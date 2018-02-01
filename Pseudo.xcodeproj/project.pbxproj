@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2470EFD42023A2B800AE9CD8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EFD32023A2B800AE9CD8 /* main.m */; };
+		2470EFDC2023A49500AE9CD8 /* PSLexer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EFDB2023A49500AE9CD8 /* PSLexer.m */; };
+		2470EFDF2023A79900AE9CD8 /* PSToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EFDE2023A79900AE9CD8 /* PSToken.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,11 @@
 /* Begin PBXFileReference section */
 		2470EFD02023A2B800AE9CD8 /* Pseudo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Pseudo; sourceTree = BUILT_PRODUCTS_DIR; };
 		2470EFD32023A2B800AE9CD8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2470EFDA2023A49500AE9CD8 /* PSLexer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSLexer.h; sourceTree = "<group>"; };
+		2470EFDB2023A49500AE9CD8 /* PSLexer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSLexer.m; sourceTree = "<group>"; };
+		2470EFDD2023A79900AE9CD8 /* PSToken.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSToken.h; sourceTree = "<group>"; };
+		2470EFDE2023A79900AE9CD8 /* PSToken.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSToken.m; sourceTree = "<group>"; };
+		2470EFE02023A7D200AE9CD8 /* PSTokenType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSTokenType.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +65,11 @@
 			isa = PBXGroup;
 			children = (
 				2470EFD32023A2B800AE9CD8 /* main.m */,
+				2470EFDA2023A49500AE9CD8 /* PSLexer.h */,
+				2470EFDB2023A49500AE9CD8 /* PSLexer.m */,
+				2470EFDD2023A79900AE9CD8 /* PSToken.h */,
+				2470EFDE2023A79900AE9CD8 /* PSToken.m */,
+				2470EFE02023A7D200AE9CD8 /* PSTokenType.h */,
 			);
 			path = Pseudo;
 			sourceTree = "<group>";
@@ -120,6 +132,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2470EFD42023A2B800AE9CD8 /* main.m in Sources */,
+				2470EFDF2023A79900AE9CD8 /* PSToken.m in Sources */,
+				2470EFDC2023A49500AE9CD8 /* PSLexer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

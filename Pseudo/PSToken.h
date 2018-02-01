@@ -13,6 +13,10 @@
 
 @property (nonatomic, readonly) PSTokenType type;
 
-- (instancetype) initWithType: (PSTokenType) type;
+@property (nonatomic, readonly) NSString *value;
+
+- (instancetype) initWithType: (PSTokenType) type andValue: (NSString *) value;
+
+- (instancetype) initWithRawToken: (NSString *) rawToken;
 
 @end
