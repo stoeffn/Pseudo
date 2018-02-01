@@ -7,11 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PSLexer.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        // insert code here...
-        NSLog(@"Hello, World!");
+        NSString *code = @"algorithm main():"
+                          "    return 42.";
+        PSLexer *lexer = [[PSLexer alloc] initWithCode: code];
+        NSLog(@"%@", lexer.description);
     }
     return 0;
 }
