@@ -20,25 +20,27 @@
 }
 
 - (instancetype) initWithRawToken: (NSString *) rawToken {
-    if ([rawToken stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceAndNewlineCharacterSet].length == 0) {
+    NSString *trimmedRawToken = [rawToken stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceAndNewlineCharacterSet];
+
+    if (trimmedRawToken.length == 0) {
         return NULL;
     }
 
-    NSNumber *delimiter = PSToken.delimiters[rawToken];
+    NSNumber *delimiter = PSToken.delimiters[trimmedRawToken];
     if (delimiter != NULL) {
         return [self initWithType: delimiter.integerValue andValue: NULL];
     }
 
-    NSNumber *keyword = PSToken.keywords[[rawToken uppercaseString]];
+    NSNumber *keyword = PSToken.keywords[[trimmedRawToken uppercaseString]];
     if (keyword != NULL) {
         return [self initWithType: keyword.integerValue andValue: NULL];
     }
 
-    return [self initWithType: PSTokenTypeIdentifier andValue: rawToken];
+    return [self initWithType: PSTokenTypeIdentifier andValue: trimmedRawToken];
 }
 
 - (NSString *) description {
-    return [NSString stringWithFormat: @"<PSToken Type: '%ld', Value: '%@'>", (long) self.type, self.value];
+    return [NSString stringWithFormat: @"<PSToken Type: %ld, Value: '%@'>", (long) self.type, self.value];
 }
 
 + (NSDictionary<NSString *, NSNumber *> *) keywords

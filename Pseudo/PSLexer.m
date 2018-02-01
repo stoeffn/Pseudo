@@ -20,7 +20,7 @@
 }
 
 - (NSString *) description {
-    return [NSString stringWithFormat: @"<PSLexer Code: '%@\', Tokens: %@>", self.code, self.tokens];
+    return [NSString stringWithFormat: @"<PSLexer Code: '%@', Tokens: %@>", self.code, self.tokens];
 }
 
 - (NSArray<PSToken *> *) tokens {
