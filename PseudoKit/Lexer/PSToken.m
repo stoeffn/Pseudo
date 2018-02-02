@@ -22,26 +22,17 @@
 
 - (instancetype) initWithRawToken: (NSString *) rawToken {
     NSString *trimmedRawToken = [rawToken stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceAndNewlineCharacterSet];
-
-    if (!rawToken || trimmedRawToken.length == 0) {
-        return NULL;
-    }
+    if (!rawToken || trimmedRawToken.length == 0) return NULL;
 
     NSNumber *delimiter = PSToken.delimiters[trimmedRawToken];
-    if (delimiter != NULL) {
-        return [self initWithType: delimiter.integerValue andValue: NULL];
-    }
+    if (delimiter != NULL) return [self initWithType: delimiter.integerValue andValue: NULL];
 
     NSNumber *keyword = PSToken.keywords[[trimmedRawToken uppercaseString]];
-    if (keyword != NULL) {
-        return [self initWithType: keyword.integerValue andValue: NULL];
-    }
+    if (keyword != NULL) return [self initWithType: keyword.integerValue andValue: NULL];
 
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     NSNumber *number = [numberFormatter numberFromString: trimmedRawToken];
-    if (number != NULL) {
-        return [self initWithType: PSTokenTypeNumberLiteral andValue: trimmedRawToken];
-    }
+    if (number != NULL) return [self initWithType: PSTokenTypeNumberLiteral andValue: trimmedRawToken];
 
     return [self initWithType: PSTokenTypeIdentifier andValue: trimmedRawToken];
 }

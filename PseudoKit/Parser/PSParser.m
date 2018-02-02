@@ -34,30 +34,14 @@
 
 #pragma mark - Parsing
 
-- (PSSyntaxNodeProgram *) programWithError: (NSError **) error {
-    PSToken *token;
-    NSMutableArray *children = [[NSMutableArray alloc] init];
-
-    do {
-        token = [self.lexer nextToken];
-        if (!token) break;
-
-        PSSyntaxNode *child;
-
-        switch (token.type) {
-            case PSTokenTypeAlgorithm:
-                child = [self algorithmWithError: error];
-                break;
-            default:
-                *error = [NSError errorWithDomain: PSParserErrorDomain code: 1 userInfo: NULL];
-                break;
-        }
-
-        if (child) [children addObject: child];
-    } while (!*error && token != NULL);
+- (PSSyntaxNodeProgram *) programWithError: (__autoreleasing NSError **) error {
+    NSDictionary *expectedTokenTypes = @{[NSNumber numberWithInt: PSTokenTypeAlgorithm]: ^PSSyntaxNode *(PSToken *token) {
+        return [self algorithmWithError: error];
+    }};
+    NSArray<PSSyntaxNode *> *children = [self.lexer expectMultipleOfTokenTypes: expectedTokenTypes error: error];
 
     if (*error) return NULL;
-    return [[PSSyntaxNodeProgram alloc] initWithChildren: children];
+    return [[PSSyntaxNodeProgram alloc] initWithChildren: [children mutableCopy]];
 }
 
 - (PSSyntaxNodeAlgorithm *) algorithmWithError: (NSError **) error {
