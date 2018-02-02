@@ -7,14 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <JavaScriptCore/JavaScriptCore.h>
 #import "PSLexer.h"
+#import "PSParser.h"
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char *argv[]) {
     @autoreleasepool {
+        JSContext *context = [[JSContext alloc] init];
+        JSValue *value = [context evaluateScript: @"21 + 21"];
+        NSLog(@"%@", value);
+
         NSString *code = @"algorithm main():"
                           "    return 42.";
         PSLexer *lexer = [[PSLexer alloc] initWithCode: code];
-        NSLog(@"%@", lexer.description);
+        PSParser *parser = [[PSParser alloc] initWithTokens: lexer.tokens];
+        NSLog(@"%@", parser.description);
     }
     return 0;
 }
