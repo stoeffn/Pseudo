@@ -8,9 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <JavaScriptCore/JavaScriptCore.h>
-#import "PSLexer.h"
-#import "PSParser.h"
-#import "PSJavaScriptTranspiler.h"
+#import "PseudoKit.h"
 
 int main(int argc, const char *argv[]) {
     @autoreleasepool {
