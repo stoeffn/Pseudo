@@ -19,6 +19,6 @@
 
 - (instancetype _Nonnull) initWithType: (PSTokenType) type andValue: (NSString * _Nullable) value;
 
-- (instancetype _Nullable) initWithRawToken: (NSString * _Nonnull) rawToken;
+- (instancetype _Nullable) initWithRawToken: (NSString * _Nullable) rawToken;
 
 @end

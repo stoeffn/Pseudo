@@ -13,6 +13,8 @@
 
 @property (nonatomic, readonly, copy, nonnull) NSString *code;
 
+- (instancetype _Nonnull) init __unavailable;
+
 - (instancetype _Nonnull) initWithCode: (NSString * _Nonnull) code;
 
 - (PSToken * _Nullable) nextToken;

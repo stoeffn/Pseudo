@@ -18,6 +18,8 @@
 
 @implementation PSLexer
 
+#pragma mark - Life Cycle
+
 - (instancetype) initWithCode: (NSString *) code {
     if (self = [super init]) {
         _code = code;
@@ -26,41 +28,51 @@
     return self;
 }
 
+#pragma mark - Description
+
 - (NSString *) description {
     return [NSString stringWithFormat: @"<%@ Code: '%@'>",
             NSStringFromClass([self class]), self.code];
 }
 
-- (PSToken *) nextToken {
-    __block NSString *rawToken;
-    void (^enumerateUntilNextToken)(NSString *, NSRange, NSRange, BOOL *) = ^(NSString *inSubstring,
-                                                                 NSRange inSubstringRange,
-                                                                 NSRange inEnclosingRange,
-                                                                 BOOL *outStop) {
-        NSRange delimiterMatch = [inSubstring rangeOfCharacterFromSet: PSLexer.delimitingCharacters];
-        if (delimiterMatch.location == NSNotFound) {
-            return;
-        }
+#pragma mark - Generating Tokens
 
-        NSRange rawTokenRange = NSMakeRange(self.currentCharacterIndex, inSubstringRange.location + inSubstringRange.length);
-        rawToken = [self.code substringWithRange: rawTokenRange];
-        *outStop = YES;
+- (PSToken *) nextToken {
+    if (self.currentCharacterIndex >= self.code.length) return NULL;
+
+    __block BOOL wasLastCharDelimiting = NO;
+    __block NSRange rawTokenRange = NSMakeRange(self.currentCharacterIndex, 0);
+    void (^enumerateUntilNextToken)(NSString *, NSRange, NSRange, BOOL *) = ^(NSString *inSubstring,
+                                                                              NSRange inSubstringRange,
+                                                                              NSRange inEnclosingRange,
+                                                                              BOOL *outStop) {
+        BOOL isCharDelimiting = [inSubstring rangeOfCharacterFromSet: PSLexer.delimitingCharacters].location != NSNotFound;
+        *outStop = rawTokenRange.length > 0 && (isCharDelimiting || (!isCharDelimiting && wasLastCharDelimiting));
+        if (*outStop) return;
+
+        rawTokenRange.length += inSubstringRange.length;
+        wasLastCharDelimiting = isCharDelimiting;
     };
 
-    [self.code enumerateSubstringsInRange: NSMakeRange(self.currentCharacterIndex, self.code.length)
+    NSRange enumerationRange = NSMakeRange(self.currentCharacterIndex, self.code.length - self.currentCharacterIndex);
+    [self.code enumerateSubstringsInRange: enumerationRange
                                   options: NSStringEnumerationByComposedCharacterSequences
                                usingBlock: enumerateUntilNextToken];
 
-    if (rawToken == NULL) {
-        return NULL;
-    }
+    self.currentCharacterIndex += rawTokenRange.length;
 
-    return [[PSToken alloc] initWithRawToken: rawToken];
+    NSString *rawToken = [self.code substringWithRange: rawTokenRange];
+    PSToken *token = [[PSToken alloc] initWithRawToken: rawToken];
+
+    if (token == NULL) return self.nextToken;
+    return token;
 }
 
 - (void) reset {
     self.currentCharacterIndex = 0;
 }
+
+#pragma mark - Constants
 
 + (NSCharacterSet *) delimitingCharacters {
     static NSMutableCharacterSet *_delimitingCharacters;

@@ -23,7 +23,7 @@
 - (instancetype) initWithRawToken: (NSString *) rawToken {
     NSString *trimmedRawToken = [rawToken stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceAndNewlineCharacterSet];
 
-    if (trimmedRawToken.length == 0) {
+    if (!rawToken || trimmedRawToken.length == 0) {
         return NULL;
     }
 
