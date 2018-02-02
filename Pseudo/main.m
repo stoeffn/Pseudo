@@ -12,7 +12,7 @@
 
 int main(int argc, const char *argv[]) {
     @autoreleasepool {
-        NSString *code = @"algorithm main():"
+        /*NSString *code = @"algorithm main():"
                           "    return 42.";
 
         PSLexer *lexer = [[PSLexer alloc] initWithCode: code];
@@ -22,7 +22,7 @@ int main(int argc, const char *argv[]) {
         JSContext *context = [[JSContext alloc] init];
         [context evaluateScript: javaScriptTranspiler.code];
         JSValue *value = [context evaluateScript: @"main();"];
-        NSLog(@"Return value of 'main': %@", value);
+        NSLog(@"Return value of 'main': %@", value);*/
     }
     return 0;
 }

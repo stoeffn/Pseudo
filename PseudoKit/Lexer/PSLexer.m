@@ -10,48 +10,56 @@
 #import "PSLexer.h"
 #import "PSToken.h"
 
+@interface PSLexer ()
+
+@property (nonatomic) NSUInteger currentCharacterIndex;
+
+@end
+
 @implementation PSLexer
 
 - (instancetype) initWithCode: (NSString *) code {
     if (self = [super init]) {
         _code = code;
+        _currentCharacterIndex = 0;
     }
     return self;
 }
 
 - (NSString *) description {
-    return [NSString stringWithFormat: @"<%@ Code: '%@', Tokens: %@>",
-            NSStringFromClass([self class]), self.code, self.tokens];
+    return [NSString stringWithFormat: @"<%@ Code: '%@'>",
+            NSStringFromClass([self class]), self.code];
 }
 
-- (NSArray<PSToken *> *) tokens {
-    NSMutableArray *tokens = [[NSMutableArray alloc] init];
-    NSMutableString *currentRawToken = [[NSMutableString alloc] init];
-
-    // TODO: Use a char buffer for better performance.
-    // TODO: Replace with generator instead of returning an array.
-    for (NSInteger index = 0; index < self.code.length; index++) {
-        unichar character = [self.code characterAtIndex: index];
-
-        if ([PSLexer.delimitingCharacters characterIsMember: character]) {
-            PSToken *token = [[PSToken alloc] initWithRawToken: currentRawToken];
-            if (token != NULL) {
-                [tokens enqueue: token];
-            }
-
-            currentRawToken = [[NSMutableString alloc] init];
+- (PSToken *) nextToken {
+    __block NSString *rawToken;
+    void (^enumerateUntilNextToken)(NSString *, NSRange, NSRange, BOOL *) = ^(NSString *inSubstring,
+                                                                 NSRange inSubstringRange,
+                                                                 NSRange inEnclosingRange,
+                                                                 BOOL *outStop) {
+        NSRange delimiterMatch = [inSubstring rangeOfCharacterFromSet: PSLexer.delimitingCharacters];
+        if (delimiterMatch.location == NSNotFound) {
+            return;
         }
 
-        [currentRawToken appendFormat: @"%C", character];
+        NSRange rawTokenRange = NSMakeRange(self.currentCharacterIndex, inSubstringRange.location + inSubstringRange.length);
+        rawToken = [self.code substringWithRange: rawTokenRange];
+        *outStop = YES;
+    };
+
+    [self.code enumerateSubstringsInRange: NSMakeRange(self.currentCharacterIndex, self.code.length)
+                                  options: NSStringEnumerationByComposedCharacterSequences
+                               usingBlock: enumerateUntilNextToken];
+
+    if (rawToken == NULL) {
+        return NULL;
     }
 
-    PSToken *token = [[PSToken alloc] initWithRawToken: currentRawToken];
+    return [[PSToken alloc] initWithRawToken: rawToken];
+}
 
-    if (token != NULL) {
-        [tokens addObject: token];
-    }
-
-    return tokens;
+- (void) reset {
+    self.currentCharacterIndex = 0;
 }
 
 + (NSCharacterSet *) delimitingCharacters {

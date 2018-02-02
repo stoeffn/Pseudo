@@ -11,10 +11,12 @@
 
 @interface PSLexer : NSObject
 
-@property (nonatomic, readonly) NSString *code;
+@property (nonatomic, readonly, copy, nonnull) NSString *code;
 
-- (instancetype) initWithCode: (NSString *) code;
+- (instancetype _Nonnull) initWithCode: (NSString * _Nonnull) code;
 
-- (NSArray<PSToken *> *) tokens;
+- (PSToken * _Nullable) nextToken;
+
+- (void) reset;
 
 @end

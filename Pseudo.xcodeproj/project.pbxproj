@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2470EFD42023A2B800AE9CD8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EFD32023A2B800AE9CD8 /* main.m */; };
 		2470F0132024BA3D00AE9CD8 /* PseudoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2470F00A2024BA3D00AE9CD8 /* PseudoKit.framework */; };
-		2470F0182024BA3D00AE9CD8 /* PseudoKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470F0172024BA3D00AE9CD8 /* PseudoKitTests.m */; };
 		2470F01A2024BA3D00AE9CD8 /* PseudoKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470F00C2024BA3D00AE9CD8 /* PseudoKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2470F0222024BA5500AE9CD8 /* PseudoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2470F00A2024BA3D00AE9CD8 /* PseudoKit.framework */; };
 		2470F0242024BA6A00AE9CD8 /* NSMutableArray+Queue.m in Sources */ = {isa = PBXBuildFile; fileRef = 244C6C342024412900778B71 /* NSMutableArray+Queue.m */; };
@@ -48,6 +47,8 @@
 		2470F0462024BE4F00AE9CD8 /* PSSyntaxNodeExpression+JavaScript.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470EFFF20248BE600AE9CD8 /* PSSyntaxNodeExpression+JavaScript.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		2470F0472024BE5200AE9CD8 /* PSSyntaxNodeNumberLiteral+JavaScript.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470F00220248C3800AE9CD8 /* PSSyntaxNodeNumberLiteral+JavaScript.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		2470F0482024BE5500AE9CD8 /* PSJavaScriptTranspilable.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470EFF22024874F00AE9CD8 /* PSJavaScriptTranspilable.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		2470F04B2024BF2800AE9CD8 /* PSLexerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470F04A2024BF2800AE9CD8 /* PSLexerTests.swift */; };
+		24DA62FB2024CA880087839C /* PSTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DA62FA2024CA880087839C /* PSTokenTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,8 +116,10 @@
 		2470F00C2024BA3D00AE9CD8 /* PseudoKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PseudoKit.h; sourceTree = "<group>"; };
 		2470F00D2024BA3D00AE9CD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2470F0122024BA3D00AE9CD8 /* PseudoKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PseudoKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2470F0172024BA3D00AE9CD8 /* PseudoKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PseudoKitTests.m; sourceTree = "<group>"; };
 		2470F0192024BA3D00AE9CD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2470F0492024BF2700AE9CD8 /* PseudoKitTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PseudoKitTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		2470F04A2024BF2800AE9CD8 /* PSLexerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSLexerTests.swift; sourceTree = "<group>"; };
+		24DA62FA2024CA880087839C /* PSTokenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSTokenTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -279,8 +282,9 @@
 		2470F0162024BA3D00AE9CD8 /* PseudoKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				2470F0172024BA3D00AE9CD8 /* PseudoKitTests.m */,
+				2470F04C2024BF2C00AE9CD8 /* Lexer */,
 				2470F0192024BA3D00AE9CD8 /* Info.plist */,
+				2470F0492024BF2700AE9CD8 /* PseudoKitTests-Bridging-Header.h */,
 			);
 			path = PseudoKitTests;
 			sourceTree = "<group>";
@@ -290,6 +294,15 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2470F04C2024BF2C00AE9CD8 /* Lexer */ = {
+			isa = PBXGroup;
+			children = (
+				2470F04A2024BF2800AE9CD8 /* PSLexerTests.swift */,
+				24DA62FA2024CA880087839C /* PSTokenTests.swift */,
+			);
+			path = Lexer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -397,6 +410,7 @@
 					};
 					2470F0112024BA3D00AE9CD8 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -474,7 +488,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2470F0182024BA3D00AE9CD8 /* PseudoKitTests.m in Sources */,
+				24DA62FB2024CA880087839C /* PSTokenTests.swift in Sources */,
+				2470F04B2024BF2800AE9CD8 /* PSLexerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,6 +676,7 @@
 		2470F01D2024BA3D00AE9CD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = X63VKA93X8;
@@ -668,12 +684,16 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = SteffenRyll.PseudoKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PseudoKitTests/PseudoKitTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		2470F01E2024BA3D00AE9CD8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = X63VKA93X8;
@@ -681,6 +701,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = SteffenRyll.PseudoKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PseudoKitTests/PseudoKitTests-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
