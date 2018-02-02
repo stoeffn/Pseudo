@@ -13,7 +13,7 @@
 int main(int argc, const char *argv[]) {
     @autoreleasepool {
         NSString *code = @"algorithm main():"
-                          "    return 42.";
+                          "    .";
 
         PSLexer *lexer = [[PSLexer alloc] initWithCode: code];
         PSParser *parser = [[PSParser alloc] initWithLexer: lexer];

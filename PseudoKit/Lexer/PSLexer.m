@@ -72,7 +72,7 @@
 #pragma mark - Asserting Tokens
 
 - (PSToken *) expectTokenType: (PSTokenType) tokenType error: (NSError **) error {
-    if (error) return NULL;
+    if (*error) return NULL;
 
     PSToken *token = self.nextToken;
 

@@ -35,37 +35,37 @@
 #pragma mark - Parsing
 
 - (PSSyntaxNodeProgram *) programWithError: (NSError **) error {
-    return [self parseProgramWithLexer: self.lexer error: error];
-}
-
-- (PSSyntaxNodeProgram *) parseProgramWithLexer: (PSLexer *) lexer error: (NSError **) error {
     PSToken *token;
     NSMutableArray *children = [[NSMutableArray alloc] init];
 
     do {
-        token = [lexer nextToken];
+        token = [self.lexer nextToken];
+        if (!token) break;
+
         PSSyntaxNode *child;
 
         switch (token.type) {
             case PSTokenTypeAlgorithm:
-                child = [self parseAlgorithmWithLexer: lexer error: error];
+                child = [self algorithmWithError: error];
                 break;
             default:
                 *error = [NSError errorWithDomain: PSParserErrorDomain code: 1 userInfo: NULL];
                 break;
         }
+
+        if (child) [children addObject: child];
     } while (!*error && token != NULL);
 
     if (*error) return NULL;
     return [[PSSyntaxNodeProgram alloc] initWithChildren: children];
 }
 
-- (PSSyntaxNodeAlgorithm *) parseAlgorithmWithLexer: (PSLexer *) lexer error: (NSError **) error {
-    PSToken *identifier = [lexer expectTokenType: PSTokenTypeIdentifier error: error];
-    [lexer expectTokenType: PSTokenTypeOpeningParenthesis error: error];
-    [lexer expectTokenType: PSTokenTypeClosingParenthesis error: error];
-    [lexer expectTokenType: PSTokenTypeColon error: error];
-    [lexer expectTokenType: PSTokenTypePoint error: error];
+- (PSSyntaxNodeAlgorithm *) algorithmWithError: (NSError **) error {
+    PSToken *identifier = [self.lexer expectTokenType: PSTokenTypeIdentifier error: error];
+    [self.lexer expectTokenType: PSTokenTypeOpeningParenthesis error: error];
+    [self.lexer expectTokenType: PSTokenTypeClosingParenthesis error: error];
+    [self.lexer expectTokenType: PSTokenTypeColon error: error];
+    [self.lexer expectTokenType: PSTokenTypePoint error: error];
 
     if (*error) return NULL;
     return [[PSSyntaxNodeAlgorithm alloc] initWithIdentifier: identifier.value andReturnType: NULL andChildren: NULL];
