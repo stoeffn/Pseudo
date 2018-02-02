@@ -6,6 +6,7 @@
 //  Copyright © 2018 Steffen Ryll. All rights reserved.
 //
 
+#import "Constants.h"
 #import "NSMutableArray+Queue.h"
 #import "PSLexer.h"
 #import "PSToken.h"
@@ -76,7 +77,7 @@
     PSToken *token = self.nextToken;
 
     if (token == NULL || token.type != tokenType) {
-        *error = [NSError errorWithDomain: NSPOSIXErrorDomain code: 1 userInfo: NULL];
+        *error = [NSError errorWithDomain: PSParserErrorDomain code: 1 userInfo: NULL];
         return NULL;
     }
 

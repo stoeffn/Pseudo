@@ -13,13 +13,13 @@
 
 @property (nonatomic, readonly, copy, nonnull) NSString *code;
 
-- (instancetype _Nonnull) init __unavailable;
+- (nonnull instancetype) init __unavailable;
 
-- (instancetype _Nonnull) initWithCode: (nonnull NSString *) code;
+- (nonnull instancetype) initWithCode: (nonnull NSString *) code;
 
-- (PSToken * _Nullable) nextToken;
+- (nullable PSToken *) nextToken;
 
-- (PSToken * _Nullable) expectTokenType: (PSTokenType) tokenType error: (NSError * __nullable * __null_unspecified) error;
+- (nullable PSToken *) expectTokenType: (PSTokenType) tokenType error: (NSError * __nullable * __null_unspecified) error;
 
 - (void) reset;
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2421AFBD202507260007FC7A /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 2421AFBB202507260007FC7A /* Constants.h */; };
+		2421AFBE202507260007FC7A /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2421AFBC202507260007FC7A /* Constants.m */; };
 		2470EFD42023A2B800AE9CD8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EFD32023A2B800AE9CD8 /* main.m */; };
 		2470F0132024BA3D00AE9CD8 /* PseudoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2470F00A2024BA3D00AE9CD8 /* PseudoKit.framework */; };
 		2470F01A2024BA3D00AE9CD8 /* PseudoKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470F00C2024BA3D00AE9CD8 /* PseudoKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -74,6 +76,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2421AFBB202507260007FC7A /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		2421AFBC202507260007FC7A /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		244C6C2A20242EC800778B71 /* PSParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSParser.h; sourceTree = "<group>"; };
 		244C6C2B20242EC800778B71 /* PSParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSParser.m; sourceTree = "<group>"; };
 		244C6C2D202430AA00778B71 /* PSSyntaxNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSSyntaxNode.h; sourceTree = "<group>"; };
@@ -273,6 +277,8 @@
 				244C6C392024650F00778B71 /* Lexer */,
 				244C6C3A2024651600778B71 /* Parser */,
 				2470EFE72024850500AE9CD8 /* JavaScriptTranspiler */,
+				2421AFBB202507260007FC7A /* Constants.h */,
+				2421AFBC202507260007FC7A /* Constants.m */,
 				2470F00C2024BA3D00AE9CD8 /* PseudoKit.h */,
 				2470F00D2024BA3D00AE9CD8 /* Info.plist */,
 			);
@@ -320,6 +326,7 @@
 				2470F03B2024BE3300AE9CD8 /* PSTokenType.h in Headers */,
 				2470F03C2024BE3800AE9CD8 /* PSSyntaxNode.h in Headers */,
 				2470F03D2024BE3A00AE9CD8 /* PSSyntaxNodeProgram.h in Headers */,
+				2421AFBD202507260007FC7A /* Constants.h in Headers */,
 				2470F0392024BE2C00AE9CD8 /* NSMutableArray+Queue.h in Headers */,
 				2470F03E2024BE3D00AE9CD8 /* PSSyntaxNodeAlgorithm.h in Headers */,
 				2470F03F2024BE3F00AE9CD8 /* PSSyntaxNodeReturn.h in Headers */,
@@ -481,6 +488,7 @@
 				2470F0302024BA9C00AE9CD8 /* PSSyntaxNodeProgram+JavaScript.m in Sources */,
 				2470F0342024BAA600AE9CD8 /* PSSyntaxNodeNumberLiteral+JavaScript.m in Sources */,
 				2470F02E2024BA9400AE9CD8 /* PSJavaScriptTranspiler.m in Sources */,
+				2421AFBE202507260007FC7A /* Constants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,6 +6,7 @@
 //  Copyright © 2018 Steffen Ryll. All rights reserved.
 //
 
+#import "Constants.h"
 #import "PSParser.h"
 #import "PSToken.h"
 #import "PSLexer.h"
@@ -50,7 +51,7 @@
                 child = [self parseAlgorithmWithLexer: lexer error: error];
                 break;
             default:
-                *error = [NSError errorWithDomain: NSPOSIXErrorDomain code: 1 userInfo: NULL];
+                *error = [NSError errorWithDomain: PSParserErrorDomain code: 1 userInfo: NULL];
                 break;
         }
     } while (!*error && token != NULL);
