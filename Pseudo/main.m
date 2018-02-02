@@ -10,18 +10,21 @@
 #import <JavaScriptCore/JavaScriptCore.h>
 #import "PSLexer.h"
 #import "PSParser.h"
+#import "PSJavaScriptTranspiler.h"
 
 int main(int argc, const char *argv[]) {
     @autoreleasepool {
-        JSContext *context = [[JSContext alloc] init];
-        JSValue *value = [context evaluateScript: @"21 + 21"];
-        NSLog(@"%@", value);
-
         NSString *code = @"algorithm main():"
                           "    return 42.";
+
         PSLexer *lexer = [[PSLexer alloc] initWithCode: code];
         PSParser *parser = [[PSParser alloc] initWithTokens: lexer.tokens];
-        NSLog(@"%@", parser.description);
+        PSJavaScriptTranspiler *javaScriptTranspiler = [[PSJavaScriptTranspiler alloc] initWithProgram: parser.program];
+
+        JSContext *context = [[JSContext alloc] init];
+        [context evaluateScript: javaScriptTranspiler.code];
+        JSValue *value = [context evaluateScript: @"main();"];
+        NSLog(@"Return value of 'main': %@", value);
     }
     return 0;
 }

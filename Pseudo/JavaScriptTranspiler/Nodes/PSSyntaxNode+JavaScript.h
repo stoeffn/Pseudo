@@ -1,5 +1,5 @@
 //
-//  PSSyntaxNodeProgram.h
+//  PSSyntaxNode+JavaScript.h
 //  Pseudo
 //
 //  Created by Steffen Ryll on 02.02.18.
@@ -7,11 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PSToken.h"
 #import "PSSyntaxNode.h"
+#import "PSJavaScriptTranspilable.h"
 
-@interface PSSyntaxNodeProgram : PSSyntaxNode
-
-+ (PSSyntaxNodeProgram *) nextProgramSyntaxNodeFor: (NSMutableArray<PSToken *> *) tokens;
+@interface PSSyntaxNode (JavaScript) <PSJavaScriptTranspilable>
 
 @end
