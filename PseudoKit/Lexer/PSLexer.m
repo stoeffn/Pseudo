@@ -10,6 +10,7 @@
 #import "NSMutableArray+Queue.h"
 #import "PSLexer.h"
 #import "PSToken.h"
+#import "PSSyntaxNode.h"
 
 @interface PSLexer ()
 
@@ -65,23 +66,68 @@
     NSString *rawToken = [self.code substringWithRange: rawTokenRange];
     PSToken *token = [[PSToken alloc] initWithRawToken: rawToken];
 
-    if (token == NULL) return self.nextToken;
+    if (!token) return self.nextToken;
     return token;
 }
 
 #pragma mark - Asserting Tokens
 
-- (PSToken *) expectTokenType: (PSTokenType) tokenType error: (NSError **) error {
+- (PSToken *) expectTokenType: (PSTokenType) tokenType
+                        error: (NSError **) error {
     if (*error) return NULL;
 
     PSToken *token = self.nextToken;
 
-    if (token == NULL || token.type != tokenType) {
+    if (!token || token.type != tokenType) {
         *error = [NSError errorWithDomain: PSParserErrorDomain code: 1 userInfo: NULL];
         return NULL;
     }
 
     return token;
+}
+
+- (PSSyntaxNode *) expectOneOfTokenTypes: (NSDictionary<NSNumber *, PSSyntaxNode *(^)(PSToken *)> *) tokenTypes
+                                   error: (NSError **) error {
+    if (*error) return NULL;
+
+    PSToken *token = self.nextToken;
+
+    if (!token) {
+        *error = [NSError errorWithDomain: PSParserErrorDomain code: 1 userInfo: NULL];
+        return NULL;
+    }
+
+    NSNumber *key = [NSNumber numberWithInt: token.type];
+    PSSyntaxNode *(^block)(PSToken *) = tokenTypes[key];
+
+    if (!block) {
+        *error = [NSError errorWithDomain: PSParserErrorDomain code: 1 userInfo: NULL];
+        return NULL;
+    }
+
+    return block(token);
+}
+
+- (NSArray<PSSyntaxNode *> *) expectMultipleOfTokenTypes: (NSDictionary<NSNumber *, PSSyntaxNode *(^)(PSToken *)> *) tokenTypes
+                                                   error: (NSError **) error {
+    if (*error) return NULL;
+
+    PSToken *token;
+    NSMutableArray *children = [[NSMutableArray alloc] init];
+
+    do {
+        token = self.nextToken;
+        if (!token) break;
+
+        NSNumber *key = [NSNumber numberWithInt: token.type];
+        PSSyntaxNode *(^block)(PSToken *) = tokenTypes[key];
+        PSSyntaxNode *node = block(token);
+
+        if (node) [children addObject: node];
+    } while (!*error && token != NULL);
+
+    if (*error) return NULL;
+    return children;
 }
 
 #pragma mark - Resetting

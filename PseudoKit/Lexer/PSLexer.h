@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "PSToken.h"
+#import "PSSyntaxNode.h"
 
 @interface PSLexer : NSObject
 
@@ -19,7 +20,14 @@
 
 - (nullable PSToken *) nextToken;
 
-- (nullable PSToken *) expectTokenType: (PSTokenType) tokenType error: (NSError * __nullable * __null_unspecified) error;
+- (nullable PSToken *) expectTokenType: (PSTokenType) tokenType
+                                 error: (NSError * __nullable * __null_unspecified) error;
+
+- (nullable PSSyntaxNode *) expectOneOfTokenTypes: (NSDictionary<NSNumber *, PSSyntaxNode *(^)(PSToken * _Nonnull)> * _Nonnull) tokenTypes
+                                            error: (NSError * __nullable * __null_unspecified) error;
+
+- (nullable NSArray<PSSyntaxNode *> *) expectMultipleOfTokenTypes: (NSDictionary<NSNumber *, PSSyntaxNode *(^)(PSToken * _Nonnull)> * _Nonnull) tokenTypes
+                                                            error: (NSError * __nullable * __null_unspecified) error;
 
 - (void) reset;
 
