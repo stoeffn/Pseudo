@@ -15,7 +15,6 @@
         _type = type;
         _value = value;
     }
-
     return self;
 }
 
@@ -34,6 +33,12 @@
     NSNumber *keyword = PSToken.keywords[[trimmedRawToken uppercaseString]];
     if (keyword != NULL) {
         return [self initWithType: keyword.integerValue andValue: NULL];
+    }
+
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    NSNumber *number = [numberFormatter numberFromString: trimmedRawToken];
+    if (number != NULL) {
+        return [self initWithType: PSTokenTypeNumberLiteral andValue: trimmedRawToken];
     }
 
     return [self initWithType: PSTokenTypeIdentifier andValue: trimmedRawToken];

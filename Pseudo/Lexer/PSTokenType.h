@@ -14,7 +14,7 @@ typedef NS_ENUM(NSInteger, PSTokenType) {
     PSTokenTypeReturn,
 
     PSTokenTypeIdentifier,
-    PSTokenTypeIntegerLiteral,
+    PSTokenTypeNumberLiteral,
 
     PSTokenTypeOpeningParenthesis,
     PSTokenTypeClosingParenthesis,

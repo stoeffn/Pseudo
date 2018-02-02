@@ -6,6 +6,7 @@
 //  Copyright © 2018 Steffen Ryll. All rights reserved.
 //
 
+#import "NSMutableArray+Queue.h"
 #import "PSLexer.h"
 #import "PSToken.h"
 
@@ -15,7 +16,6 @@
     if (self = [super init]) {
         _code = code;
     }
-
     return self;
 }
 
@@ -28,14 +28,14 @@
     NSMutableString *currentRawToken = [[NSMutableString alloc] init];
 
     // TODO: Use a char buffer for better performance.
+    // TODO: Replace with generator instead of returning an array.
     for (NSInteger index = 0; index < self.code.length; index++) {
         unichar character = [self.code characterAtIndex: index];
 
         if ([PSLexer.delimitingCharacters characterIsMember: character]) {
             PSToken *token = [[PSToken alloc] initWithRawToken: currentRawToken];
-
             if (token != NULL) {
-                [tokens addObject: token];
+                [tokens enqueue: token];
             }
 
             currentRawToken = [[NSMutableString alloc] init];
