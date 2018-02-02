@@ -19,7 +19,8 @@
 }
 
 - (NSString *) description {
-    return [NSString stringWithFormat: @"<PSJavaScriptTranspiler program: %@, code: %@>", self.program, self.code];
+    return [NSString stringWithFormat: @"<%@ program: %@, code: %@>",
+            NSStringFromClass([self class]), self.program, self.code];
 }
 
 - (NSString *) code {

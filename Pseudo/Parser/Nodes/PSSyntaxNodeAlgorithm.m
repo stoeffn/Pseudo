@@ -25,8 +25,8 @@
 }
 
 - (NSString *) description {
-    return [[NSString alloc] initWithFormat: @"<PSSyntaxAlgorithm children: %@, identifier: %@, returnType: %@>",
-            self.children, self.identifier, self.returnType];
+    return [[NSString alloc] initWithFormat: @"<%@ children: %@, identifier: %@, returnType: %@>",
+            NSStringFromClass([self class]), self.children, self.identifier, self.returnType];
 }
 
 + (PSSyntaxNode *) nextSyntaxNodeFor: (NSMutableArray<PSToken *> *) tokens {

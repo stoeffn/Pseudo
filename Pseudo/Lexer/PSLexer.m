@@ -20,7 +20,8 @@
 }
 
 - (NSString *) description {
-    return [NSString stringWithFormat: @"<PSLexer Code: '%@', Tokens: %@>", self.code, self.tokens];
+    return [NSString stringWithFormat: @"<%@ Code: '%@', Tokens: %@>",
+            NSStringFromClass([self class]), self.code, self.tokens];
 }
 
 - (NSArray<PSToken *> *) tokens {
@@ -53,8 +54,7 @@
     return tokens;
 }
 
-+ (NSCharacterSet *) delimitingCharacters
-{
++ (NSCharacterSet *) delimitingCharacters {
     static NSMutableCharacterSet *_delimitingCharacters;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{

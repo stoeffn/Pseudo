@@ -13,10 +13,6 @@
 
 @implementation PSSyntaxNodeProgram
 
-- (NSString *) description {
-    return [[NSString alloc] initWithFormat: @"<PSSyntaxNodeProgram children: %@>", self.children];
-}
-
 + (PSSyntaxNodeProgram *) nextProgramSyntaxNodeFor: (NSMutableArray<PSToken *> *) tokens {
     PSSyntaxNodeProgram *node = [[PSSyntaxNodeProgram alloc] init];
 

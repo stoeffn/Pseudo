@@ -13,10 +13,6 @@
 
 @implementation PSSyntaxNodeExpression
 
-- (NSString *) description {
-    return [[NSString alloc] initWithFormat: @"<PSSyntaxNodeExpression children: %@>", self.children];
-}
-
 + (PSSyntaxNodeExpression *) nextExpressionSyntaxNodeFor: (NSMutableArray<PSToken *> *) tokens {
     PSSyntaxNodeExpression *node = [[PSSyntaxNodeExpression alloc] init];
     PSToken *nextToken;

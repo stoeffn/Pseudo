@@ -45,11 +45,11 @@
 }
 
 - (NSString *) description {
-    return [NSString stringWithFormat: @"<PSToken Type: %ld, Value: '%@'>", (long) self.type, self.value];
+    return [NSString stringWithFormat: @"<%@ Type: %ld, Value: '%@'>",
+            NSStringFromClass([self class]), (long) self.type, self.value];
 }
 
-+ (NSDictionary<NSString *, NSNumber *> *) keywords
-{
++ (NSDictionary<NSString *, NSNumber *> *) keywords {
     static NSDictionary *_keywords;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -59,8 +59,7 @@
     return _keywords;
 }
 
-+ (NSDictionary<NSString *, NSNumber *> *) delimiters
-{
++ (NSDictionary<NSString *, NSNumber *> *) delimiters {
     static NSDictionary *_delimiters;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{

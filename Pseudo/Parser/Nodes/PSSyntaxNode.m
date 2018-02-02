@@ -11,7 +11,8 @@
 @implementation PSSyntaxNode
 
 - (NSString *) description {
-    return [[NSString alloc] initWithFormat: @"<PSSyntaxNode children: %@>", self.children];
+    return [[NSString alloc] initWithFormat: @"<%@ children: %@>",
+            NSStringFromClass([self class]), self.children];
 }
 
 - (instancetype) init {

@@ -13,10 +13,6 @@
 
 @implementation PSSyntaxNodeReturn
 
-- (NSString *) description {
-    return [[NSString alloc] initWithFormat: @"<PSSyntaxNodeReturn children: %@>", self.children];
-}
-
 + (PSSyntaxNodeReturn *) nextReturnSyntaxNodeFor: (NSMutableArray *) tokens {
     PSSyntaxNodeReturn *node = [[PSSyntaxNodeReturn alloc] init];
     PSToken *nextToken;

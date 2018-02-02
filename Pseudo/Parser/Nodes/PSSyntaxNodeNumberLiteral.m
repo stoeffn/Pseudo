@@ -18,7 +18,8 @@
 }
 
 - (NSString *) description {
-    return [[NSString alloc] initWithFormat: @"<PSSyntaxNodeNumberLiteral value: %@>", self.value];
+    return [[NSString alloc] initWithFormat: @"<%@ value: %@>",
+            NSStringFromClass([self class]), self.value];
 }
 
 @end

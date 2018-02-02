@@ -29,7 +29,8 @@
 }
 
 - (NSString *) description {
-    return [[NSString alloc] initWithFormat: @"<PSParser tokens: %@, program: %@>", self.tokens, self.program];
+    return [[NSString alloc] initWithFormat: @"<%@ tokens: %@, program: %@>",
+            NSStringFromClass([self class]), self.tokens, self.program];
 }
 
 - (PSSyntaxNodeProgram *) program {
