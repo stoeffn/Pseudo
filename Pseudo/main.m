@@ -12,17 +12,25 @@
 
 int main(int argc, const char *argv[]) {
     @autoreleasepool {
-        /*NSString *code = @"algorithm main():"
+        NSString *code = @"algorithm main():"
                           "    return 42.";
 
         PSLexer *lexer = [[PSLexer alloc] initWithCode: code];
-        PSParser *parser = [[PSParser alloc] initWithTokens: lexer.tokens];
-        PSJavaScriptTranspiler *javaScriptTranspiler = [[PSJavaScriptTranspiler alloc] initWithProgram: parser.program];
+        PSParser *parser = [[PSParser alloc] initWithLexer: lexer];
 
+        NSError *error;
+        PSSyntaxNodeProgram *program = [parser programWithError: &error];
+
+        if (error) {
+            NSLog(@"Error: %@", error.localizedDescription);
+            return (int) error.code;
+        }
+
+        PSJavaScriptTranspiler *javaScriptTranspiler = [[PSJavaScriptTranspiler alloc] initWithProgram: program];
         JSContext *context = [[JSContext alloc] init];
         [context evaluateScript: javaScriptTranspiler.code];
         JSValue *value = [context evaluateScript: @"main();"];
-        NSLog(@"Return value of 'main': %@", value);*/
+        NSLog(@"Return value of 'main': %@", value);
     }
     return 0;
 }
