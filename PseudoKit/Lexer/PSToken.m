@@ -10,6 +10,8 @@
 
 @implementation PSToken
 
+#pragma mark - Life Cycle
+
 - (instancetype) initWithType: (PSTokenType) type andValue: (NSString *) value {
     if (self = [super init]) {
         _type = type;
@@ -44,10 +46,31 @@
     return [self initWithType: PSTokenTypeIdentifier andValue: trimmedRawToken];
 }
 
+#pragma mark - Description
+
 - (NSString *) description {
     return [NSString stringWithFormat: @"<%@ Type: %ld, Value: '%@'>",
             NSStringFromClass([self class]), (long) self.type, self.value];
 }
+
+#pragma mark - Equality
+
+- (BOOL) isEqual: (id) object {
+    return self == object
+        || ([object isKindOfClass: [PSToken class]] && [self isEqualToToken: (PSToken *) object]);
+}
+
+- (BOOL) isEqualToToken: (PSToken *) token {
+    return token
+        && self.type == token.type
+        && ((!self.value && !token.value) || [self.value isEqualToString: token.value]);
+}
+
+- (NSUInteger) hash {
+    return (self.type + 17) ^ self.value.hash;
+}
+
+#pragma mark - Constants
 
 + (NSDictionary<NSString *, NSNumber *> *) keywords {
     static NSDictionary *_keywords;

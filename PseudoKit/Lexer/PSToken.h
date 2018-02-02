@@ -13,10 +13,12 @@
 
 @property (nonatomic, readonly) PSTokenType type;
 
-@property (nonatomic, readonly) NSString *value;
+@property (nonatomic, readonly, copy, nullable) NSString *value;
 
-- (instancetype) initWithType: (PSTokenType) type andValue: (NSString *) value;
+- (instancetype _Nonnull) init __unavailable;
 
-- (instancetype) initWithRawToken: (NSString *) rawToken;
+- (instancetype _Nonnull) initWithType: (PSTokenType) type andValue: (NSString * _Nullable) value;
+
+- (instancetype _Nullable) initWithRawToken: (NSString * _Nonnull) rawToken;
 
 @end
