@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PSToken.h"
 #import "PSSyntaxNode.h"
 
 @interface PSSyntaxNodeAlgorithm : PSSyntaxNode

@@ -6,36 +6,68 @@
 //  Copyright © 2018 Steffen Ryll. All rights reserved.
 //
 
-#import "NSMutableArray+Queue.h"
 #import "PSParser.h"
+#import "PSToken.h"
+#import "PSLexer.h"
 #import "PSSyntaxNode.h"
 #import "PSSyntaxNodeProgram.h"
 #import "PSSyntaxNodeAlgorithm.h"
 
 @implementation PSParser
 
-- (instancetype) init {
+#pragma mark - Life Cycle
+
+- (instancetype) initWithLexer: (nonnull PSLexer *) lexer {
     if (self = [super init]) {
-        _tokens = [[NSArray alloc] init];
+        _lexer = lexer;
     }
     return self;
 }
 
-- (instancetype) initWithTokens: (NSArray<PSToken *> *) tokens {
-    if (self = [self init]) {
-        _tokens = tokens;
-    }
-    return self;
-}
+#pragma mark - Description
 
 - (NSString *) description {
-    return [[NSString alloc] initWithFormat: @"<%@ tokens: %@, program: %@>",
-            NSStringFromClass([self class]), self.tokens, self.program];
+    return [[NSString alloc] initWithFormat: @"<%@ lexer: %@>",
+            NSStringFromClass([self class]), self.lexer];
 }
 
-- (PSSyntaxNodeProgram *) program {
-    NSMutableArray *tokens = [[NSMutableArray alloc] initWithArray: self.tokens];
-    return [PSSyntaxNodeProgram nextProgramSyntaxNodeFor: tokens];
+#pragma mark - Parsing
+
+- (PSSyntaxNodeProgram *) programWithError: (NSError **) error {
+    return [self parseProgramWithLexer: self.lexer error: error];
+}
+
+- (PSSyntaxNodeProgram *) parseProgramWithLexer: (PSLexer *) lexer error: (NSError **) error {
+    PSToken *token;
+    NSMutableArray *children = [[NSMutableArray alloc] init];
+
+    do {
+        token = [lexer nextToken];
+        PSSyntaxNode *child;
+
+        switch (token.type) {
+            case PSTokenTypeAlgorithm:
+                child = [self parseAlgorithmWithLexer: lexer error: error];
+                break;
+            default:
+                *error = [NSError errorWithDomain: NSPOSIXErrorDomain code: 1 userInfo: NULL];
+                break;
+        }
+    } while (!*error && token != NULL);
+
+    if (*error) return NULL;
+    return [[PSSyntaxNodeProgram alloc] initWithChildren: children];
+}
+
+- (PSSyntaxNodeAlgorithm *) parseAlgorithmWithLexer: (PSLexer *) lexer error: (NSError **) error {
+    PSToken *identifier = [lexer expectTokenType: PSTokenTypeIdentifier error: error];
+    [lexer expectTokenType: PSTokenTypeOpeningParenthesis error: error];
+    [lexer expectTokenType: PSTokenTypeClosingParenthesis error: error];
+    [lexer expectTokenType: PSTokenTypeColon error: error];
+    [lexer expectTokenType: PSTokenTypePoint error: error];
+
+    if (*error) return NULL;
+    return [[PSSyntaxNodeAlgorithm alloc] initWithIdentifier: identifier.value andReturnType: NULL andChildren: NULL];
 }
 
 @end

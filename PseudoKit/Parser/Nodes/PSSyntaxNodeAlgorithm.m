@@ -11,6 +11,7 @@
 #import "PSToken.h"
 #import "PSSyntaxNode.h"
 #import "PSSyntaxNodeReturn.h"
+#import "PSLexer.h"
 
 @implementation PSSyntaxNodeAlgorithm
 

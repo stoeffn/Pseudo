@@ -7,15 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PSToken.h"
+#import "PSLexer.h"
 #import "PSSyntaxNodeProgram.h"
 
 @interface PSParser : NSObject
 
-@property (nonatomic) NSArray<PSToken *> *tokens;
+@property (nonatomic, nonnull) PSLexer *lexer;
 
-- (instancetype) initWithTokens: (NSArray<PSToken *> *) tokens;
+- (instancetype _Nonnull) init __unavailable;
 
-- (PSSyntaxNodeProgram *) program;
+- (nonnull instancetype) initWithLexer: (nonnull PSLexer *) lexer;
+
+- (nonnull PSSyntaxNodeProgram *) programWithError: (NSError * __nullable * __null_unspecified) error;
 
 @end
