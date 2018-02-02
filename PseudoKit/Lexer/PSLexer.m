@@ -68,6 +68,23 @@
     return token;
 }
 
+#pragma mark - Asserting Tokens
+
+- (PSToken *) expectTokenType: (PSTokenType) tokenType error: (NSError **) error {
+    if (error) return NULL;
+
+    PSToken *token = self.nextToken;
+
+    if (token == NULL || token.type != tokenType) {
+        *error = [NSError errorWithDomain: NSPOSIXErrorDomain code: 1 userInfo: NULL];
+        return NULL;
+    }
+
+    return token;
+}
+
+#pragma mark - Resetting
+
 - (void) reset {
     self.currentCharacterIndex = 0;
 }

@@ -51,6 +51,20 @@ final class PSLexerTests: XCTestCase {
         XCTAssertNil(lexer.nextToken())
     }
 
+    // MARK: - Asserting
+
+    func testExpectToken_Empty() {
+        XCTAssertThrowsError(try PSLexer(code: "").expect(.colon))
+    }
+
+    func testExpectToken_Failure() {
+        XCTAssertThrowsError(try PSLexer(code: ".").expect(.colon))
+    }
+
+    func testExpectToken_Success() {
+        XCTAssertNoThrow(try PSLexer(code: ":").expect(.colon))
+    }
+
     // MARK: - Resetting
 
     func testReset() {
