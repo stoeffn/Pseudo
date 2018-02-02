@@ -16,6 +16,8 @@
 		2470EFD42023A2B800AE9CD8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EFD32023A2B800AE9CD8 /* main.m */; };
 		2470EFDC2023A49500AE9CD8 /* PSLexer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EFDB2023A49500AE9CD8 /* PSLexer.m */; };
 		2470EFDF2023A79900AE9CD8 /* PSToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EFDE2023A79900AE9CD8 /* PSToken.m */; };
+		2470EFE320247E1700AE9CD8 /* PSSyntaxNodeNumberLiteral.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EFE220247E1700AE9CD8 /* PSSyntaxNodeNumberLiteral.m */; };
+		2470EFE620247FCA00AE9CD8 /* PSSyntaxNodeExpression.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EFE520247FCA00AE9CD8 /* PSSyntaxNodeExpression.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,6 +52,10 @@
 		2470EFDD2023A79900AE9CD8 /* PSToken.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSToken.h; sourceTree = "<group>"; };
 		2470EFDE2023A79900AE9CD8 /* PSToken.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSToken.m; sourceTree = "<group>"; };
 		2470EFE02023A7D200AE9CD8 /* PSTokenType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSTokenType.h; sourceTree = "<group>"; };
+		2470EFE120247E1700AE9CD8 /* PSSyntaxNodeNumberLiteral.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSSyntaxNodeNumberLiteral.h; sourceTree = "<group>"; };
+		2470EFE220247E1700AE9CD8 /* PSSyntaxNodeNumberLiteral.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSSyntaxNodeNumberLiteral.m; sourceTree = "<group>"; };
+		2470EFE420247FCA00AE9CD8 /* PSSyntaxNodeExpression.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSSyntaxNodeExpression.h; sourceTree = "<group>"; };
+		2470EFE520247FCA00AE9CD8 /* PSSyntaxNodeExpression.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSSyntaxNodeExpression.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +119,10 @@
 				244C6C31202432EC00778B71 /* PSSyntaxNodeAlgorithm.m */,
 				244C6C3E20246DDF00778B71 /* PSSyntaxNodeReturn.h */,
 				244C6C3F20246DDF00778B71 /* PSSyntaxNodeReturn.m */,
+				2470EFE420247FCA00AE9CD8 /* PSSyntaxNodeExpression.h */,
+				2470EFE520247FCA00AE9CD8 /* PSSyntaxNodeExpression.m */,
+				2470EFE120247E1700AE9CD8 /* PSSyntaxNodeNumberLiteral.h */,
+				2470EFE220247E1700AE9CD8 /* PSSyntaxNodeNumberLiteral.m */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -209,6 +219,8 @@
 				244C6C32202432EC00778B71 /* PSSyntaxNodeAlgorithm.m in Sources */,
 				244C6C4020246DDF00778B71 /* PSSyntaxNodeReturn.m in Sources */,
 				2470EFDF2023A79900AE9CD8 /* PSToken.m in Sources */,
+				2470EFE620247FCA00AE9CD8 /* PSSyntaxNodeExpression.m in Sources */,
+				2470EFE320247E1700AE9CD8 /* PSSyntaxNodeNumberLiteral.m in Sources */,
 				2470EFDC2023A49500AE9CD8 /* PSLexer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -20,8 +20,6 @@
                       andReturnType: (NSString *) returnType
                         andChildren: (NSArray<PSSyntaxNode *> *) children;
 
-+ (PSSyntaxNode *) nextSyntaxNodeFor: (NSMutableArray<PSToken *> *) token;
-
 + (PSSyntaxNodeAlgorithm *) nextAlgorithmSyntaxNodeFor: (NSMutableArray *) tokens;
 
 @end

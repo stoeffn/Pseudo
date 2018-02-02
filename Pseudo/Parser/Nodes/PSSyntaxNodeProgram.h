@@ -13,6 +13,4 @@
 
 + (PSSyntaxNodeProgram *) nextProgramSyntaxNodeFor: (NSMutableArray<PSToken *> *) tokens;
 
-+ (PSSyntaxNodeProgram *) nextSyntaxNodeFor: (NSMutableArray *) tokens;
-
 @end

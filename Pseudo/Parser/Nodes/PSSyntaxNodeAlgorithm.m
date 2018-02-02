@@ -34,7 +34,7 @@
 
     switch (nextToken.type) {
         case PSTokenTypeReturn:
-            return [[PSSyntaxNodeReturn alloc] init];
+            return [PSSyntaxNodeReturn nextReturnSyntaxNodeFor: tokens];
         default:
             return NULL;
     }

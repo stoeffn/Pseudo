@@ -18,16 +18,16 @@
 }
 
 + (PSSyntaxNodeProgram *) nextProgramSyntaxNodeFor: (NSMutableArray<PSToken *> *) tokens {
-    PSSyntaxNodeProgram *program = [[PSSyntaxNodeProgram alloc] init];
+    PSSyntaxNodeProgram *node = [[PSSyntaxNodeProgram alloc] init];
 
     while (tokens.count > 0) {
-        PSSyntaxNode *node = [PSSyntaxNodeProgram nextSyntaxNodeFor: tokens];
-        if (node != NULL) {
-            [program.children enqueue: node];
+        PSSyntaxNode *body = [PSSyntaxNodeProgram nextSyntaxNodeFor: tokens];
+        if (body != NULL) {
+            [node.children enqueue: body];
         }
     }
 
-    return program;
+    return node;
 }
 
 + (PSSyntaxNode *) nextSyntaxNodeFor: (NSMutableArray<PSToken *> *) tokens {

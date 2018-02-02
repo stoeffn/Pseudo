@@ -1,5 +1,5 @@
 //
-//  PSSyntaxNodeKeyword.h
+//  PSSyntaxNodeNumberLiteral.h
 //  Pseudo
 //
 //  Created by Steffen Ryll on 02.02.18.
@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "PSSyntaxNode.h"
 
-@interface PSSyntaxNodeReturn : PSSyntaxNode
+@interface PSSyntaxNodeNumberLiteral : PSSyntaxNode
 
-+ (PSSyntaxNodeReturn *) nextReturnSyntaxNodeFor: (NSMutableArray *) tokens;
+@property (nonatomic) NSNumber *value;
+
+- (instancetype) initWithValue: (NSNumber *) value;
 
 @end
