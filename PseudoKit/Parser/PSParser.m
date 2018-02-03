@@ -13,6 +13,9 @@
 #import "PSSyntaxNode.h"
 #import "PSSyntaxNodeProgram.h"
 #import "PSSyntaxNodeAlgorithm.h"
+#import "PSSyntaxNodeReturn.h"
+#import "PSSyntaxNodeExpression.h"
+#import "PSSyntaxNodeNumberLiteral.h"
 
 @implementation PSParser
 
@@ -38,21 +41,51 @@
     NSDictionary *expectedTokenTypes = @{[NSNumber numberWithInt: PSTokenTypeAlgorithm]: ^PSSyntaxNode *(PSToken *token) {
         return [self algorithmWithError: error];
     }};
-    NSArray<PSSyntaxNode *> *children = [self.lexer expectMultipleOfTokenTypes: expectedTokenTypes error: error];
+    NSArray<PSSyntaxNode *> *children = [self.lexer expectMultipleOfTokenTypes: expectedTokenTypes
+                                                             withStopTokenType: PSTokenTypePoint
+                                                                         error: error];
 
     if (*error) return NULL;
-    return [[PSSyntaxNodeProgram alloc] initWithChildren: [children mutableCopy]];
+    return [[PSSyntaxNodeProgram alloc] initWithChildren: children];
 }
 
-- (PSSyntaxNodeAlgorithm *) algorithmWithError: (NSError **) error {
+- (PSSyntaxNodeAlgorithm *) algorithmWithError: (__autoreleasing NSError **) error {
     PSToken *identifier = [self.lexer expectTokenType: PSTokenTypeIdentifier error: error];
     [self.lexer expectTokenType: PSTokenTypeOpeningParenthesis error: error];
     [self.lexer expectTokenType: PSTokenTypeClosingParenthesis error: error];
     [self.lexer expectTokenType: PSTokenTypeColon error: error];
-    [self.lexer expectTokenType: PSTokenTypePoint error: error];
+
+    NSDictionary *expectedTokenTypes = @{[NSNumber numberWithInt: PSTokenTypeReturn]: ^PSSyntaxNode *(PSToken *token) {
+        return [self algorithmReturnWithError: error];
+    }};
+    NSArray<PSSyntaxNode *> *children = [self.lexer expectMultipleOfTokenTypes: expectedTokenTypes
+                                                             withStopTokenType: PSTokenTypePoint
+                                                                         error: error];
 
     if (*error) return NULL;
-    return [[PSSyntaxNodeAlgorithm alloc] initWithIdentifier: identifier.value andReturnType: NULL andChildren: NULL];
+    return [[PSSyntaxNodeAlgorithm alloc] initWithIdentifier: identifier.value andReturnType: NULL andChildren: children];
+}
+
+- (PSSyntaxNodeReturn *) algorithmReturnWithError: (NSError **) error {
+    NSError *expressionError;
+    PSSyntaxNodeExpression *expression = [self expressionWithError: &expressionError];
+
+    if (!expressionError) {
+        return [[PSSyntaxNodeReturn alloc] initWithChildren: @[expression]];
+    }
+
+    if (*error) return NULL;
+    return [[PSSyntaxNodeReturn alloc] init];
+}
+
+- (PSSyntaxNodeExpression *) expressionWithError: (NSError **) error {
+    PSToken *literal = [self.lexer expectTokenType: PSTokenTypeNumberLiteral error: error];
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    NSNumber *number = [numberFormatter numberFromString: literal.value];
+    PSSyntaxNodeNumberLiteral *child = [[PSSyntaxNodeNumberLiteral alloc] initWithValue: number];
+
+    if (*error) return NULL;
+    return [[PSSyntaxNodeExpression alloc] initWithChildren: @[child]];
 }
 
 @end
