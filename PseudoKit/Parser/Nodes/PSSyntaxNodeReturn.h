@@ -11,6 +11,4 @@
 
 @interface PSSyntaxNodeReturn : PSSyntaxNode
 
-+ (PSSyntaxNodeReturn *) nextReturnSyntaxNodeFor: (NSMutableArray *) tokens;
-
 @end

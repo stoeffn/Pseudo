@@ -13,28 +13,4 @@
 
 @implementation PSSyntaxNodeProgram
 
-+ (PSSyntaxNodeProgram *) nextProgramSyntaxNodeFor: (NSMutableArray<PSToken *> *) tokens {
-    PSSyntaxNodeProgram *node = [[PSSyntaxNodeProgram alloc] init];
-
-    while (tokens.count > 0) {
-        PSSyntaxNode *body = [PSSyntaxNodeProgram nextSyntaxNodeFor: tokens];
-        if (body != NULL) {
-            [node.children enqueue: body];
-        }
-    }
-
-    return node;
-}
-
-+ (PSSyntaxNode *) nextSyntaxNodeFor: (NSMutableArray<PSToken *> *) tokens {
-    PSToken *nextToken = [tokens dequeue];
-
-    switch (nextToken.type) {
-        case PSTokenTypeAlgorithm:
-            return [PSSyntaxNodeAlgorithm nextAlgorithmSyntaxNodeFor: tokens];
-        default:
-            return NULL;
-    }
-}
-
 @end

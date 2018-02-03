@@ -13,20 +13,4 @@
 
 @implementation PSSyntaxNodeExpression
 
-+ (PSSyntaxNodeExpression *) nextExpressionSyntaxNodeFor: (NSMutableArray<PSToken *> *) tokens {
-    PSSyntaxNodeExpression *node = [[PSSyntaxNodeExpression alloc] init];
-    PSToken *nextToken;
-
-    nextToken = [tokens dequeue];
-    if (nextToken.type != PSTokenTypeNumberLiteral) {
-        return NULL;
-    }
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    NSNumber *number = [numberFormatter numberFromString: nextToken.value];
-    PSSyntaxNodeNumberLiteral *body = [[PSSyntaxNodeNumberLiteral alloc] initWithValue: number];
-    [node.children enqueue: body];
-
-    return node;
-}
-
 @end

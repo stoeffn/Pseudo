@@ -13,24 +13,4 @@
 
 @implementation PSSyntaxNodeReturn
 
-+ (PSSyntaxNodeReturn *) nextReturnSyntaxNodeFor: (NSMutableArray *) tokens {
-    PSSyntaxNodeReturn *node = [[PSSyntaxNodeReturn alloc] init];
-    PSToken *nextToken;
-
-    NSMutableArray *bodyTokens = [[NSMutableArray alloc] init];
-
-    do {
-        nextToken = [tokens dequeue];
-        [bodyTokens enqueue: nextToken];
-    } while (nextToken != NULL && nextToken.type != PSTokenTypePoint);
-
-    PSSyntaxNodeExpression *bodyNode = [PSSyntaxNodeExpression nextExpressionSyntaxNodeFor: bodyTokens];
-    if (bodyNode == NULL) {
-        return NULL;
-    }
-    [node.children enqueue: bodyNode];
-
-    return node;
-}
-
 @end
