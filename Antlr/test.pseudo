@@ -1,7 +1,42 @@
-algorithm test(int n): int:
-    return n div 5 - 1.
+true;
+S.first()[1].test();
+
+if not true then
+    return S.
+
+;
+
+algorithm test(int n, int r): int:
+    return n div r - 1.
+
+print(test(42));
 
 algorithm main(): int:
     return test(42 mod 8) + 1.
 
-main()
+// Übungsblatt 1
+
+algorithm doit2(Sequence S): Obj:
+    Position p ← S.first();
+    Obj e ← p.getCont();
+    Position q ← p;
+
+    while not S.isLast(p) do
+        p ← S.after(p);
+        Obj f ← p.getCont();
+        if e < f then
+            e ← f;
+            q ← p;
+            e ← S.remove(q)..
+
+    return e.
+
+
+
+algorithm fibonacci(int n): int:
+    if n ≦ 1 then
+        return n.
+    return fibonacci(n - 1) + fibonacci(n - 2).
+
+
+main();
