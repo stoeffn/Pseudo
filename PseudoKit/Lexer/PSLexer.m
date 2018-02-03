@@ -109,6 +109,7 @@
 }
 
 - (NSArray<PSSyntaxNode *> *) expectMultipleOfTokenTypes: (NSDictionary<NSNumber *, PSSyntaxNode *(^)(PSToken *)> *) tokenTypes
+                                       withStopTokenType: (PSTokenType) stopTokenType
                                                    error: (NSError **) error {
     if (*error) return NULL;
 
@@ -117,14 +118,14 @@
 
     do {
         token = self.nextToken;
-        if (!token) break;
+        if (!token || token.type == stopTokenType) break;
 
         NSNumber *key = [NSNumber numberWithInt: token.type];
         PSSyntaxNode *(^block)(PSToken *) = tokenTypes[key];
         PSSyntaxNode *node = block(token);
 
         if (node) [children addObject: node];
-    } while (!*error && token != NULL);
+    } while (!*error && token != NULL && token.type != stopTokenType);
 
     if (*error) return NULL;
     return children;

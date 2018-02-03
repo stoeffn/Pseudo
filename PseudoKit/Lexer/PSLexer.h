@@ -27,6 +27,7 @@
                                             error: (NSError * __nullable * __null_unspecified) error;
 
 - (nullable NSArray<PSSyntaxNode *> *) expectMultipleOfTokenTypes: (NSDictionary<NSNumber *, PSSyntaxNode *(^)(PSToken * _Nonnull)> * _Nonnull) tokenTypes
+                                                withStopTokenType: (PSTokenType) stopTokenType
                                                             error: (NSError * __nullable * __null_unspecified) error;
 
 - (void) reset;
