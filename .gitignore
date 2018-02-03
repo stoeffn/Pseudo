@@ -18,3 +18,10 @@ Packages/
 Package.pins
 Package.resolved
 .build/
+
+### Antlr ###
+
+*.interp
+*.tokens
+*.class
+*.java
