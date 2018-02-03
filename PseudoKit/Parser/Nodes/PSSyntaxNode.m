@@ -17,12 +17,12 @@
 
 - (instancetype) init {
     if (self = [super init]) {
-        _children = [[NSMutableArray alloc] init];
+        _children = [[NSArray alloc] init];
     }
     return self;
 }
 
-- (instancetype) initWithChildren: (NSMutableArray<PSSyntaxNode *> *) children {
+- (instancetype) initWithChildren: (NSArray<PSSyntaxNode *> *) children {
     if (self = [self init]) {
         _children = children;
     }

@@ -10,8 +10,8 @@
 
 @interface PSSyntaxNode : NSObject
 
-@property (nonatomic) NSMutableArray<PSSyntaxNode *> *children;
+@property (nonatomic) NSArray<PSSyntaxNode *> *children;
 
-- (instancetype) initWithChildren: (NSMutableArray<PSSyntaxNode *> *) children;
+- (instancetype) initWithChildren: (NSArray<PSSyntaxNode *> *) children;
 
 @end

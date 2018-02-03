@@ -11,7 +11,7 @@
 
 @interface PSSyntaxNodeNumberLiteral : PSSyntaxNode
 
-@property (nonatomic) NSNumber *value;
+@property (nonatomic, readonly) NSNumber *value;
 
 - (instancetype) initWithValue: (NSNumber *) value;
 
