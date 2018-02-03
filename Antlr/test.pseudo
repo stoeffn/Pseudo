@@ -1,0 +1,7 @@
+algorithm test(int n): int:
+    return n div 5 - 1.
+
+algorithm main(): int:
+    return test(42 mod 8) + 1.
+
+main()
