@@ -39,7 +39,7 @@
 }
 
 - (instancetype) initWithRawToken: (NSString *) rawToken {
-    NSString *trimmedRawToken = [rawToken stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceAndNewlineCharacterSet];
+    /*NSString *trimmedRawToken = [rawToken stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceAndNewlineCharacterSet];
     if (!rawToken || trimmedRawToken.length == 0) return NULL;
 
     NSNumber *delimiter = PSToken.delimiters[trimmedRawToken];
@@ -50,16 +50,16 @@
 
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     NSNumber *number = [numberFormatter numberFromString: trimmedRawToken];
-    if (number != NULL) return [self initWithType: PSTokenTypesNumber number: number];
+    if (number != NULL) return [self initWithType: PSTokenTypesNumber number: number];*/
 
-    return [self initWithType: PSTokenTypesIdentifier string: trimmedRawToken];
+    return [self initWithType: PSTokenTypesIdentifier string: rawToken];
 }
 
 #pragma mark - Description
 
 - (NSString *) description {
-    return [NSString stringWithFormat: @"<%@ Type: %ld, String: '%@', Number: %@>",
-            NSStringFromClass([self class]), (long) self.type, self.string, self.number];
+    return [NSString stringWithFormat: @"<%@ Type: %@, String: '%@', Number: %@>",
+            NSStringFromClass([self class]), [PSToken descriptionForTokenType: self.type], self.string, self.number];
 }
 
 #pragma mark - Equality

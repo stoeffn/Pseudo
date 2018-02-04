@@ -14,4 +14,8 @@
 
 + (nonnull NSDictionary<NSString *, NSString *> *) aliases;
 
++ (nonnull NSCharacterSet *) delimiters;
+
++ (nonnull NSString *) descriptionForTokenType: (PSTokenTypes) tokenType;
+
 @end
