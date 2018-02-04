@@ -74,7 +74,7 @@
 - (nullable PSToken *) nextDelimiterTokenFromReader: (id<PSReading>) reader {
     NSNumber *singleCharacterTokenType = PSToken.tokenTypes[reader.currentCharacter];
 
-    if (reader.nextCharacter && [self isCharacterAmbiguousDelimiter: reader.currentCharacter]) {
+    if ([self isCharacterAmbiguousDelimiter: reader.currentCharacter] && reader.nextCharacter) {
         NSString *doubleCharacterRawToken = [self rawTokenFromBuffer: @[reader.currentCharacter, reader.nextCharacter]];
         NSNumber *doubleCharacterTokenType = PSToken.tokenTypes[doubleCharacterRawToken];
 
@@ -95,17 +95,17 @@
 
 - (nullable PSToken *) nextStringTokenFromReader: (id<PSReading>) reader {
     if (![reader.currentCharacter isEqualToString: PSToken.stringStartCharacter]) return NULL;
-    [reader advance];
 
     NSMutableArray<NSString *> *buffer = [[NSMutableArray alloc] init];
 
     while (reader.nextCharacter) {
-        if ([reader.nextCharacter isEqualToString: PSToken.stringStartCharacter]) break;
-
         [reader advance];
         [buffer addObject: reader.currentCharacter];
+
+        if ([reader.nextCharacter isEqualToString: PSToken.stringStartCharacter]) break;
     };
 
+    [reader advance];
     [reader advance];
 
     NSString *string = [self rawTokenFromBuffer: buffer];
@@ -118,16 +118,19 @@
     NSMutableArray<NSString *> *buffer = [[NSMutableArray alloc] init];
 
     BOOL isFloatingPointNumber = NO;
-    while (reader.nextCharacter) {
-        [buffer addObject: reader.currentCharacter];
-
-        BOOL isFloatingPointCharacter = [reader.currentCharacter isEqualToString: PSToken.floatingPointCharacter];
-        BOOL isSecondFloatingPointCharacter = isFloatingPointNumber && isFloatingPointCharacter;
+    while (reader.currentCharacter) {
+        BOOL isDigit = [self isCharacterDigit: reader.currentCharacter];
         BOOL isFollowedByDigit = [self isCharacterDigit: reader.nextCharacter];
+        BOOL isFloatingPointCharacter = [reader.currentCharacter isEqualToString: PSToken.floatingPointCharacter];
+        BOOL isDigitOrFloatingPointCharacter = isDigit || isFloatingPointCharacter;
+        BOOL isSecondFloatingPointCharacter = isFloatingPointNumber && isFloatingPointCharacter;
+        BOOL isPoint = isFloatingPointCharacter && !isFollowedByDigit;
 
-        if (isSecondFloatingPointCharacter || (isFloatingPointCharacter && !isFollowedByDigit)) break;
+        if (!isDigitOrFloatingPointCharacter || isSecondFloatingPointCharacter || isPoint) break;
 
+        [buffer addObject: reader.currentCharacter];
         [reader advance];
+
         isFloatingPointNumber = isFloatingPointCharacter;
     }
 
@@ -143,7 +146,7 @@
 
     NSMutableArray<NSString *> *buffer = [[NSMutableArray alloc] init];
 
-    while (reader.nextCharacter) {
+    while (reader.currentCharacter) {
         [buffer addObject: reader.currentCharacter];
         
         if (![self isCharacterDelimiter: reader.currentCharacter] && [self isCharacterDelimiter: reader.nextCharacter]) break;
@@ -167,15 +170,15 @@
 }
 
 - (BOOL) isCharacterDigit: (NSString *) character {
-    return [character rangeOfCharacterFromSet: NSCharacterSet.decimalDigitCharacterSet].location != NSNotFound;
+    return character && [character rangeOfCharacterFromSet: NSCharacterSet.decimalDigitCharacterSet].location != NSNotFound;
 }
 
 - (BOOL) isCharacterDelimiter: (NSString *) character {
-    return [character rangeOfCharacterFromSet: PSToken.delimiterCharacterSet].location != NSNotFound;
+    return character && [character rangeOfCharacterFromSet: PSToken.delimiterCharacterSet].location != NSNotFound;
 }
 
 - (BOOL) isCharacterAmbiguousDelimiter: (NSString *) character {
-    return [character rangeOfCharacterFromSet: PSToken.ambiguousDelimiterCharacterSet].location != NSNotFound;
+    return character && [character rangeOfCharacterFromSet: PSToken.ambiguousDelimiterCharacterSet].location != NSNotFound;
 }
 
 - (NSString *) rawTokenFromBuffer: (NSArray<NSString *> *) buffer {

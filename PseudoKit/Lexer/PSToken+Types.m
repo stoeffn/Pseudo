@@ -45,7 +45,7 @@
                     @"<=":          [[NSNumber alloc] initWithInt: PSTokenTypesLessThanOrEquals],
 
                     @"←":           [[NSNumber alloc] initWithInt: PSTokenTypesAssign],
-                    @"<=":          [[NSNumber alloc] initWithInt: PSTokenTypesAssign],
+                    @"<-":          [[NSNumber alloc] initWithInt: PSTokenTypesAssign],
 
                     @"not":         [[NSNumber alloc] initWithInt: PSTokenTypesNot],
 
