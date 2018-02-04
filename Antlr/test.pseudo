@@ -4,10 +4,8 @@ S.first()[1].test();
 if not true then
     return S.
 
-;
-
 algorithm test(int n, int r): int:
-    return n div r - 1.
+    return n div r - 1 + 2.
 
 print(test(42));
 

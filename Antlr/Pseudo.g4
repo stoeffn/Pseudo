@@ -15,10 +15,10 @@ blockList
     ;
 
 block
-    : statementList
-    | algorithm
+    : algorithm
     | condition
     | loop
+    | statementList
     ;
 
 // Statements
@@ -84,8 +84,8 @@ returnType
 // Expressions
 
 expression
-    : term ((PLUS | MINUS) term)*
-    | NOT expression
+    : NOT expression
+    | term ((PLUS | MINUS) term)*
     | expression relationOperator expression
     ;
 
@@ -95,8 +95,8 @@ term
 
 arithmeticOperator
     : TIMES
-    | DIVIDED
-    | DIVIDED_AS_INTEGER
+    | DIVIDED_BY
+    | DIVIDED_AS_INTEGER_BY
     | MODULO
     ;
 
@@ -168,12 +168,12 @@ CLOSING_BRACKET     : ']';
 
 // Arithmetic Tokens
 
-PLUS                : '+';
-MINUS               : '-';
-TIMES               : '*';
-DIVIDED             : '/';
-DIVIDED_AS_INTEGER  : 'div';
-MODULO              : 'mod';
+PLUS                    : '+';
+MINUS                   : '-';
+TIMES                   : '*';
+DIVIDED_BY              : '/';
+DIVIDED_AS_INTEGER_BY   : 'div';
+MODULO                  : 'mod';
 
 // Relationship Operators
 
