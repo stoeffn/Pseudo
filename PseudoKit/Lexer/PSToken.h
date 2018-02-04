@@ -7,13 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PSTokenType.h"
+#import "PSTokenTypes.h"
 
 @interface PSToken : NSObject
 
 #pragma mark - Properties
 
-@property (nonatomic, readonly) PSTokenType type;
+@property (nonatomic, readonly) PSTokenTypes type;
 
 @property (nonatomic, readonly, copy, nullable) NSString *string;
 
@@ -23,13 +23,13 @@
 
 - (nonnull instancetype) init __unavailable;
 
-- (nonnull instancetype) initWithType: (PSTokenType) type
+- (nonnull instancetype) initWithType: (PSTokenTypes) type
                                number: (nullable NSNumber *) number;
 
-- (nonnull instancetype) initWithType: (PSTokenType) type
+- (nonnull instancetype) initWithType: (PSTokenTypes) type
                                string: (nullable NSString *) string;
 
-- (nonnull instancetype) initWithType: (PSTokenType) type;
+- (nonnull instancetype) initWithType: (PSTokenTypes) type;
 
 - (nonnull instancetype) initWithRawToken: (nullable NSString *) rawToken;
 

@@ -7,12 +7,13 @@
 //
 
 #import "PSToken.h"
+#import "PSToken+Types.h"
 
 @implementation PSToken
 
 #pragma mark - Life Cycle
 
-- (nonnull instancetype) initWithType: (PSTokenType) type
+- (nonnull instancetype) initWithType: (PSTokenTypes) type
                                number: (nullable NSNumber *) number {
     if (self = [super init]) {
         _type = type;
@@ -21,7 +22,7 @@
     return self;
 }
 
-- (nonnull instancetype) initWithType: (PSTokenType) type
+- (nonnull instancetype) initWithType: (PSTokenTypes) type
                                string: (nullable NSString *) string {
     if (self = [super init]) {
         _type = type;
@@ -30,7 +31,7 @@
     return self;
 }
 
-- (nonnull instancetype) initWithType: (PSTokenType) type {
+- (nonnull instancetype) initWithType: (PSTokenTypes) type {
     if (self = [super init]) {
         _type = type;
     }
@@ -49,9 +50,9 @@
 
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     NSNumber *number = [numberFormatter numberFromString: trimmedRawToken];
-    if (number != NULL) return [self initWithType: PSTokenTypeNumberLiteral number: number];
+    if (number != NULL) return [self initWithType: PSTokenTypesNumber number: number];
 
-    return [self initWithType: PSTokenTypeIdentifier string: trimmedRawToken];
+    return [self initWithType: PSTokenTypesIdentifier string: trimmedRawToken];
 }
 
 #pragma mark - Description
@@ -73,32 +74,6 @@
         && self.type == token.type
         && ((!self.string && !token.string) || [self.string isEqualToString: token.string])
         && ((!self.number && !token.number) || [self.number isEqualToNumber: token.number]);
-}
-
-#pragma mark - Constants
-
-+ (NSDictionary<NSString *, NSNumber *> *) keywords {
-    static NSDictionary *_keywords;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _keywords = @{@"ALGORITHM": [NSNumber numberWithInt: PSTokenTypeAlgorithm],
-                      @"RETURN": [NSNumber numberWithInt: PSTokenTypeReturn]};
-    });
-    return _keywords;
-}
-
-+ (NSDictionary<NSString *, NSNumber *> *) delimiters {
-    static NSDictionary *_delimiters;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _delimiters = @{@"(": [NSNumber numberWithInt: PSTokenTypeOpeningParenthesis],
-                        @")": [NSNumber numberWithInt: PSTokenTypeClosingParenthesis],
-                        @"{": [NSNumber numberWithInt: PSTokenTypeOpeningBrace],
-                        @"}": [NSNumber numberWithInt: PSTokenTypeClosingBrace],
-                        @":": [NSNumber numberWithInt: PSTokenTypeColon],
-                        @".": [NSNumber numberWithInt: PSTokenTypePoint]};
-    });
-    return _delimiters;
 }
 
 @end
