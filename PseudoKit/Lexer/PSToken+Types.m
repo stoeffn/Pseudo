@@ -36,16 +36,12 @@
 
                     @"=": [[PSToken alloc] initWithType: PSTokenTypesEquals],
                     @"≠": [[PSToken alloc] initWithType: PSTokenTypesNotEquals],
-                    @"!=": [[PSToken alloc] initWithType: PSTokenTypesNotEquals],
                     @">": [[PSToken alloc] initWithType: PSTokenTypesGreaterThan],
                     @"≧": [[PSToken alloc] initWithType: PSTokenTypesGreaterThanOrEquals],
-                    @">=": [[PSToken alloc] initWithType: PSTokenTypesGreaterThanOrEquals],
                     @"<": [[PSToken alloc] initWithType: PSTokenTypesLessThan],
                     @"≦": [[PSToken alloc] initWithType: PSTokenTypesLessThanOrEquals],
-                    @"<=": [[PSToken alloc] initWithType: PSTokenTypesLessThanOrEquals],
 
                     @"←": [[PSToken alloc] initWithType: PSTokenTypesAssign],
-                    @"<-": [[PSToken alloc] initWithType: PSTokenTypesAssign],
 
                     @"not": [[PSToken alloc] initWithType: PSTokenTypesNot],
 
@@ -70,6 +66,20 @@
                     };
     });
     return _tokens;
+}
+
++ (nonnull NSDictionary<NSString *, NSString *> *) aliases {
+    static NSDictionary *_aliases;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _aliases = @{
+                     @"!=": @"≠",
+                     @">=": @"≧",
+                     @"<=": @"≦",
+                     @"<-": @"←"
+                     };
+    });
+    return _aliases;
 }
 
 @end

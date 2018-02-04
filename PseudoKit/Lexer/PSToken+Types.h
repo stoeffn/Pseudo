@@ -12,4 +12,6 @@
 
 + (nonnull NSDictionary<NSString *, PSToken *> *) sharedTokens;
 
++ (nonnull NSDictionary<NSString *, NSString *> *) aliases;
+
 @end

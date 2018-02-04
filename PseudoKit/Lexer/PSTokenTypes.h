@@ -8,7 +8,7 @@
 
 typedef NS_ENUM(NSInteger, PSTokenTypes) {
     PSTokenTypesComma,
-    PSTokenTypesColor,
+    PSTokenTypesColon,
     PSTokenTypesSemicolon,
 
     PSTokenTypesPoint,
