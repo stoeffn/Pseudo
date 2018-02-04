@@ -13,57 +13,56 @@
 
 #pragma mark - Constants
 
-+ (nonnull NSDictionary<NSString *, PSToken *> *) sharedTokens {
++ (nonnull NSDictionary<NSString *, NSNumber *> *) tokenTypes {
     static NSDictionary *_tokens;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _tokens = @{@",": [[PSToken alloc] initWithType: PSTokenTypesComma],
-                    @":": [[PSToken alloc] initWithType: PSTokenTypesColon],
-                    @";": [[PSToken alloc] initWithType: PSTokenTypesSemicolon],
+        _tokens = @{@",":           [[NSNumber alloc] initWithInt: PSTokenTypesComma],
+                    @":":           [[NSNumber alloc] initWithInt: PSTokenTypesColon],
+                    @";":           [[NSNumber alloc] initWithInt: PSTokenTypesSemicolon],
 
-                    @".": [[PSToken alloc] initWithType: PSTokenTypesPoint],
-                    @"(": [[PSToken alloc] initWithType: PSTokenTypesOpeningParenthesis],
-                    @")": [[PSToken alloc] initWithType: PSTokenTypesClosingParanthesis],
-                    @"[": [[PSToken alloc] initWithType: PSTokenTypesOpeningBracket],
-                    @"]": [[PSToken alloc] initWithType: PSTokenTypesClosingBracket],
+                    @".":           [[NSNumber alloc] initWithInt: PSTokenTypesPoint],
+                    @"(":           [[NSNumber alloc] initWithInt: PSTokenTypesOpeningParenthesis],
+                    @")":           [[NSNumber alloc] initWithInt: PSTokenTypesClosingParanthesis],
+                    @"[":           [[NSNumber alloc] initWithInt: PSTokenTypesOpeningBracket],
+                    @"]":           [[NSNumber alloc] initWithInt: PSTokenTypesClosingBracket],
 
-                    @"+": [[PSToken alloc] initWithType: PSTokenTypesPlus],
-                    @"-": [[PSToken alloc] initWithType: PSTokenTypesMinus],
-                    @"*": [[PSToken alloc] initWithType: PSTokenTypesTimes],
-                    @"/": [[PSToken alloc] initWithType: PSTokenTypesDividedBy],
-                    @"div": [[PSToken alloc] initWithType: PSTokenTypesDividedAsIntegerBy],
-                    @"mod": [[PSToken alloc] initWithType: PSTokenTypesModulo],
+                    @"+":           [[NSNumber alloc] initWithInt: PSTokenTypesPlus],
+                    @"-":           [[NSNumber alloc] initWithInt: PSTokenTypesMinus],
+                    @"*":           [[NSNumber alloc] initWithInt: PSTokenTypesTimes],
+                    @"/":           [[NSNumber alloc] initWithInt: PSTokenTypesDividedBy],
+                    @"div":         [[NSNumber alloc] initWithInt: PSTokenTypesDividedAsIntegerBy],
+                    @"mod":         [[NSNumber alloc] initWithInt: PSTokenTypesModulo],
 
-                    @"=": [[PSToken alloc] initWithType: PSTokenTypesEquals],
-                    @"≠": [[PSToken alloc] initWithType: PSTokenTypesNotEquals],
-                    @">": [[PSToken alloc] initWithType: PSTokenTypesGreaterThan],
-                    @"≧": [[PSToken alloc] initWithType: PSTokenTypesGreaterThanOrEquals],
-                    @"<": [[PSToken alloc] initWithType: PSTokenTypesLessThan],
-                    @"≦": [[PSToken alloc] initWithType: PSTokenTypesLessThanOrEquals],
+                    @"=":           [[NSNumber alloc] initWithInt: PSTokenTypesEquals],
+                    @"≠":           [[NSNumber alloc] initWithInt: PSTokenTypesNotEquals],
+                    @">":           [[NSNumber alloc] initWithInt: PSTokenTypesGreaterThan],
+                    @"≧":           [[NSNumber alloc] initWithInt: PSTokenTypesGreaterThanOrEquals],
+                    @"<":           [[NSNumber alloc] initWithInt: PSTokenTypesLessThan],
+                    @"≦":           [[NSNumber alloc] initWithInt: PSTokenTypesLessThanOrEquals],
 
-                    @"←": [[PSToken alloc] initWithType: PSTokenTypesAssign],
+                    @"←":           [[NSNumber alloc] initWithInt: PSTokenTypesAssign],
 
-                    @"not": [[PSToken alloc] initWithType: PSTokenTypesNot],
+                    @"not":         [[NSNumber alloc] initWithInt: PSTokenTypesNot],
 
-                    @"for": [[PSToken alloc] initWithType: PSTokenTypesFor],
-                    @"in": [[PSToken alloc] initWithType: PSTokenTypesIn],
-                    @"to": [[PSToken alloc] initWithType: PSTokenTypesTo],
-                    @"downto": [[PSToken alloc] initWithType: PSTokenTypesDownTo],
-                    @"do": [[PSToken alloc] initWithType: PSTokenTypesDo],
-                    @"while": [[PSToken alloc] initWithType: PSTokenTypesWhile],
-                    @"until": [[PSToken alloc] initWithType: PSTokenTypesUntil],
-                    @"break": [[PSToken alloc] initWithType: PSTokenTypesBreak],
-                    @"continue": [[PSToken alloc] initWithType: PSTokenTypesContinue],
+                    @"for":         [[NSNumber alloc] initWithInt: PSTokenTypesFor],
+                    @"in":          [[NSNumber alloc] initWithInt: PSTokenTypesIn],
+                    @"to":          [[NSNumber alloc] initWithInt: PSTokenTypesTo],
+                    @"downto":      [[NSNumber alloc] initWithInt: PSTokenTypesDownTo],
+                    @"do":          [[NSNumber alloc] initWithInt: PSTokenTypesDo],
+                    @"while":       [[NSNumber alloc] initWithInt: PSTokenTypesWhile],
+                    @"until":       [[NSNumber alloc] initWithInt: PSTokenTypesUntil],
+                    @"break":       [[NSNumber alloc] initWithInt: PSTokenTypesBreak],
+                    @"continue":    [[NSNumber alloc] initWithInt: PSTokenTypesContinue],
 
-                    @"algorithm": [[PSToken alloc] initWithType: PSTokenTypesAlgorithm],
-                    @"return": [[PSToken alloc] initWithType: PSTokenTypesReturn],
+                    @"algorithm":   [[NSNumber alloc] initWithInt: PSTokenTypesAlgorithm],
+                    @"return":      [[NSNumber alloc] initWithInt: PSTokenTypesReturn],
 
-                    @"new": [[PSToken alloc] initWithType: PSTokenTypesNew],
+                    @"new":         [[NSNumber alloc] initWithInt: PSTokenTypesNew],
 
-                    @"null": [[PSToken alloc] initWithType: PSTokenTypesNull],
-                    @"true": [[PSToken alloc] initWithType: PSTokenTypesTrue],
-                    @"false": [[PSToken alloc] initWithType: PSTokenTypesFalse]
-                    };
+                    @"null":        [[NSNumber alloc] initWithInt: PSTokenTypesNull],
+                    @"true":        [[NSNumber alloc] initWithInt: PSTokenTypesTrue],
+                    @"false":       [[NSNumber alloc] initWithInt: PSTokenTypesFalse]};
     });
     return _tokens;
 }
@@ -72,12 +71,10 @@
     static NSDictionary *_aliases;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _aliases = @{
-                     @"!=": @"≠",
+        _aliases = @{@"!=": @"≠",
                      @">=": @"≧",
                      @"<=": @"≦",
-                     @"<-": @"←"
-                     };
+                     @"<-": @"←"};
     });
     return _aliases;
 }

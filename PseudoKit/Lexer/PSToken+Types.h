@@ -10,7 +10,7 @@
 
 @interface PSToken (Types)
 
-+ (nonnull NSDictionary<NSString *, PSToken *> *) sharedTokens;
++ (nonnull NSDictionary<NSString *, NSNumber *> *) tokenTypes;
 
 + (nonnull NSDictionary<NSString *, NSString *> *) aliases;
 
