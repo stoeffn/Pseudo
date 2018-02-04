@@ -9,54 +9,30 @@
 import XCTest
 @testable import PseudoKit
 
-/*final class PSTokenTests: XCTestCase {
-    // MARK: - Life Cycle
-
-    func testInit_SameProperties() {
-        let token = PSToken(type: .number, andValue: "42")
-        XCTAssertEqual(token.type, .numberLiteral)
-        XCTAssertEqual(token.value, "42")
-    }
-
-    func testInitFromRawToken_Empty() {
-        XCTAssertNil(PSToken(rawToken: ""))
-    }
-
-    func testInitFromRawToken_Invalid() {
-        XCTAssertNil(PSToken(rawToken: " \n "))
-    }
-
-    func testInitFromRawToken_Algorithm() {
-        XCTAssertEqual(PSToken(rawToken: "algoRITHM"), PSToken(type: .algorithm, andValue: nil))
-    }
-
-    func testInitFromRawToken_Colon() {
-        XCTAssertEqual(PSToken(rawToken: ":"), PSToken(type: .colon, andValue: nil))
-    }
-
-    func testInitFromRawToken_Number() {
-        XCTAssertEqual(PSToken(rawToken: "42"), PSToken(type: .numberLiteral, andValue: "42"))
-    }
-
-    func testInitFromRawToken_Identifier() {
-    XCTAssertEqual(PSToken(rawToken: "main"), PSToken(type: .identifier, andValue: "main"))
-    }
-
+final class PSTokenTests: XCTestCase {
     // MARK: - Equality
 
     func testEquality_ClosingBrace_true() {
-        XCTAssertEqual(PSToken(type: .closingBrace, andValue: nil), PSToken(type: .closingBrace, andValue: nil))
+        XCTAssertEqual(PSToken(type: .closingParanthesis), PSToken(type: .closingParanthesis))
     }
 
     func testEquality_SameIdentifiers_true() {
-        XCTAssertEqual(PSToken(type: .identifier, andValue: "main"), PSToken(type: .identifier, andValue: "main"))
+        XCTAssertEqual(PSToken(type: .identifier, string: "main"), PSToken(type: .identifier, string: "main"))
     }
 
     func testEquality_DifferentIdentifier_false() {
-        XCTAssertNotEqual(PSToken(type: .identifier, andValue: "main"), PSToken(type: .identifier, andValue: "fibonacci"))
+        XCTAssertNotEqual(PSToken(type: .identifier, string: "main"), PSToken(type: .identifier, string: "fibonacci"))
+    }
+
+    func testEquality_SameNumbers_true() {
+        XCTAssertEqual(PSToken(type: .number, number: 42), PSToken(type: .number, number: 42))
+    }
+
+    func testEquality_StringAndNumber_false() {
+        XCTAssertNotEqual(PSToken(type: .identifier, string: "main"), PSToken(type: .identifier, number: 42))
     }
 
     func testEquality_ClosingBraceAndColon_true() {
-        XCTAssertNotEqual(PSToken(type: .closingBrace, andValue: nil), PSToken(type: .colon, andValue: nil))
+        XCTAssertNotEqual(PSToken(type: .closingParanthesis), PSToken(type: .colon))
     }
-}*/
+}

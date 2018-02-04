@@ -22,7 +22,7 @@ final class PSLexerTests: XCTestCase {
     func testNextToken_MainReturn() {
         let reader = PSStringReader(string: """
         algorithm main(): int:
-            return 42.0.
+            return 42.
         """)
         let lexer = PSLexer(reader: reader)
 

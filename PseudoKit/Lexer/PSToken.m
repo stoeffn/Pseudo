@@ -38,23 +38,6 @@
     return self;
 }
 
-- (instancetype) initWithRawToken: (NSString *) rawToken {
-    /*NSString *trimmedRawToken = [rawToken stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceAndNewlineCharacterSet];
-    if (!rawToken || trimmedRawToken.length == 0) return NULL;
-
-    NSNumber *delimiter = PSToken.delimiters[trimmedRawToken];
-    if (delimiter != NULL) return [self initWithType: delimiter.integerValue];
-
-    NSNumber *keyword = PSToken.keywords[[trimmedRawToken uppercaseString]];
-    if (keyword != NULL) return [self initWithType: keyword.integerValue];
-
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    NSNumber *number = [numberFormatter numberFromString: trimmedRawToken];
-    if (number != NULL) return [self initWithType: PSTokenTypesNumber number: number];*/
-
-    return [self initWithType: PSTokenTypesIdentifier string: rawToken];
-}
-
 #pragma mark - Description
 
 - (NSString *) description {

@@ -31,6 +31,4 @@
 
 - (nonnull instancetype) initWithType: (PSTokenTypes) type;
 
-- (nonnull instancetype) initWithRawToken: (nullable NSString *) rawToken;
-
 @end
