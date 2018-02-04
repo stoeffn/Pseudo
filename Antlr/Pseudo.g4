@@ -4,13 +4,28 @@ grammar Pseudo;
 // ##                PARSER                ##
 // ##########################################
 
-// Program
-
 program
     : blockList
     ;
 
+// Blocks
+
+blockList
+    : block*
+    ;
+
+block
+    : statementList
+    | algorithm
+    | condition
+    | loop
+    ;
+
 // Statements
+
+statementList
+    : statement (SEMICOLON statement?)*
+    ;
 
 statement
     : BREAK
@@ -21,33 +36,6 @@ statement
     | assignment
     ;
 
-statementList
-    : statement (SEMICOLON statement?)*
-    ;
-
-block
-    : statementList
-    | algorithm
-    | condition
-    | loop
-    ;
-
-blockList
-    : block*
-    ;
-
-condition
-    : IF expression THEN blockList (ELSE blockList)? POINT
-    ;
-
-loop
-    : WHILE expression DO blockList POINT
-    | REPEAT blockList UNTIL expression POINT
-    | FOR parameter IN expression DO blockList POINT
-    | FOR (declaration | assignment) TO expression DO blockList POINT
-    | FOR (declaration | assignment) DOWNTO expression DO blockList POINT
-    ;
-
 declaration
     : parameter
     | parameter ASSIGN expression
@@ -55,6 +43,22 @@ declaration
 
 assignment
     : scalar ASSIGN expression
+    ;
+
+// Conditions
+
+condition
+    : IF expression THEN blockList (ELSE blockList)? POINT
+    ;
+
+// Loops
+
+loop
+    : WHILE expression DO blockList POINT
+    | REPEAT blockList UNTIL expression POINT
+    | FOR parameter IN expression DO blockList POINT
+    | FOR (declaration | assignment) TO expression DO blockList POINT
+    | FOR (declaration | assignment) DOWNTO expression DO blockList POINT
     ;
 
 // Algorithms
@@ -75,10 +79,6 @@ parameter
 
 returnType
     : IDENTIFIER COLON
-    ;
-
-arguments
-    : expression (COMMA expression)*
     ;
 
 // Expressions
@@ -119,6 +119,8 @@ scalar
     | anyCall
     ;
 
+// Calls
+
 anyCall
     : functionCall anyCallExtension?
     | constructorCall anyCallExtension?
@@ -135,11 +137,15 @@ subscriptCall
     ;
 
 functionCall
-    : IDENTIFIER OPENING_PARENTHESIS arguments? CLOSING_PARENTHESIS
+    : IDENTIFIER OPENING_PARENTHESIS callArguments? CLOSING_PARENTHESIS
     ;
 
 constructorCall
     : NEW functionCall
+    ;
+
+callArguments
+    : expression (COMMA expression)*
     ;
 
 // ##########################################
