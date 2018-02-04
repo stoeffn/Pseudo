@@ -82,4 +82,14 @@
     return _aliases;
 }
 
++ (NSCharacterSet *) delimiters {
+    static NSMutableCharacterSet *_delimiters;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _delimiters = NSMutableCharacterSet.whitespaceAndNewlineCharacterSet;
+        [_delimiters addCharactersInString: @",:;.()[]+-*/=≠>≧<≦←"];
+    });
+    return _delimiters;
+}
+
 @end
