@@ -18,10 +18,10 @@
 
 - (nonnull instancetype) initWithReader: (nonnull id<PSReading>) reader;
 
-/*- (nullable PSToken *) expectTokenType: (PSTokenTypes) tokenType
-                                 error: (NSError * __nullable * __null_unspecified) error;
+- (nullable PSToken *) expectTokenTypes: (PSTokenTypes) tokenType
+                                  error: (NSError * __nullable * __null_unspecified) error;
 
-- (nullable id<PSNodeProtocol>) expectOneOfTokenTypes: (NSDictionary<NSNumber *, id<PSNodeProtocol>(^)(PSToken * _Nonnull)> * _Nonnull) tokenTypes
+/*- (nullable id<PSNodeProtocol>) expectOneOfTokenTypes: (NSDictionary<NSNumber *, id<PSNodeProtocol>(^)(PSToken * _Nonnull)> * _Nonnull) tokenTypes
                                                 error: (NSError * __nullable * __null_unspecified) error;
 
 - (nullable NSArray<id<PSNodeProtocol>> *) expectMultipleOfTokenTypes: (NSDictionary<NSNumber *, id<PSNodeProtocol>(^)(PSToken * _Nonnull)> * _Nonnull) tokenTypes

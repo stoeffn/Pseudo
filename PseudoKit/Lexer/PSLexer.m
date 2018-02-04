@@ -31,6 +31,8 @@
 - (nonnull instancetype) initWithReader: (nonnull id<PSReading>) reader {
     if (self = [super init]) {
         _reader = reader;
+
+        [self advanceToFirstToken];
     }
     return self;
 }
@@ -44,7 +46,14 @@
 #pragma mark - Advancing
 
 - (nullable PSToken *) advance {
-    return [self nextTokenFromReader: self.reader];
+    self.currentToken = self.nextToken;
+    self.nextToken = [self nextTokenFromReader: self.reader];
+    return self.nextToken;
+}
+
+- (void) advanceToFirstToken {
+    [self advance];
+    [self advance];
 }
 
 - (nullable PSToken *) nextTokenFromReader: (id<PSReading>) reader {
@@ -181,61 +190,30 @@
     return character && [character rangeOfCharacterFromSet: PSToken.ambiguousDelimiterCharacterSet].location != NSNotFound;
 }
 
-- (NSString *) rawTokenFromBuffer: (NSArray<NSString *> *) buffer {
+- (nonnull NSString *) rawTokenFromBuffer: (NSArray<NSString *> *) buffer {
     return [[buffer componentsJoinedByString: @""]
             stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceAndNewlineCharacterSet];
 }
 
-/*#pragma mark - Generating Tokens
-
-- (PSToken *) nextToken {
-    if (self.currentCharacterIndex >= self.code.length) return NULL;
-
-    __block BOOL wasLastCharDelimiting = NO;
-    __block NSRange rawTokenRange = NSMakeRange(self.currentCharacterIndex, 0);
-    void (^enumerateUntilNextToken)(NSString *, NSRange, NSRange, BOOL *) = ^(NSString *inSubstring,
-                                                                              NSRange inSubstringRange,
-                                                                              NSRange inEnclosingRange,
-                                                                              BOOL *outStop) {
-        BOOL isCharDelimiting = [inSubstring rangeOfCharacterFromSet: PSLexer.delimitingCharacters].location != NSNotFound;
-        *outStop = rawTokenRange.length > 0 && (isCharDelimiting || (!isCharDelimiting && wasLastCharDelimiting));
-        if (*outStop) return;
-
-        rawTokenRange.length += inSubstringRange.length;
-        wasLastCharDelimiting = isCharDelimiting;
-    };
-
-    NSRange enumerationRange = NSMakeRange(self.currentCharacterIndex, self.code.length - self.currentCharacterIndex);
-    [self.code enumerateSubstringsInRange: enumerationRange
-                                  options: NSStringEnumerationByComposedCharacterSequences
-                               usingBlock: enumerateUntilNextToken];
-
-    self.currentCharacterIndex += rawTokenRange.length;
-
-    NSString *rawToken = [self.code substringWithRange: rawTokenRange];
-    PSToken *token = [[PSToken alloc] initWithRawToken: rawToken];
-
-    if (!token) return self.nextToken;
-    return token;
-}
-
 #pragma mark - Asserting Tokens
 
-- (PSToken *) expectTokenType: (PSTokenTypes) tokenType
-                        error: (NSError **) error {
+- (nullable PSToken *) expectTokenTypes: (PSTokenTypes) tokenType
+                                  error: (NSError * __nullable * __null_unspecified) error {
     if (*error) return NULL;
 
-    PSToken *token = self.nextToken;
+    PSToken *token = self.currentToken;
 
     if (!token || token.type != tokenType) {
         *error = [NSError errorWithDomain: PSParserErrorDomain code: 1 userInfo: NULL];
         return NULL;
     }
 
+    [self advance];
+
     return token;
 }
 
-- (id<PSNodeProtocol>) expectOneOfTokenTypes: (NSDictionary<NSNumber *, id<PSNodeProtocol>(^)(PSToken *)> *) tokenTypes
+/*- (id<PSNodeProtocol>) expectOneOfTokenTypes: (NSDictionary<NSNumber *, id<PSNodeProtocol>(^)(PSToken *)> *) tokenTypes
                                        error: (NSError **) error {
     if (*error) return NULL;
 
