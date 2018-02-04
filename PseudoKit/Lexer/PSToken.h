@@ -11,14 +11,26 @@
 
 @interface PSToken : NSObject
 
+#pragma mark - Properties
+
 @property (nonatomic, readonly) PSTokenType type;
 
-@property (nonatomic, readonly, copy, nullable) NSString *value;
+@property (nonatomic, readonly, copy, nullable) NSString *string;
 
-- (instancetype _Nonnull) init __unavailable;
+@property (nonatomic, readonly, nullable) NSNumber *number;
 
-- (instancetype _Nonnull) initWithType: (PSTokenType) type andValue: (NSString * _Nullable) value;
+#pragma mark - Life Cycle
 
-- (instancetype _Nullable) initWithRawToken: (NSString * _Nullable) rawToken;
+- (nonnull instancetype) init __unavailable;
+
+- (nonnull instancetype) initWithType: (PSTokenType) type
+                               number: (nullable NSNumber *) number;
+
+- (nonnull instancetype) initWithType: (PSTokenType) type
+                               string: (nullable NSString *) string;
+
+- (nonnull instancetype) initWithType: (PSTokenType) type;
+
+- (nonnull instancetype) initWithRawToken: (nullable NSString *) rawToken;
 
 @end

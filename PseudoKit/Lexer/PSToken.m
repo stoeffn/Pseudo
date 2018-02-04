@@ -12,10 +12,27 @@
 
 #pragma mark - Life Cycle
 
-- (instancetype) initWithType: (PSTokenType) type andValue: (NSString *) value {
+- (nonnull instancetype) initWithType: (PSTokenType) type
+                               number: (nullable NSNumber *) number {
     if (self = [super init]) {
         _type = type;
-        _value = value;
+        _number = number;
+    }
+    return self;
+}
+
+- (nonnull instancetype) initWithType: (PSTokenType) type
+                               string: (nullable NSString *) string {
+    if (self = [super init]) {
+        _type = type;
+        _string = string;
+    }
+    return self;
+}
+
+- (nonnull instancetype) initWithType: (PSTokenType) type {
+    if (self = [super init]) {
+        _type = type;
     }
     return self;
 }
@@ -25,23 +42,23 @@
     if (!rawToken || trimmedRawToken.length == 0) return NULL;
 
     NSNumber *delimiter = PSToken.delimiters[trimmedRawToken];
-    if (delimiter != NULL) return [self initWithType: delimiter.integerValue andValue: NULL];
+    if (delimiter != NULL) return [self initWithType: delimiter.integerValue];
 
     NSNumber *keyword = PSToken.keywords[[trimmedRawToken uppercaseString]];
-    if (keyword != NULL) return [self initWithType: keyword.integerValue andValue: NULL];
+    if (keyword != NULL) return [self initWithType: keyword.integerValue];
 
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     NSNumber *number = [numberFormatter numberFromString: trimmedRawToken];
-    if (number != NULL) return [self initWithType: PSTokenTypeNumberLiteral andValue: trimmedRawToken];
+    if (number != NULL) return [self initWithType: PSTokenTypeNumberLiteral number: number];
 
-    return [self initWithType: PSTokenTypeIdentifier andValue: trimmedRawToken];
+    return [self initWithType: PSTokenTypeIdentifier string: trimmedRawToken];
 }
 
 #pragma mark - Description
 
 - (NSString *) description {
-    return [NSString stringWithFormat: @"<%@ Type: %ld, Value: '%@'>",
-            NSStringFromClass([self class]), (long) self.type, self.value];
+    return [NSString stringWithFormat: @"<%@ Type: %ld, String: '%@', Number: %@>",
+            NSStringFromClass([self class]), (long) self.type, self.string, self.number];
 }
 
 #pragma mark - Equality
@@ -54,11 +71,8 @@
 - (BOOL) isEqualToToken: (PSToken *) token {
     return token
         && self.type == token.type
-        && ((!self.value && !token.value) || [self.value isEqualToString: token.value]);
-}
-
-- (NSUInteger) hash {
-    return (self.type + 17) ^ self.value.hash;
+        && ((!self.string && !token.string) || [self.string isEqualToString: token.string])
+        && ((!self.number && !token.number) || [self.number isEqualToNumber: token.number]);
 }
 
 #pragma mark - Constants
