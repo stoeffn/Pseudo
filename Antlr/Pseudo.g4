@@ -115,6 +115,7 @@ scalar
     | FALSE
     | NUMBER
     | STRING
+    | MINUS scalar
     | OPENING_PARENTHESIS expression CLOSING_PARENTHESIS
     | anyCall
     ;
@@ -226,7 +227,7 @@ NULL        : 'null';
 TRUE        : 'true';
 FALSE       : 'false';
 IDENTIFIER  : [a-zA-Z] [a-zA-Z0-9]*;
-NUMBER      : MINUS? [0-9]+;
+NUMBER      : ('0' | [1-9][0-9]*) ('.' [0-9]+)?;
 STRING      : '"' ('\\"' | .)*? '"';
 
 // Whitespace and Comment Tokens
