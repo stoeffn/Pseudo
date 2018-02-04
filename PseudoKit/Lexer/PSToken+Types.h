@@ -10,11 +10,21 @@
 
 @interface PSToken (Types)
 
+#pragma mark - Constants
+
 + (nonnull NSDictionary<NSString *, NSNumber *> *) tokenTypes;
+
++ (nonnull NSCharacterSet *) ambiguousDelimiterCharacterSet;
 
 + (nonnull NSDictionary<NSString *, NSString *> *) aliases;
 
-+ (nonnull NSCharacterSet *) delimiters;
++ (nonnull NSCharacterSet *) delimiterCharacterSet;
+
++ (nonnull NSString *) stringStartCharacter;
+
++ (nonnull NSString *) floatingPointCharacter;
+
+#pragma mark - Description
 
 + (nonnull NSString *) descriptionForTokenType: (PSTokenTypes) tokenType;
 

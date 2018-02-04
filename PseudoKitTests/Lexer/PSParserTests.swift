@@ -12,7 +12,7 @@ import XCTest
 final class PSParserTests: XCTestCase {
     // MARK: - Parsing
 
-    func testParseProgram() {
+    /*func testParseProgram() {
         let lexer = PSLexer(code: "algorithm test():.")
         let parser = PSParser(lexer: lexer)
         let node = try! parser.program()
@@ -25,5 +25,5 @@ final class PSParserTests: XCTestCase {
         let parser = PSParser(lexer: lexer)
         let node = try! parser.algorithm()
         XCTAssertEqual(node.identifier, "test")
-    }
+    }*/
 }

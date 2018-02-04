@@ -13,45 +13,33 @@ final class PSLexerTests: XCTestCase {
     // MARK: - Generating Tokens
 
     func testNextToken_Empty() {
-        XCTAssertNil(PSLexer(code: "").nextToken())
+        let reader = PSStringReader(string: "")
+        let lexer = PSLexer(reader: reader)
+
+        XCTAssertNil(lexer.advance())
     }
 
     func testNextToken_MainReturn() {
-        let lexer = PSLexer(code: """
+        let reader = PSStringReader(string: """
         algorithm main(): int:
-            return 42.
+            return 42.0.
         """)
+        let lexer = PSLexer(reader: reader)
 
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .algorithm, andValue: nil))
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .identifier, andValue: "main"))
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .openingParenthesis, andValue: nil))
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .closingParenthesis, andValue: nil))
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .colon, andValue: nil))
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .identifier, andValue: "int"))
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .colon, andValue: nil))
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .return, andValue: nil))
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .numberLiteral, andValue: "42"))
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .point, andValue: nil))
-        XCTAssertNil(lexer.nextToken())
+        XCTAssertEqual(lexer.advance(), PSToken(type: .algorithm))
+        XCTAssertEqual(lexer.advance(), PSToken(type: .identifier, string: "main"))
+        XCTAssertEqual(lexer.advance(), PSToken(type: .openingParenthesis))
+        XCTAssertEqual(lexer.advance(), PSToken(type: .closingParanthesis))
+        XCTAssertEqual(lexer.advance(), PSToken(type: .colon))
+        XCTAssertEqual(lexer.advance(), PSToken(type: .identifier, string: "int"))
+        XCTAssertEqual(lexer.advance(), PSToken(type: .colon))
+        XCTAssertEqual(lexer.advance(), PSToken(type: .return))
+        XCTAssertEqual(lexer.advance(), PSToken(type: .number, number: 42))
+        XCTAssertEqual(lexer.advance(), PSToken(type: .point))
+        XCTAssertNil(lexer.advance())
     }
 
-    func testNextToken_MainReturnUnicode() {
-        let lexer = PSLexer(code: """
-        algorithm mäin():
-            return.
-        """)
-
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .algorithm, andValue: nil))
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .identifier, andValue: "mäin"))
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .openingParenthesis, andValue: nil))
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .closingParenthesis, andValue: nil))
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .colon, andValue: nil))
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .return, andValue: nil))
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .point, andValue: nil))
-        XCTAssertNil(lexer.nextToken())
-    }
-
-    // MARK: - Asserting
+    /*// MARK: - Asserting
 
     func testExpectToken_Empty() {
         XCTAssertThrowsError(try PSLexer(code: "").expect(.colon))
@@ -63,27 +51,5 @@ final class PSLexerTests: XCTestCase {
 
     func testExpectToken_Success() {
         XCTAssertNoThrow(try PSLexer(code: ":").expect(.colon))
-    }
-
-    // MARK: - Resetting
-
-    func testReset() {
-        let lexer = PSLexer(code: "(int) abc.")
-
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .openingParenthesis, andValue: nil))
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .identifier, andValue: "int"))
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .closingParenthesis, andValue: nil))
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .identifier, andValue: "abc"))
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .point, andValue: nil))
-        XCTAssertNil(lexer.nextToken())
-
-        lexer.reset()
-
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .openingParenthesis, andValue: nil))
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .identifier, andValue: "int"))
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .closingParenthesis, andValue: nil))
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .identifier, andValue: "abc"))
-        XCTAssertEqual(lexer.nextToken(), PSToken(type: .point, andValue: nil))
-        XCTAssertNil(lexer.nextToken())
-    }
+    }*/
 }

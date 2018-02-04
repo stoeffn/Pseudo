@@ -7,29 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PSToken.h"
-#import "PSSyntaxNode.h"
+#import "PSReading.h"
+#import "PSLexing.h"
 
-@interface PSLexer : NSObject
+@interface PSLexer : NSObject <PSLexing>
 
-@property (nonatomic, readonly, copy, nonnull) NSString *code;
+#pragma mark - Life Cycle
 
 - (nonnull instancetype) init __unavailable;
 
-- (nonnull instancetype) initWithCode: (nonnull NSString *) code;
+- (nonnull instancetype) initWithReader: (nonnull id<PSReading>) reader;
 
-- (nullable PSToken *) nextToken;
-
-- (nullable PSToken *) expectTokenType: (PSTokenType) tokenType
+/*- (nullable PSToken *) expectTokenType: (PSTokenTypes) tokenType
                                  error: (NSError * __nullable * __null_unspecified) error;
 
-- (nullable PSSyntaxNode *) expectOneOfTokenTypes: (NSDictionary<NSNumber *, PSSyntaxNode *(^)(PSToken * _Nonnull)> * _Nonnull) tokenTypes
-                                            error: (NSError * __nullable * __null_unspecified) error;
+- (nullable id<PSNodeProtocol>) expectOneOfTokenTypes: (NSDictionary<NSNumber *, id<PSNodeProtocol>(^)(PSToken * _Nonnull)> * _Nonnull) tokenTypes
+                                                error: (NSError * __nullable * __null_unspecified) error;
 
-- (nullable NSArray<PSSyntaxNode *> *) expectMultipleOfTokenTypes: (NSDictionary<NSNumber *, PSSyntaxNode *(^)(PSToken * _Nonnull)> * _Nonnull) tokenTypes
-                                                withStopTokenType: (PSTokenType) stopTokenType
-                                                            error: (NSError * __nullable * __null_unspecified) error;
-
-- (void) reset;
+- (nullable NSArray<id<PSNodeProtocol>> *) expectMultipleOfTokenTypes: (NSDictionary<NSNumber *, id<PSNodeProtocol>(^)(PSToken * _Nonnull)> * _Nonnull) tokenTypes
+                                                    withStopTokenType: (PSTokenTypes) stopTokenType
+                                                                error: (NSError * __nullable * __null_unspecified) error;*/
 
 @end

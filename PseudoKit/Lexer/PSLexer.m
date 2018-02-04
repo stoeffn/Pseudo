@@ -10,11 +10,17 @@
 #import "NSMutableArray+Queue.h"
 #import "PSLexer.h"
 #import "PSToken.h"
-#import "PSSyntaxNode.h"
+#import "PSToken+Types.h"
 
 @interface PSLexer ()
 
-@property (nonatomic) NSUInteger currentCharacterIndex;
+#pragma mark - State
+
+@property (nonatomic, nonnull) id<PSReading> reader;
+
+@property (nonatomic, nullable) PSToken *currentToken;
+
+@property (nonatomic, nullable) PSToken *nextToken;
 
 @end
 
@@ -22,10 +28,11 @@
 
 #pragma mark - Life Cycle
 
-- (instancetype) initWithCode: (NSString *) code {
+- (nonnull instancetype) initWithReader: (nonnull id<PSReading>) reader {
     if (self = [super init]) {
-        _code = code;
-        _currentCharacterIndex = 0;
+        _reader = reader;
+
+        while (!reader.currentCharacter) [reader advance];
     }
     return self;
 }
@@ -33,11 +40,153 @@
 #pragma mark - Description
 
 - (NSString *) description {
-    return [NSString stringWithFormat: @"<%@ Code: '%@'>",
-            NSStringFromClass([self class]), self.code];
+    return [NSString stringWithFormat: @"<%@ Reader: '%@'>", NSStringFromClass([self class]), self.reader];
 }
 
-#pragma mark - Generating Tokens
+#pragma mark - Advancing
+
+- (nullable PSToken *) advance {
+    return [self nextTokenFromReader: self.reader];
+}
+
+- (nullable PSToken *) nextTokenFromReader: (id<PSReading>) reader {
+    [self skipWhitespaceAndNewlinesInReader: reader];
+
+    PSToken *delimiterToken = [self nextDelimiterTokenFromReader: reader];
+    if (delimiterToken) return delimiterToken;
+
+    PSToken *stringToken = [self nextStringTokenFromReader: reader];
+    if (stringToken) return stringToken;
+
+    PSToken *numberToken = [self nextNumberTokenFromReader: reader];
+    if (numberToken) return numberToken;
+
+    PSToken *keywordOrIdentifierToken = [self nextKeywordOrIdentifierTokenFromReader: reader];
+    if (keywordOrIdentifierToken) return keywordOrIdentifierToken;
+
+    return NULL;
+}
+
+- (void) skipWhitespaceAndNewlinesInReader: (id<PSReading>) reader {
+    while (self.reader.nextCharacter && [self isCharacterWhitespaceOrNewline: reader.currentCharacter]) {
+        [reader advance];
+    }
+}
+
+- (nullable PSToken *) nextDelimiterTokenFromReader: (id<PSReading>) reader {
+    NSNumber *singleCharacterTokenType = PSToken.tokenTypes[reader.currentCharacter];
+
+    if (reader.nextCharacter && [self isCharacterAmbiguousDelimiter: reader.currentCharacter]) {
+        NSString *doubleCharacterRawToken = [self rawTokenFromBuffer: @[reader.currentCharacter, reader.nextCharacter]];
+        NSNumber *doubleCharacterTokenType = PSToken.tokenTypes[doubleCharacterRawToken];
+
+        if (doubleCharacterTokenType) {
+            [reader advance];
+            [reader advance];
+            return [[PSToken alloc] initWithType: doubleCharacterTokenType.intValue];
+        }
+    }
+
+    if (singleCharacterTokenType) {
+        [reader advance];
+        return [[PSToken alloc] initWithType: singleCharacterTokenType.intValue];
+    }
+
+    return NULL;
+}
+
+- (nullable PSToken *) nextStringTokenFromReader: (id<PSReading>) reader {
+    if (![reader.currentCharacter isEqualToString: PSToken.stringStartCharacter]) return NULL;
+    [reader advance];
+
+    NSMutableArray<NSString *> *buffer = [[NSMutableArray alloc] init];
+
+    while (reader.nextCharacter) {
+        if ([reader.nextCharacter isEqualToString: PSToken.stringStartCharacter]) break;
+
+        [reader advance];
+        [buffer addObject: reader.currentCharacter];
+    };
+
+    [reader advance];
+
+    NSString *string = [self rawTokenFromBuffer: buffer];
+    return [[PSToken alloc] initWithType: PSTokenTypesString string: string];
+}
+
+- (nullable PSToken *) nextNumberTokenFromReader: (id<PSReading>) reader {
+    if (![self isCharacterDigit: reader.currentCharacter]) return NULL;
+
+    NSMutableArray<NSString *> *buffer = [[NSMutableArray alloc] init];
+
+    BOOL isFloatingPointNumber = NO;
+    while (reader.nextCharacter) {
+        [buffer addObject: reader.currentCharacter];
+
+        BOOL isFloatingPointCharacter = [reader.currentCharacter isEqualToString: PSToken.floatingPointCharacter];
+        BOOL isSecondFloatingPointCharacter = isFloatingPointNumber && isFloatingPointCharacter;
+        BOOL isFollowedByDigit = [self isCharacterDigit: reader.nextCharacter];
+
+        if (isSecondFloatingPointCharacter || (isFloatingPointCharacter && !isFollowedByDigit)) break;
+
+        [reader advance];
+        isFloatingPointNumber = isFloatingPointCharacter;
+    }
+
+    NSString *rawToken = [self rawTokenFromBuffer: buffer];
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    numberFormatter.decimalSeparator = PSToken.floatingPointCharacter;
+    numberFormatter.lenient = NO;
+    NSNumber *number = [numberFormatter numberFromString: rawToken];
+
+    if (number != NULL) return [[PSToken alloc] initWithType: PSTokenTypesNumber number: number];
+    return NULL;
+}
+
+- (nullable PSToken *) nextKeywordOrIdentifierTokenFromReader: (id<PSReading>) reader {
+    if (!reader.currentCharacter) return NULL;
+
+    NSMutableArray<NSString *> *buffer = [[NSMutableArray alloc] init];
+
+    while (reader.nextCharacter) {
+        [buffer addObject: reader.currentCharacter];
+        
+        if (![self isCharacterDelimiter: reader.currentCharacter] && [self isCharacterDelimiter: reader.nextCharacter]) break;
+
+        [reader advance];
+    };
+
+    [reader advance];
+
+    NSString *rawToken = [self rawTokenFromBuffer: buffer];
+    NSNumber *keywordTokenType = PSToken.tokenTypes[rawToken];
+
+    if (keywordTokenType) return [[PSToken alloc] initWithType: keywordTokenType.intValue];
+    return [[PSToken alloc] initWithType: PSTokenTypesIdentifier string: rawToken];
+}
+
+- (BOOL) isCharacterWhitespaceOrNewline: (NSString *) character {
+    return [character rangeOfCharacterFromSet: NSCharacterSet.whitespaceAndNewlineCharacterSet].location != NSNotFound;
+}
+
+- (BOOL) isCharacterDigit: (NSString *) character {
+    return [character rangeOfCharacterFromSet: NSCharacterSet.decimalDigitCharacterSet].location != NSNotFound;
+}
+
+- (BOOL) isCharacterDelimiter: (NSString *) character {
+    return [character rangeOfCharacterFromSet: PSToken.delimiterCharacterSet].location != NSNotFound;
+}
+
+- (BOOL) isCharacterAmbiguousDelimiter: (NSString *) character {
+    return [character rangeOfCharacterFromSet: PSToken.ambiguousDelimiterCharacterSet].location != NSNotFound;
+}
+
+- (NSString *) rawTokenFromBuffer: (NSArray<NSString *> *) buffer {
+    return [[buffer componentsJoinedByString: @""]
+            stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceAndNewlineCharacterSet];
+}
+
+/*#pragma mark - Generating Tokens
 
 - (PSToken *) nextToken {
     if (self.currentCharacterIndex >= self.code.length) return NULL;
@@ -72,7 +221,7 @@
 
 #pragma mark - Asserting Tokens
 
-- (PSToken *) expectTokenType: (PSTokenType) tokenType
+- (PSToken *) expectTokenType: (PSTokenTypes) tokenType
                         error: (NSError **) error {
     if (*error) return NULL;
 
@@ -86,8 +235,8 @@
     return token;
 }
 
-- (PSSyntaxNode *) expectOneOfTokenTypes: (NSDictionary<NSNumber *, PSSyntaxNode *(^)(PSToken *)> *) tokenTypes
-                                   error: (NSError **) error {
+- (id<PSNodeProtocol>) expectOneOfTokenTypes: (NSDictionary<NSNumber *, id<PSNodeProtocol>(^)(PSToken *)> *) tokenTypes
+                                       error: (NSError **) error {
     if (*error) return NULL;
 
     PSToken *token = self.nextToken;
@@ -98,7 +247,7 @@
     }
 
     NSNumber *key = [NSNumber numberWithInt: token.type];
-    PSSyntaxNode *(^block)(PSToken *) = tokenTypes[key];
+    id<PSNodeProtocol> (^block)(PSToken *) = tokenTypes[key];
 
     if (!block) {
         *error = [NSError errorWithDomain: PSParserErrorDomain code: 1 userInfo: NULL];
@@ -108,9 +257,9 @@
     return block(token);
 }
 
-- (NSArray<PSSyntaxNode *> *) expectMultipleOfTokenTypes: (NSDictionary<NSNumber *, PSSyntaxNode *(^)(PSToken *)> *) tokenTypes
-                                       withStopTokenType: (PSTokenType) stopTokenType
-                                                   error: (NSError **) error {
+- (NSArray<id<PSNodeProtocol>> *) expectMultipleOfTokenTypes: (NSDictionary<NSNumber *, id<PSNodeProtocol>(^)(PSToken *)> *) tokenTypes
+                                           withStopTokenType: (PSTokenTypes) stopTokenType
+                                                       error: (NSError **) error {
     if (*error) return NULL;
 
     PSToken *token;
@@ -121,32 +270,14 @@
         if (!token || token.type == stopTokenType) break;
 
         NSNumber *key = [NSNumber numberWithInt: token.type];
-        PSSyntaxNode *(^block)(PSToken *) = tokenTypes[key];
-        PSSyntaxNode *node = block(token);
+        id<PSNodeProtocol> (^block)(PSToken *) = tokenTypes[key];
+        id<PSNodeProtocol> node = block(token);
 
         if (node) [children addObject: node];
     } while (!*error && token != NULL && token.type != stopTokenType);
 
     if (*error) return NULL;
     return children;
-}
-
-#pragma mark - Resetting
-
-- (void) reset {
-    self.currentCharacterIndex = 0;
-}
-
-#pragma mark - Constants
-
-+ (NSCharacterSet *) delimitingCharacters {
-    static NSMutableCharacterSet *_delimitingCharacters;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _delimitingCharacters = NSMutableCharacterSet.whitespaceAndNewlineCharacterSet;
-        [_delimitingCharacters addCharactersInString: @"(){}:."];
-    });
-    return _delimitingCharacters;
-}
+}*/
 
 @end

@@ -36,14 +36,22 @@
 
                     @"=":           [[NSNumber alloc] initWithInt: PSTokenTypesEquals],
                     @"≠":           [[NSNumber alloc] initWithInt: PSTokenTypesNotEquals],
+                    @"!=":          [[NSNumber alloc] initWithInt: PSTokenTypesNotEquals],
                     @">":           [[NSNumber alloc] initWithInt: PSTokenTypesGreaterThan],
                     @"≧":           [[NSNumber alloc] initWithInt: PSTokenTypesGreaterThanOrEquals],
+                    @">=":          [[NSNumber alloc] initWithInt: PSTokenTypesGreaterThanOrEquals],
                     @"<":           [[NSNumber alloc] initWithInt: PSTokenTypesLessThan],
                     @"≦":           [[NSNumber alloc] initWithInt: PSTokenTypesLessThanOrEquals],
+                    @"<=":          [[NSNumber alloc] initWithInt: PSTokenTypesLessThanOrEquals],
 
                     @"←":           [[NSNumber alloc] initWithInt: PSTokenTypesAssign],
+                    @"<=":          [[NSNumber alloc] initWithInt: PSTokenTypesAssign],
 
                     @"not":         [[NSNumber alloc] initWithInt: PSTokenTypesNot],
+
+                    @"if":          [[NSNumber alloc] initWithInt: PSTokenTypesIf],
+                    @"then":        [[NSNumber alloc] initWithInt: PSTokenTypesThen],
+                    @"else":        [[NSNumber alloc] initWithInt: PSTokenTypesElse],
 
                     @"for":         [[NSNumber alloc] initWithInt: PSTokenTypesFor],
                     @"in":          [[NSNumber alloc] initWithInt: PSTokenTypesIn],
@@ -67,26 +75,32 @@
     return _tokens;
 }
 
-+ (nonnull NSDictionary<NSString *, NSString *> *) aliases {
-    static NSDictionary *_aliases;
++ (nonnull NSCharacterSet *) ambiguousDelimiterCharacterSet {
+    static NSMutableCharacterSet *_characters;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _aliases = @{@"!=": @"≠",
-                     @">=": @"≧",
-                     @"<=": @"≦",
-                     @"<-": @"←"};
+        _characters = [[NSMutableCharacterSet alloc] init];
+        [_characters addCharactersInString: @"!<>"];
     });
-    return _aliases;
+    return _characters;
 }
 
-+ (nonnull NSCharacterSet *) delimiters {
++ (nonnull NSCharacterSet *) delimiterCharacterSet {
     static NSMutableCharacterSet *_delimiters;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _delimiters = NSMutableCharacterSet.whitespaceAndNewlineCharacterSet;
-        [_delimiters addCharactersInString: @",:;.()[]+-*/=≠>≧<≦←"];
+        [_delimiters addCharactersInString: @",:;.()[]+-*/!=≠>≧<≦←"];
     });
     return _delimiters;
+}
+
++ (nonnull NSString *) stringStartCharacter {
+    return @"\"";
+}
+
++ (nonnull NSString *) floatingPointCharacter {
+    return @".";
 }
 
 #pragma mark - Description
