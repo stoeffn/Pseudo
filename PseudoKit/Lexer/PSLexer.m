@@ -31,8 +31,6 @@
 - (nonnull instancetype) initWithReader: (nonnull id<PSReading>) reader {
     if (self = [super init]) {
         _reader = reader;
-
-        while (!reader.currentCharacter) [reader advance];
     }
     return self;
 }

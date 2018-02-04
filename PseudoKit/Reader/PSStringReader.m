@@ -28,6 +28,8 @@
     if (self = [super init]) {
         _string = string;
         _currentPosition = 0;
+
+        [self advanceToFirstCharacter];
     }
     return self;
 }
@@ -63,6 +65,11 @@
                                  usingBlock: enumerateNextCharacter];
 
     return self.nextCharacter;
+}
+
+- (void) advanceToFirstCharacter {
+    [self advance];
+    [self advance];
 }
 
 @end

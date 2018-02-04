@@ -16,8 +16,6 @@
 
 + (nonnull NSCharacterSet *) ambiguousDelimiterCharacterSet;
 
-+ (nonnull NSDictionary<NSString *, NSString *> *) aliases;
-
 + (nonnull NSCharacterSet *) delimiterCharacterSet;
 
 + (nonnull NSString *) stringStartCharacter;
