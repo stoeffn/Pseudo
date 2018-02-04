@@ -103,6 +103,17 @@
     return @".";
 }
 
++ (nonnull NSNumberFormatter *) numberFormatter {
+    static NSNumberFormatter *_formatter;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _formatter = [[NSNumberFormatter alloc] init];
+        _formatter.decimalSeparator = PSToken.floatingPointCharacter;
+        _formatter.lenient = NO;
+    });
+    return _formatter;
+}
+
 #pragma mark - Description
 
 + (nonnull NSString *) descriptionForTokenType: (PSTokenTypes) tokenType {
@@ -110,7 +121,6 @@
         case PSTokenTypesComma:                 return @"COMMA";
         case PSTokenTypesColon:                 return @"COLON";
         case PSTokenTypesSemicolon:             return @"SEMICOLON";
-        case PSTokenTypesEndOfFile:             return @"END_OF_FILE";
         case PSTokenTypesPoint:                 return @"POINT";
         case PSTokenTypesOpeningParenthesis:    return @"OPENING_PARENTHESIS";
         case PSTokenTypesClosingParanthesis:    return @"CLOSING_PARENTHESIS";

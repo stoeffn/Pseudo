@@ -22,6 +22,8 @@
 
 + (nonnull NSString *) floatingPointCharacter;
 
++ (nonnull NSNumberFormatter *) numberFormatter;
+
 #pragma mark - Description
 
 + (nonnull NSString *) descriptionForTokenType: (PSTokenTypes) tokenType;

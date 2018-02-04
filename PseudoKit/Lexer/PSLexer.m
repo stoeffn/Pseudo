@@ -132,10 +132,7 @@
     }
 
     NSString *rawToken = [self rawTokenFromBuffer: buffer];
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    numberFormatter.decimalSeparator = PSToken.floatingPointCharacter;
-    numberFormatter.lenient = NO;
-    NSNumber *number = [numberFormatter numberFromString: rawToken];
+    NSNumber *number = [PSToken.numberFormatter numberFromString: rawToken];
 
     if (number != NULL) return [[PSToken alloc] initWithType: PSTokenTypesNumber number: number];
     return NULL;
@@ -152,7 +149,7 @@
         if (![self isCharacterDelimiter: reader.currentCharacter] && [self isCharacterDelimiter: reader.nextCharacter]) break;
 
         [reader advance];
-    };
+    }
 
     [reader advance];
 
@@ -162,6 +159,8 @@
     if (keywordTokenType) return [[PSToken alloc] initWithType: keywordTokenType.intValue];
     return [[PSToken alloc] initWithType: PSTokenTypesIdentifier string: rawToken];
 }
+
+#pragma mark - Helpers
 
 - (BOOL) isCharacterWhitespaceOrNewline: (NSString *) character {
     return [character rangeOfCharacterFromSet: NSCharacterSet.whitespaceAndNewlineCharacterSet].location != NSNotFound;

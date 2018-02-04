@@ -10,7 +10,6 @@ typedef NS_ENUM(NSInteger, PSTokenTypes) {
     PSTokenTypesComma,
     PSTokenTypesColon,
     PSTokenTypesSemicolon,
-    PSTokenTypesEndOfFile,
 
     PSTokenTypesPoint,
     PSTokenTypesOpeningParenthesis,
