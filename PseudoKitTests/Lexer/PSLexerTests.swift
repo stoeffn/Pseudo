@@ -16,6 +16,8 @@ final class PSLexerTests: XCTestCase {
         let reader = PSStringReader(string: "")
         let lexer = PSLexer(reader: reader)
 
+        XCTAssertNil(lexer.currentToken)
+        XCTAssertNil(lexer.nextToken)
         XCTAssertNil(lexer.advance())
     }
 
@@ -23,8 +25,8 @@ final class PSLexerTests: XCTestCase {
         let reader = PSStringReader(string: "←*  =")
         let lexer = PSLexer(reader: reader)
 
-        XCTAssertEqual(lexer.advance(), PSToken(type: .assign))
-        XCTAssertEqual(lexer.advance(), PSToken(type: .times))
+        XCTAssertEqual(lexer.currentToken, PSToken(type: .assign))
+        XCTAssertEqual(lexer.nextToken, PSToken(type: .times))
         XCTAssertEqual(lexer.advance(), PSToken(type: .equals))
         XCTAssertNil(lexer.advance())
     }
@@ -33,8 +35,8 @@ final class PSLexerTests: XCTestCase {
         let reader = PSStringReader(string: "*<-")
         let lexer = PSLexer(reader: reader)
 
-        XCTAssertEqual(lexer.advance(), PSToken(type: .times))
-        XCTAssertEqual(lexer.advance(), PSToken(type: .assign))
+        XCTAssertEqual(lexer.currentToken, PSToken(type: .times))
+        XCTAssertEqual(lexer.nextToken, PSToken(type: .assign))
         XCTAssertNil(lexer.advance())
     }
 
@@ -42,7 +44,8 @@ final class PSLexerTests: XCTestCase {
         let reader = PSStringReader(string: "\"test\"")
         let lexer = PSLexer(reader: reader)
 
-        XCTAssertEqual(lexer.advance(), PSToken(type: .string, string: "test"))
+        XCTAssertEqual(lexer.currentToken, PSToken(type: .string, string: "test"))
+        XCTAssertNil(lexer.nextToken)
         XCTAssertNil(lexer.advance())
     }
 
@@ -50,7 +53,8 @@ final class PSLexerTests: XCTestCase {
         let reader = PSStringReader(string: "42")
         let lexer = PSLexer(reader: reader)
 
-        XCTAssertEqual(lexer.advance(), PSToken(type: .number, number: 42))
+        XCTAssertEqual(lexer.currentToken, PSToken(type: .number, number: 42))
+        XCTAssertNil(lexer.nextToken)
         XCTAssertNil(lexer.advance())
     }
 
@@ -58,8 +62,8 @@ final class PSLexerTests: XCTestCase {
         let reader = PSStringReader(string: "42.")
         let lexer = PSLexer(reader: reader)
 
-        XCTAssertEqual(lexer.advance(), PSToken(type: .number, number: 42))
-        XCTAssertEqual(lexer.advance(), PSToken(type: .point))
+        XCTAssertEqual(lexer.currentToken, PSToken(type: .number, number: 42))
+        XCTAssertEqual(lexer.nextToken, PSToken(type: .point))
         XCTAssertNil(lexer.advance())
     }
 
@@ -67,7 +71,8 @@ final class PSLexerTests: XCTestCase {
         let reader = PSStringReader(string: "42.8")
         let lexer = PSLexer(reader: reader)
 
-        XCTAssertEqual(lexer.advance(), PSToken(type: .number, number: 42.8))
+        XCTAssertEqual(lexer.currentToken, PSToken(type: .number, number: 42.8))
+        XCTAssertNil(lexer.nextToken)
         XCTAssertNil(lexer.advance())
     }
 
@@ -75,8 +80,8 @@ final class PSLexerTests: XCTestCase {
         let reader = PSStringReader(string: "42.8.")
         let lexer = PSLexer(reader: reader)
 
-        XCTAssertEqual(lexer.advance(), PSToken(type: .number, number: 42.8))
-        XCTAssertEqual(lexer.advance(), PSToken(type: .point))
+        XCTAssertEqual(lexer.currentToken, PSToken(type: .number, number: 42.8))
+        XCTAssertEqual(lexer.nextToken, PSToken(type: .point))
         XCTAssertNil(lexer.advance())
     }
 
@@ -84,7 +89,8 @@ final class PSLexerTests: XCTestCase {
         let reader = PSStringReader(string: "test")
         let lexer = PSLexer(reader: reader)
 
-        XCTAssertEqual(lexer.advance(), PSToken(type: .identifier, string: "test"))
+        XCTAssertEqual(lexer.currentToken, PSToken(type: .identifier, string: "test"))
+        XCTAssertNil(lexer.nextToken)
         XCTAssertNil(lexer.advance())
     }
 
@@ -92,7 +98,8 @@ final class PSLexerTests: XCTestCase {
         let reader = PSStringReader(string: "downto")
         let lexer = PSLexer(reader: reader)
 
-        XCTAssertEqual(lexer.advance(), PSToken(type: .downTo))
+        XCTAssertEqual(lexer.currentToken, PSToken(type: .downTo))
+        XCTAssertNil(lexer.nextToken)
         XCTAssertNil(lexer.advance())
     }
 
@@ -100,8 +107,8 @@ final class PSLexerTests: XCTestCase {
         let reader = PSStringReader(string: "S.first()[1].test();")
         let lexer = PSLexer(reader: reader)
 
-        XCTAssertEqual(lexer.advance(), PSToken(type: .identifier, string: "S"))
-        XCTAssertEqual(lexer.advance(), PSToken(type: .point))
+        XCTAssertEqual(lexer.currentToken, PSToken(type: .identifier, string: "S"))
+        XCTAssertEqual(lexer.nextToken, PSToken(type: .point))
         XCTAssertEqual(lexer.advance(), PSToken(type: .identifier, string: "first"))
         XCTAssertEqual(lexer.advance(), PSToken(type: .openingParenthesis))
         XCTAssertEqual(lexer.advance(), PSToken(type: .closingParanthesis))
@@ -123,8 +130,8 @@ final class PSLexerTests: XCTestCase {
         """)
         let lexer = PSLexer(reader: reader)
 
-        XCTAssertEqual(lexer.advance(), PSToken(type: .algorithm))
-        XCTAssertEqual(lexer.advance(), PSToken(type: .identifier, string: "main"))
+        XCTAssertEqual(lexer.currentToken, PSToken(type: .algorithm))
+        XCTAssertEqual(lexer.nextToken, PSToken(type: .identifier, string: "main"))
         XCTAssertEqual(lexer.advance(), PSToken(type: .openingParenthesis))
         XCTAssertEqual(lexer.advance(), PSToken(type: .closingParanthesis))
         XCTAssertEqual(lexer.advance(), PSToken(type: .colon))
@@ -145,8 +152,8 @@ final class PSLexerTests: XCTestCase {
         """)
         let lexer = PSLexer(reader: reader)
 
-        XCTAssertEqual(lexer.advance(), PSToken(type: .algorithm))
-        XCTAssertEqual(lexer.advance(), PSToken(type: .identifier, string: "fibonacci"))
+        XCTAssertEqual(lexer.currentToken, PSToken(type: .algorithm))
+        XCTAssertEqual(lexer.nextToken, PSToken(type: .identifier, string: "fibonacci"))
         XCTAssertEqual(lexer.advance(), PSToken(type: .openingParenthesis))
         XCTAssertEqual(lexer.advance(), PSToken(type: .identifier, string: "int"))
         XCTAssertEqual(lexer.advance(), PSToken(type: .identifier, string: "n"))
@@ -180,17 +187,40 @@ final class PSLexerTests: XCTestCase {
         XCTAssertNil(lexer.advance())
     }
 
-    /*// MARK: - Asserting
+    // MARK: - Asserting
 
     func testExpectToken_Empty() {
-        XCTAssertThrowsError(try PSLexer(code: "").expect(.colon))
+        let reader = PSStringReader(string: "")
+        let lexer = PSLexer(reader: reader)
+
+        XCTAssertThrowsError(try lexer.expect(.colon))
     }
 
     func testExpectToken_Failure() {
-        XCTAssertThrowsError(try PSLexer(code: ".").expect(.colon))
+        let reader = PSStringReader(string: ".")
+        let lexer = PSLexer(reader: reader)
+
+        XCTAssertThrowsError(try lexer.expect(.colon))
+        XCTAssertNoThrow(try lexer.expect(.point))
+        XCTAssertThrowsError(try lexer.expect(.point))
     }
 
     func testExpectToken_Success() {
-        XCTAssertNoThrow(try PSLexer(code: ":").expect(.colon))
-    }*/
+        let reader = PSStringReader(string: ":")
+        let lexer = PSLexer(reader: reader)
+
+        XCTAssertNoThrow(try lexer.expect(.colon))
+        XCTAssertThrowsError(try lexer.expect(.colon))
+    }
+
+    func testExpectToken_Multiple() {
+        let reader = PSStringReader(string: "if true then.")
+        let lexer = PSLexer(reader: reader)
+
+        XCTAssertNoThrow(try lexer.expect(.if))
+        XCTAssertNoThrow(try lexer.expect(.true))
+        XCTAssertNoThrow(try lexer.expect(.then))
+        XCTAssertNoThrow(try lexer.expect(.point))
+        XCTAssertThrowsError(try lexer.expect(.point))
+    }
 }
