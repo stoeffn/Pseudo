@@ -66,7 +66,7 @@
         node = [[PSBinaryOperationNode alloc] initWithToken: token
                                                        type: type.integerValue
                                                        left: node
-                                                      right: [self termWithError: error]];
+                                                      right: [self scalarWithError: error]];
     };
     [self.lexer expectMultipleOfTokenTypes: allowedTokenTypes handler: handler error: error];
 
