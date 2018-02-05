@@ -1,14 +1,14 @@
 //
-//  PSLiteralNode+JavaScript.h
+//  PSControlFlowNode+JavaScript.h
 //  PseudoKit
 //
 //  Created by Steffen Ryll on 05.02.18.
 //  Copyright © 2018 Steffen Ryll. All rights reserved.
 //
 
-#import "PSLiteralNode.h"
+#import "PSControlFlowNode.h"
 #import "PSJavaScriptTranspilable.h"
 
-@interface PSLiteralNode (JavaScript) <PSJavaScriptTranspilable>
+@interface PSControlFlowNode (JavaScript) <PSJavaScriptTranspilable>
 
 @end

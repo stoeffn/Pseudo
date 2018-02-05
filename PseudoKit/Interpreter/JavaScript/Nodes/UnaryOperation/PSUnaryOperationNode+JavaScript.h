@@ -6,7 +6,7 @@
 //  Copyright © 2018 Steffen Ryll. All rights reserved.
 //
 
-#import <PseudoKit/PseudoKit.h>
+#import "PSUnaryOperationNode.h"
 #import "PSJavaScriptTranspilable.h"
 
 @interface PSUnaryOperationNode (JavaScript) <PSJavaScriptTranspilable>
