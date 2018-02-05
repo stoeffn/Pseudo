@@ -22,6 +22,12 @@
 
 #pragma mark - Parsing
 
+#pragma mark Statements
+
+- (nullable PSNode *) statementWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error;
+
+#pragma mark Expressions
+
 - (nullable PSNode *) expressionWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error;
 
 - (nullable PSNode *) termWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error;

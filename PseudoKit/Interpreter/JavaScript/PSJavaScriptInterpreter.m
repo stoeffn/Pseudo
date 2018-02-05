@@ -41,7 +41,7 @@
     PSStringReader *reader = [[PSStringReader alloc] initWithString: code];
     PSLexer *lexer = [[PSLexer alloc] initWithReader: reader];
     PSParser *parser = [[PSParser alloc] initWithLexer: lexer];
-    PSNode *node = [parser expressionWithError: error];
+    PSNode *node = [parser statementWithError: error];
 
     if (*error) return NULL;
     return [self executeNode: node];

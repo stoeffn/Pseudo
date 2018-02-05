@@ -15,7 +15,7 @@
 
 - (nonnull instancetype) initWithToken: (nullable PSToken *) token
                                   type: (PSControlFlowTypes) type
-                                  node: (nonnull PSNode *) node {
+                                  node: (nullable PSNode *) node {
     if (self = [super initWithToken: token]) {
         _type = type;
         _node = node;
@@ -24,7 +24,7 @@
 }
 
 - (nonnull instancetype) initWithType: (PSControlFlowTypes) type
-                                 node: (nonnull PSNode *) node {
+                                 node: (nullable PSNode *) node {
     return [self initWithToken: NULL type: type node: node];
 }
 
