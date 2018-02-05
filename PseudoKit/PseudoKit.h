@@ -16,10 +16,27 @@ FOUNDATION_EXPORT const unsigned char PseudoKitVersionString[];
 
 #import <PseudoKit/Constants.h>
 #import <PseudoKit/Macros.h>
+
+#import <PseudoKit/PSReading.h>
 #import <PseudoKit/PSStringReader.h>
+
+#import <PseudoKit/PSLexing.h>
 #import <PseudoKit/PSLexer.h>
-#import <PseudoKit/PSParser.h>
+#import <PseudoKit/PSToken.h>
+#import <PseudoKit/PSToken+Types.h>
+#import <PseudoKit/PSTokenTypes.h>
+
 #import <PseudoKit/PSNode.h>
 #import <PseudoKit/PSBinaryOperationNode.h>
 #import <PseudoKit/PSNumberLiteralNode.h>
-#import <PseudoKit/PSJavaScriptTranspiler.h>
+
+#import <PseudoKit/PSParser.h>
+
+#import <PseudoKit/PSInterpreting.h>
+#import <PseudoKit/PSJavaScriptTranspilable.h>
+#import <PseudoKit/PSJavaScriptInterpreter.h>
+#import <PseudoKit/PSNode+JavaScript.h>
+#import <PseudoKit/PSBinaryOperationNode+JavaScript.h>
+#import <PseudoKit/PSNumberLiteralNode+JavaScript.h>
+
+#import <PseudoKit/PSREPL.h>
