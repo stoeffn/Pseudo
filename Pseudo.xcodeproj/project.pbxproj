@@ -50,6 +50,9 @@
 		2471113F2028AAF000A79633 /* PSREPL.h in Headers */ = {isa = PBXBuildFile; fileRef = 2471113D2028AAF000A79633 /* PSREPL.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		247111402028AAF000A79633 /* PSREPL.m in Sources */ = {isa = PBXBuildFile; fileRef = 2471113E2028AAF000A79633 /* PSREPL.m */; };
 		247111422028AC1300A79633 /* PSInterpreting.h in Headers */ = {isa = PBXBuildFile; fileRef = 247111412028AC1300A79633 /* PSInterpreting.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		247111462028B40400A79633 /* PSBinaryOperationTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 247111452028B40400A79633 /* PSBinaryOperationTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		247111492028B6E300A79633 /* PSBinaryOperationNode+Types.h in Headers */ = {isa = PBXBuildFile; fileRef = 247111472028B6E300A79633 /* PSBinaryOperationNode+Types.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2471114A2028B6E300A79633 /* PSBinaryOperationNode+Types.m in Sources */ = {isa = PBXBuildFile; fileRef = 247111482028B6E300A79633 /* PSBinaryOperationNode+Types.m */; };
 		24DA62FB2024CA880087839C /* PSTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DA62FA2024CA880087839C /* PSTokenTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +126,9 @@
 		2471113D2028AAF000A79633 /* PSREPL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSREPL.h; sourceTree = "<group>"; };
 		2471113E2028AAF000A79633 /* PSREPL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSREPL.m; sourceTree = "<group>"; };
 		247111412028AC1300A79633 /* PSInterpreting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSInterpreting.h; sourceTree = "<group>"; };
+		247111452028B40400A79633 /* PSBinaryOperationTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSBinaryOperationTypes.h; sourceTree = "<group>"; };
+		247111472028B6E300A79633 /* PSBinaryOperationNode+Types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PSBinaryOperationNode+Types.h"; sourceTree = "<group>"; };
+		247111482028B6E300A79633 /* PSBinaryOperationNode+Types.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PSBinaryOperationNode+Types.m"; sourceTree = "<group>"; };
 		24DA62FA2024CA880087839C /* PSTokenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSTokenTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -337,8 +343,11 @@
 		247110F9202710E800A79633 /* Expressions */ = {
 			isa = PBXGroup;
 			children = (
+				247111452028B40400A79633 /* PSBinaryOperationTypes.h */,
 				247111192027B57F00A79633 /* PSBinaryOperationNode.h */,
 				2471111A2027B57F00A79633 /* PSBinaryOperationNode.m */,
+				247111472028B6E300A79633 /* PSBinaryOperationNode+Types.h */,
+				247111482028B6E300A79633 /* PSBinaryOperationNode+Types.m */,
 				2421AFDC2025F8000007FC7A /* PSLiteralNode.h */,
 				2421AFDD2025F8000007FC7A /* PSLiteralNode.m */,
 			);
@@ -432,10 +441,12 @@
 				247111312028977100A79633 /* PSBinaryOperationNode+JavaScript.h in Headers */,
 				2471110820273BA300A79633 /* PSToken+Types.h in Headers */,
 				24711135202897E200A79633 /* PSLiteralNode+JavaScript.h in Headers */,
+				247111492028B6E300A79633 /* PSBinaryOperationNode+Types.h in Headers */,
 				2471113F2028AAF000A79633 /* PSREPL.h in Headers */,
 				2471113A20289A6700A79633 /* PSJavaScriptInterpreter.h in Headers */,
 				2470F0392024BE2C00AE9CD8 /* NSMutableArray+Queue.h in Headers */,
 				2471110E2027458900A79633 /* PSStringReader.h in Headers */,
+				247111462028B40400A79633 /* PSBinaryOperationTypes.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,6 +586,7 @@
 				2470F0262024BA7800AE9CD8 /* PSToken.m in Sources */,
 				2471112E2028968500A79633 /* PSNode+JavaScript.m in Sources */,
 				2470F0252024BA7600AE9CD8 /* PSLexer.m in Sources */,
+				2471114A2028B6E300A79633 /* PSBinaryOperationNode+Types.m in Sources */,
 				247111322028977100A79633 /* PSBinaryOperationNode+JavaScript.m in Sources */,
 				2471110920273BA300A79633 /* PSToken+Types.m in Sources */,
 				247111402028AAF000A79633 /* PSREPL.m in Sources */,

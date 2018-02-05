@@ -27,7 +27,9 @@ FOUNDATION_EXPORT const unsigned char PseudoKitVersionString[];
 #import <PseudoKit/PSTokenTypes.h>
 
 #import <PseudoKit/PSNode.h>
+#import <PseudoKit/PSBinaryOperationTypes.h>
 #import <PseudoKit/PSBinaryOperationNode.h>
+#import <PseudoKit/PSBinaryOperationNode+Types.h>
 #import <PseudoKit/PSLiteralNode.h>
 
 #import <PseudoKit/PSParser.h>

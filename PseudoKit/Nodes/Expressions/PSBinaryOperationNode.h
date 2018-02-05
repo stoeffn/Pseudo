@@ -8,8 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "PSNode.h"
+#import "PSBinaryOperationTypes.h"
 
 @interface PSBinaryOperationNode : PSNode
+
+@property (nonatomic, readonly) PSBinaryOperationTypes type;
 
 @property (nonatomic, readonly, nonnull) PSNode *left;
 
@@ -20,10 +23,16 @@
 - (nonnull instancetype) initWithToken: (nullable PSToken *) token __unavailable;
 
 - (nonnull instancetype) initWithToken: (nullable PSToken *) token
+                                  type: (PSBinaryOperationTypes) type
                                   left: (nonnull PSNode *) left
                                  right: (nonnull PSNode *) right;
 
-- (nonnull instancetype) initWithLeft: (nonnull PSNode *) left
+- (nonnull instancetype) initWithType: (PSBinaryOperationTypes) type
+                                 left: (nonnull PSNode *) left
                                 right: (nonnull PSNode *) right;
+
+- (nullable instancetype) initWithToken: (nonnull PSToken *) token
+                                   left: (nonnull PSNode *) left
+                                  right: (nonnull PSNode *) right;
 
 @end
