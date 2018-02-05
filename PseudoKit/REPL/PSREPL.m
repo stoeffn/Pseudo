@@ -31,6 +31,8 @@
     self.isActive = YES;
 
     while (self.isActive) {
+        printf(">>> ");
+
         NSData *data = [[NSFileHandle fileHandleWithStandardInput] availableData];
         NSString *string = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
         [self handleREPLInput: string];
@@ -45,12 +47,8 @@
     NSError *error;
     NSString *result = [self.interpreter executePseudoCode: input error: &error];
 
-    if (error) {
-        NSLog(@"Error: %@", error.localizedDescription);
-        return;
-    }
-
-    NSLog(@"%@", result);
+    if (error) printf("%s\n", [error.localizedDescription UTF8String]);
+    if (result.length > 0) printf("%s\n", [result UTF8String]);
 }
 
 @end
