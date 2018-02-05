@@ -75,16 +75,31 @@
 }
 
 - (nullable PSNode *) scalarWithError: (NSError * __nullable * __null_unspecified) error {
-    PSToken *token = [self.lexer expectTokenTypes: PSTokenTypesNumber error: error];
+    PSNode *node;
+
+    if (self.lexer.currentToken.type == PSTokenTypesOpeningParenthesis) {
+        [self.lexer advance];
+        node = [self expressionWithError: error];
+        [self.lexer expectTokenTypes: PSTokenTypesClosingParanthesis error: error];
+    } else {
+        node = [self literalWithError: error];
+    }
 
     if (*error) return NULL;
+    return node;
+}
+
+- (nullable PSNode *) literalWithError: (NSError * __nullable * __null_unspecified) error {
+    NSSet<NSNumber *> *allowedTokenTypes = $set(@(PSTokenTypesNull), @(PSTokenTypesTrue), @(PSTokenTypesFalse),
+                                                @(PSTokenTypesNumber), @(PSTokenTypesString));
+    PSToken *token = [self.lexer expectOneOfTokenTypes: allowedTokenTypes error: error];
 
     NSNumber *type = [PSLiteralNode typeForTokenType: token.type];
     if (!type) return NULL;
 
     return [[PSLiteralNode alloc] initWithToken: token
                                            type: type.integerValue
-                                         string: NULL
+                                         string: token.string
                                          number: token.number];
 }
 
