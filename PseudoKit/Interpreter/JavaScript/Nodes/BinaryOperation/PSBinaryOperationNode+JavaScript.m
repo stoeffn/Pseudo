@@ -15,6 +15,18 @@
 
 - (nonnull NSString *) javaScriptCode {
     switch (self.type) {
+        case PSBinaryOperationTypesEqual:
+            return [[NSString alloc] initWithFormat: @"(%@ == %@)", self.left.javaScriptCode, self.right.javaScriptCode];
+        case PSBinaryOperationTypesUnequal:
+            return [[NSString alloc] initWithFormat: @"(%@ != %@)", self.left.javaScriptCode, self.right.javaScriptCode];
+        case PSBinaryOperationTypesGreaterThan:
+            return [[NSString alloc] initWithFormat: @"(%@ > %@)", self.left.javaScriptCode, self.right.javaScriptCode];
+        case PSBinaryOperationTypesGreaterThanOrEqual:
+            return [[NSString alloc] initWithFormat: @"(%@ >= %@)", self.left.javaScriptCode, self.right.javaScriptCode];
+        case PSBinaryOperationTypesLessThan:
+            return [[NSString alloc] initWithFormat: @"(%@ < %@)", self.left.javaScriptCode, self.right.javaScriptCode];
+        case PSBinaryOperationTypesLessThanOrEqual:
+            return [[NSString alloc] initWithFormat: @"(%@ <= %@)", self.left.javaScriptCode, self.right.javaScriptCode];
         case PSBinaryOperationTypesAddition:
             return [[NSString alloc] initWithFormat: @"(%@ + %@)", self.left.javaScriptCode, self.right.javaScriptCode];
         case PSBinaryOperationTypesSubtraction:
