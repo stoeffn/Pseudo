@@ -34,8 +34,8 @@
         printf(">>> ");
 
         NSData *data = [[NSFileHandle fileHandleWithStandardInput] availableData];
-        NSString *string = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-        [self handleREPLInput: string];
+        NSString *input = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
+        [self handleREPLInput: [input stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceAndNewlineCharacterSet]];
     }
 }
 
@@ -44,6 +44,8 @@
 }
 
 - (void) handleREPLInput: (NSString *) input {
+    if (input.length == 0) return;
+
     NSError *error;
     NSString *result = [self.interpreter executePseudoCode: input error: &error];
 
