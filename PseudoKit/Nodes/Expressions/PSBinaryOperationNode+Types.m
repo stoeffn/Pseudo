@@ -14,7 +14,7 @@
 
 + (nonnull NSString *) descriptionForType: (PSBinaryOperationTypes) type {
     switch (type) {
-        case PSBinaryOperationTypesAddtion:         return @"ADDTITION";
+        case PSBinaryOperationTypesAddition:        return @"ADDTITION";
         case PSBinaryOperationTypesSubtraction:     return @"SUBSTRACTION";
         case PSBinaryOperationTypesMultiplication:  return @"MULTIPLICATION";
         case PSBinaryOperationTypesDivision:        return @"DIVISION";
@@ -28,7 +28,7 @@
 + (nullable NSNumber *) typeForTokenType: (PSTokenTypes) tokenType {
     switch (tokenType) {
         case PSTokenTypesPlus:
-            return @(PSBinaryOperationTypesAddtion);
+            return @(PSBinaryOperationTypesAddition);
         case PSTokenTypesMinus:
             return @(PSBinaryOperationTypesSubtraction);
         case PSTokenTypesTimes:

@@ -7,7 +7,7 @@
 //
 
 typedef NS_ENUM(NSInteger, PSBinaryOperationTypes) {
-    PSBinaryOperationTypesAddtion,
+    PSBinaryOperationTypesAddition,
     PSBinaryOperationTypesSubtraction,
     PSBinaryOperationTypesMultiplication,
     PSBinaryOperationTypesDivision,
