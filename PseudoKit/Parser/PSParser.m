@@ -14,6 +14,8 @@
 #import "PSBinaryOperationNode+Types.h"
 #import "PSLiteralNode.h"
 #import "PSLiteralNode+Types.h"
+#import "PSUnaryOperationNode.h"
+#import "PSUnaryOperationNode+Types.h"
 
 @implementation PSParser
 
@@ -36,19 +38,29 @@
 #pragma mark - Parsing
 
 - (nullable PSNode *) expressionWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error {
-    __block PSNode *node = [self termWithError: error];
+    __block PSNode *node;
 
-    NSSet<NSNumber *> *allowedTokenTypes = $set(@(PSTokenTypesPlus), @(PSTokenTypesMinus));
-    TokenHandler handler = ^(PSToken *token) {
-        NSNumber *type = [PSBinaryOperationNode typeForTokenType: token.type];
-        if (!type) return;
+    if (self.lexer.currentToken.type == PSTokenTypesNot) {
+        PSToken *token = self.lexer.currentToken;
+        [self.lexer advance];
+        node = [[PSUnaryOperationNode alloc] initWithToken: token
+                                                      type: PSUnaryOperationTypesNot
+                                                      node: [self expressionWithError: error]];
+    } else {
+        node = [self termWithError: error];
 
-        node = [[PSBinaryOperationNode alloc] initWithToken: token
-                                                       type: type.integerValue
-                                                       left: node
-                                                      right: [self termWithError: error]];
-    };
-    [self.lexer expectMultipleOfTokenTypes: allowedTokenTypes handler: handler error: error];
+        NSSet<NSNumber *> *allowedTokenTypes = $set(@(PSTokenTypesPlus), @(PSTokenTypesMinus));
+        TokenHandler handler = ^(PSToken *token) {
+            NSNumber *type = [PSBinaryOperationNode typeForTokenType: token.type];
+            if (!type) return;
+
+            node = [[PSBinaryOperationNode alloc] initWithToken: token
+                                                           type: type.integerValue
+                                                           left: node
+                                                          right: [self termWithError: error]];
+        };
+        [self.lexer expectMultipleOfTokenTypes: allowedTokenTypes handler: handler error: error];
+    }
 
     if (*error) return NULL;
     return node;
@@ -74,13 +86,19 @@
     return node;
 }
 
-- (nullable PSNode *) scalarWithError: (NSError * __nullable * __null_unspecified) error {
+- (nullable PSNode *) scalarWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error {
     PSNode *node;
 
     if (self.lexer.currentToken.type == PSTokenTypesOpeningParenthesis) {
         [self.lexer advance];
         node = [self expressionWithError: error];
         [self.lexer expectTokenTypes: PSTokenTypesClosingParanthesis error: error];
+    } else if (self.lexer.currentToken.type == PSTokenTypesMinus) {
+        PSToken *token = self.lexer.currentToken;
+        [self.lexer advance];
+        node = [[PSUnaryOperationNode alloc] initWithToken: token
+                                                      type: PSUnaryOperationTypesNegation
+                                                      node: [self scalarWithError: error]];
     } else {
         node = [self literalWithError: error];
     }
@@ -89,7 +107,7 @@
     return node;
 }
 
-- (nullable PSNode *) literalWithError: (NSError * __nullable * __null_unspecified) error {
+- (nullable PSNode *) literalWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error {
     NSSet<NSNumber *> *allowedTokenTypes = $set(@(PSTokenTypesNull), @(PSTokenTypesTrue), @(PSTokenTypesFalse),
                                                 @(PSTokenTypesNumber), @(PSTokenTypesString));
     PSToken *token = [self.lexer expectOneOfTokenTypes: allowedTokenTypes error: error];

@@ -28,6 +28,6 @@
 
 - (nullable PSNode *) scalarWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error;
 
-- (nullable PSNode *) literalWithError: (NSError * __nullable * __null_unspecified) error;
+- (nullable PSNode *) literalWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error;
 
 @end
