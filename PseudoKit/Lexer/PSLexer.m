@@ -7,6 +7,7 @@
 //
 
 #import "Constants.h"
+#import "Macros.h"
 #import "NSMutableArray+Queue.h"
 #import "PSLexer.h"
 #import "PSToken.h"
@@ -199,63 +200,36 @@
 
 - (nullable PSToken *) expectTokenTypes: (PSTokenTypes) tokenType
                                   error: (NSError * __nullable * __null_unspecified) error {
+    return [self expectOneOfTokenTypes: $set(@(tokenType)) error: error];
+}
+
+- (nullable PSToken *) expectOneOfTokenTypes: (nonnull NSSet<NSNumber *> *) tokenTypes
+                                       error: (NSError * __nullable * __null_unspecified) error {
     if (*error) return NULL;
 
     PSToken *token = self.currentToken;
 
-    if (!token || token.type != tokenType) {
+    if (!token || ![tokenTypes containsObject: @(token.type)]) {
         *error = [NSError errorWithDomain: PSParserErrorDomain code: 1 userInfo: NULL];
         return NULL;
     }
 
     [self advance];
-
     return token;
 }
 
-/*- (id<PSNodeProtocol>) expectOneOfTokenTypes: (NSDictionary<NSNumber *, id<PSNodeProtocol>(^)(PSToken *)> *) tokenTypes
-                                       error: (NSError **) error {
-    if (*error) return NULL;
+- (BOOL) expectMultipleOfTokenTypes: (nonnull NSSet<NSNumber *> *) tokenTypes
+                            handler: (nonnull TokenHandler) handler
+                              error: (NSError * __nullable * __null_unspecified) error {
+    if (*error) return NO;
 
-    PSToken *token = self.nextToken;
-
-    if (!token) {
-        *error = [NSError errorWithDomain: PSParserErrorDomain code: 1 userInfo: NULL];
-        return NULL;
+    while (self.currentToken && [tokenTypes containsObject: @(self.currentToken.type)]) {
+        PSToken *token = self.currentToken;
+        [self advance];
+        handler(token);
     }
 
-    NSNumber *key = [NSNumber numberWithInt: token.type];
-    id<PSNodeProtocol> (^block)(PSToken *) = tokenTypes[key];
-
-    if (!block) {
-        *error = [NSError errorWithDomain: PSParserErrorDomain code: 1 userInfo: NULL];
-        return NULL;
-    }
-
-    return block(token);
+    return YES;
 }
-
-- (NSArray<id<PSNodeProtocol>> *) expectMultipleOfTokenTypes: (NSDictionary<NSNumber *, id<PSNodeProtocol>(^)(PSToken *)> *) tokenTypes
-                                           withStopTokenType: (PSTokenTypes) stopTokenType
-                                                       error: (NSError **) error {
-    if (*error) return NULL;
-
-    PSToken *token;
-    NSMutableArray *children = [[NSMutableArray alloc] init];
-
-    do {
-        token = self.nextToken;
-        if (!token || token.type == stopTokenType) break;
-
-        NSNumber *key = [NSNumber numberWithInt: token.type];
-        id<PSNodeProtocol> (^block)(PSToken *) = tokenTypes[key];
-        id<PSNodeProtocol> node = block(token);
-
-        if (node) [children addObject: node];
-    } while (!*error && token != NULL && token.type != stopTokenType);
-
-    if (*error) return NULL;
-    return children;
-}*/
 
 @end

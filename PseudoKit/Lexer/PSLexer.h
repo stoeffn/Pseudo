@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PSReading.h"
 #import "PSLexing.h"
+#import "PSNode.h"
 
 @interface PSLexer : NSObject <PSLexing>
 
@@ -18,14 +19,16 @@
 
 - (nonnull instancetype) initWithReader: (nonnull id<PSReading>) reader;
 
+#pragma mark - Expectations
+
 - (nullable PSToken *) expectTokenTypes: (PSTokenTypes) tokenType
                                   error: (NSError * __nullable * __null_unspecified) error;
 
-/*- (nullable id<PSNodeProtocol>) expectOneOfTokenTypes: (NSDictionary<NSNumber *, id<PSNodeProtocol>(^)(PSToken * _Nonnull)> * _Nonnull) tokenTypes
-                                                error: (NSError * __nullable * __null_unspecified) error;
+- (nullable PSToken *) expectOneOfTokenTypes: (nonnull NSSet<NSNumber *> *) tokenTypes
+                                       error: (NSError * __nullable * __null_unspecified) error;
 
-- (nullable NSArray<id<PSNodeProtocol>> *) expectMultipleOfTokenTypes: (NSDictionary<NSNumber *, id<PSNodeProtocol>(^)(PSToken * _Nonnull)> * _Nonnull) tokenTypes
-                                                    withStopTokenType: (PSTokenTypes) stopTokenType
-                                                                error: (NSError * __nullable * __null_unspecified) error;*/
+- (BOOL) expectMultipleOfTokenTypes: (nonnull NSSet<NSNumber *> *) tokenTypes
+                            handler: (nonnull TokenHandler) handler
+                              error: (NSError * __nullable * __null_unspecified) error;
 
 @end

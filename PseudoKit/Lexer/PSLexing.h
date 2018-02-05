@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "PSToken.h"
 
+typedef void (^TokenHandler)(PSToken *_Nonnull);
+
 @protocol PSLexing <NSObject>
 
 #pragma mark - State

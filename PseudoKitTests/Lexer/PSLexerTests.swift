@@ -223,4 +223,36 @@ final class PSLexerTests: XCTestCase {
         XCTAssertNoThrow(try lexer.expect(.point))
         XCTAssertThrowsError(try lexer.expect(.point))
     }
+
+    func testExpectOneOf() {
+        let reader = PSStringReader(string: "if true")
+        let lexer = PSLexer(reader: reader)
+
+        XCTAssertNoThrow(try lexer.expectOne(
+            ofTokenTypes: [NSNumber(value: PSTokenTypes.if.rawValue), NSNumber(value: PSTokenTypes.algorithm.rawValue)]))
+        XCTAssertThrowsError(try lexer.expectOne(
+            ofTokenTypes: [NSNumber(value: PSTokenTypes.if.rawValue), NSNumber(value: PSTokenTypes.algorithm.rawValue)]))
+        XCTAssertNoThrow(try lexer.expectOne(
+            ofTokenTypes: [NSNumber(value: PSTokenTypes.if.rawValue), NSNumber(value: PSTokenTypes.true.rawValue)]))
+        XCTAssertNil(lexer.currentToken)
+    }
+
+    func testExcpectMultipleOf_None() {
+        let reader = PSStringReader(string: ".")
+        let lexer = PSLexer(reader: reader)
+
+        try! lexer.expectMultiple(ofTokenTypes: [NSNumber(value: PSTokenTypes.plus.rawValue)]) { _ in XCTFail() }
+    }
+
+    func testExcpectMultipleOf_Multiple() {
+        let reader = PSStringReader(string: "+-+.")
+        let lexer = PSLexer(reader: reader)
+
+        let tokenTypes: Set = [NSNumber(value: PSTokenTypes.plus.rawValue), NSNumber(value: PSTokenTypes.minus.rawValue)]
+        var tokens: [PSToken] = []
+        try! lexer.expectMultiple(ofTokenTypes: tokenTypes) { tokens.append($0) }
+
+        XCTAssertEqual(tokens, [PSToken(type: .plus), PSToken(type: .minus), PSToken(type: .plus)])
+        XCTAssertEqual(lexer.currentToken, PSToken(type: .point))
+    }
 }
