@@ -33,4 +33,10 @@
                                string: (nullable NSString *) string
                                number: (nullable NSNumber *) number;
 
+- (nonnull instancetype) initWithType: (PSLiteralTypes) type;
+
+- (nonnull instancetype) initWithString: (nullable NSString *) string;
+
+- (nonnull instancetype) initWithNumber: (nullable NSNumber *) number;
+
 @end
