@@ -34,11 +34,45 @@
 #pragma mark - Description
 
 - (NSString *) description {
-    return [[NSString alloc] initWithFormat: @"<%@ lexer: %@>",
-            NSStringFromClass([self class]), self.lexer];
+    return [[NSString alloc] initWithFormat: @"<%@ lexer: %@>", NSStringFromClass([self class]), self.lexer];
 }
 
 #pragma mark - Parsing
+
+- (nullable PSNode *) programWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error {
+    return [self blockListError: error];
+}
+
+#pragma mark Blocks
+
+- (nullable PSNode *) blockListError: (NSError * __nullable __autoreleasing * __null_unspecified) error {
+    NSMutableArray<PSNode *> *nodes = [[NSMutableArray alloc] initWithObjects: [self blockWithError: error], nil];
+
+    while (self.lexer.currentToken.type == PSTokenTypesPoint) {
+        [self.lexer advance];
+        [nodes addObject: [self blockWithError: error]];
+    }
+
+    if (*error) return NULL;
+    return [[PSCompoundNode alloc] initWithChildren: nodes];
+}
+
+- (nullable PSNode *) blockWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error {
+    switch (self.lexer.currentToken.type) {
+        case PSTokenTypesAlgorithm:
+            return [self algorithmWithError: error];
+        case PSTokenTypesIf:
+            return [self conditionWithError: error];
+        case PSTokenTypesWhile:
+            return [self whileLoopWithError: error];
+        case PSTokenTypesRepeat:
+            return [self repeatLoopWithError: error];
+        case PSTokenTypesFor:
+            return [self forLoopWithError: error];
+        default:
+            return [self statementListWithError: error];
+    }
+}
 
 #pragma mark Statements
 
@@ -71,6 +105,37 @@
     }
 
     return [self expressionWithError: error];
+}
+
+#pragma mark Conditions
+
+- (nullable PSNode *) conditionWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error {
+    NSLog(@"Conditions are not supported yet.");
+    return NULL;
+}
+
+#pragma mark Algorithms
+
+- (nullable PSNode *) algorithmWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error {
+    NSLog(@"Algorithms are not supported yet.");
+    return NULL;
+}
+
+#pragma mark Loops
+
+- (nullable PSNode *) whileLoopWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error {
+    NSLog(@"While loops are not supported yet.");
+    return NULL;
+}
+
+- (nullable PSNode *) repeatLoopWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error {
+    NSLog(@"Repeat loops are not supported yet.");
+    return NULL;
+}
+
+- (nullable PSNode *) forLoopWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error {
+    NSLog(@"For loops are not supported yet.");
+    return NULL;
 }
 
 #pragma mark Expressions

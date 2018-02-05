@@ -22,11 +22,35 @@
 
 #pragma mark - Parsing
 
+- (nullable PSNode *) programWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error;
+
+#pragma mark Blocks
+
+- (nullable PSNode *) blockListError: (NSError * __nullable __autoreleasing * __null_unspecified) error;
+
+- (nullable PSNode *) blockWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error;
+
 #pragma mark Statements
 
 - (nullable PSNode *) statementListWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error;
 
 - (nullable PSNode *) statementWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error;
+
+#pragma mark Conditions
+
+- (nullable PSNode *) conditionWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error;
+
+#pragma mark Algorithms
+
+- (nullable PSNode *) algorithmWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error;
+
+#pragma mark Loops
+
+- (nullable PSNode *) whileLoopWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error;
+
+- (nullable PSNode *) repeatLoopWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error;
+
+- (nullable PSNode *) forLoopWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error;
 
 #pragma mark Expressions
 
