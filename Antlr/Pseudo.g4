@@ -110,14 +110,18 @@ relationOperator
     ;
 
 scalar
+    : MINUS scalar
+    | OPENING_PARENTHESIS expression CLOSING_PARENTHESIS
+    | literal
+    | anyCall
+    ;
+
+literal
     : NULL
     | TRUE
     | FALSE
     | NUMBER
     | STRING
-    | MINUS scalar
-    | OPENING_PARENTHESIS expression CLOSING_PARENTHESIS
-    | anyCall
     ;
 
 // Calls
