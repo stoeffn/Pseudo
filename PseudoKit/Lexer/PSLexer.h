@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "PSReading.h"
 #import "PSLexing.h"
-#import "PSNode.h"
 
 @interface PSLexer : NSObject <PSLexing>
 

@@ -6,8 +6,6 @@
 //  Copyright © 2018 Steffen Ryll. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @protocol PSReading <NSObject>
 
 #pragma mark - State
