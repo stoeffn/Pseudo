@@ -8,8 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "PSLexer.h"
-#import "PSSyntaxNodeProgram.h"
-#import "PSSyntaxNodeAlgorithm.h"
+#import "PSNode.h"
 
 @interface PSParser : NSObject
 
@@ -19,8 +18,10 @@
 
 - (nonnull instancetype) initWithLexer: (nonnull PSLexer *) lexer;
 
-- (nullable PSSyntaxNodeProgram *) programWithError: (NSError * __nullable * __null_unspecified) error;
+- (nullable PSNode *) expressionWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error;
 
-- (nullable PSSyntaxNodeAlgorithm *) algorithmWithError: (NSError * __nullable * __null_unspecified) error;
+- (nullable PSNode *) termWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error;
+
+- (nullable PSNode *) scalarWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error;
 
 @end
