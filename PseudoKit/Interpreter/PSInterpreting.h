@@ -7,10 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PSNode.h"
 
 @protocol PSInterpreting <NSObject>
 
 #pragma mark - Executing Code
+
+- (nullable NSString *) executeNode: (nonnull PSNode *) node;
 
 - (nullable NSString *) executePseudoCode: (nonnull NSString *) code
                                     error: (NSError * __nullable __autoreleasing * __null_unspecified) error;

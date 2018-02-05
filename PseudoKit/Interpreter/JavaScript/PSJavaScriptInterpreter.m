@@ -32,6 +32,10 @@
 
 #pragma mark - Executing Code
 
+- (nullable NSString *) executeNode: (nonnull PSNode *) node {
+    return [self.context evaluateScript: node.javaScriptCode].description;
+}
+
 - (nullable NSString *) executePseudoCode: (nonnull NSString *) code
                                     error: (NSError * __nullable __autoreleasing * __null_unspecified) error {
     PSStringReader *reader = [[PSStringReader alloc] initWithString: code];
@@ -40,7 +44,7 @@
     PSNode *node = [parser expressionWithError: error];
 
     if (*error) return NULL;
-    return [self.context evaluateScript: node.javaScriptCode].description;
+    return [self executeNode: node];
 }
 
 @end
