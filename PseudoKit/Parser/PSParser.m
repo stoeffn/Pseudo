@@ -11,7 +11,9 @@
 #import "PSParser.h"
 #import "PSToken.h"
 #import "PSBinaryOperationNode.h"
+#import "PSBinaryOperationNode+Types.h"
 #import "PSLiteralNode.h"
+#import "PSLiteralNode+Types.h"
 
 @implementation PSParser
 
@@ -38,7 +40,13 @@
 
     NSSet<NSNumber *> *allowedTokenTypes = $set(@(PSTokenTypesPlus), @(PSTokenTypesMinus));
     TokenHandler handler = ^(PSToken *token) {
-        node = [[PSBinaryOperationNode alloc] initWithToken: token left: node right: [self termWithError: error]];
+        NSNumber *type = [PSBinaryOperationNode typeForTokenType: token.type];
+        if (!type) return;
+
+        node = [[PSBinaryOperationNode alloc] initWithToken: token
+                                                       type: type.integerValue
+                                                       left: node
+                                                      right: [self termWithError: error]];
     };
     [self.lexer expectMultipleOfTokenTypes: allowedTokenTypes handler: handler error: error];
 
@@ -52,7 +60,13 @@
     NSSet<NSNumber *> *allowedTokenTypes = $set(@(PSTokenTypesTimes), @(PSTokenTypesDividedBy),
                                                 @(PSTokenTypesDividedAsIntegerBy), @(PSTokenTypesModulo));
     TokenHandler handler = ^(PSToken *token) {
-        node = [[PSBinaryOperationNode alloc] initWithToken: token left: node right: [self scalarWithError: error]];
+        NSNumber *type = [PSBinaryOperationNode typeForTokenType: token.type];
+        if (!type) return;
+
+        node = [[PSBinaryOperationNode alloc] initWithToken: token
+                                                       type: type.integerValue
+                                                       left: node
+                                                      right: [self termWithError: error]];
     };
     [self.lexer expectMultipleOfTokenTypes: allowedTokenTypes handler: handler error: error];
 
@@ -61,10 +75,17 @@
 }
 
 - (nullable PSNode *) scalarWithError: (NSError * __nullable * __null_unspecified) error {
-    PSToken *numberLiteral = [self.lexer expectTokenTypes: PSTokenTypesNumber error: error];
+    PSToken *token = [self.lexer expectTokenTypes: PSTokenTypesNumber error: error];
 
     if (*error) return NULL;
-    return [[PSLiteralNode alloc] initWithToken: numberLiteral value: numberLiteral.number];
+
+    NSNumber *type = [PSLiteralNode typeForTokenType: token.type];
+    if (!type) return NULL;
+
+    return [[PSLiteralNode alloc] initWithToken: token
+                                           type: type.integerValue
+                                         string: NULL
+                                         number: token.number];
 }
 
 @end

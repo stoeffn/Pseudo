@@ -13,7 +13,7 @@
 #pragma mark - Transpiling
 
 - (nonnull NSString *) javaScriptCode {
-    return [[NSString alloc] initWithFormat: @"%@", self.value];
+    return [[NSString alloc] initWithFormat: @"%@", self.number];
 }
 
 @end

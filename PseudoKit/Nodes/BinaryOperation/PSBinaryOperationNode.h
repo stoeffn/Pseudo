@@ -31,8 +31,4 @@
                                  left: (nonnull PSNode *) left
                                 right: (nonnull PSNode *) right;
 
-- (nullable instancetype) initWithToken: (nonnull PSToken *) token
-                                   left: (nonnull PSNode *) left
-                                  right: (nonnull PSNode *) right;
-
 @end

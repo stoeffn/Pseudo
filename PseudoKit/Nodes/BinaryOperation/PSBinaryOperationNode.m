@@ -31,15 +31,6 @@
     return [self initWithToken: NULL type: type left: left right: right];
 }
 
-- (nullable instancetype) initWithToken: (nonnull PSToken *) token
-                                   left: (nonnull PSNode *) left
-                                  right: (nonnull PSNode *) right {
-    NSNumber *type = [PSBinaryOperationNode typeForTokenType: token.type];
-    if (!type) return NULL;
-
-    return [self initWithToken: token type: type.integerValue left: left right: right];
-}
-
 #pragma mark - Description
 
 - (nonnull NSString *) description {

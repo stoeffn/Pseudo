@@ -27,20 +27,13 @@
 
 + (nullable NSNumber *) typeForTokenType: (PSTokenTypes) tokenType {
     switch (tokenType) {
-        case PSTokenTypesPlus:
-            return @(PSBinaryOperationTypesAddition);
-        case PSTokenTypesMinus:
-            return @(PSBinaryOperationTypesSubtraction);
-        case PSTokenTypesTimes:
-            return @(PSBinaryOperationTypesMultiplication);
-        case PSTokenTypesDividedBy:
-            return @(PSBinaryOperationTypesDivision);
-        case PSTokenTypesDividedAsIntegerBy:
-            return @(PSBinaryOperationTypesIntegerDivision);
-        case PSTokenTypesModulo:
-            return @(PSBinaryOperationTypesModulo);
-        default:
-            return NULL;
+        case PSTokenTypesPlus:                  return @(PSBinaryOperationTypesAddition);
+        case PSTokenTypesMinus:                 return @(PSBinaryOperationTypesSubtraction);
+        case PSTokenTypesTimes:                 return @(PSBinaryOperationTypesMultiplication);
+        case PSTokenTypesDividedBy:             return @(PSBinaryOperationTypesDivision);
+        case PSTokenTypesDividedAsIntegerBy:    return @(PSBinaryOperationTypesIntegerDivision);
+        case PSTokenTypesModulo:                return @(PSBinaryOperationTypesModulo);
+        default:                                return NULL;
     }
 }
 
