@@ -31,11 +31,8 @@
     self.isActive = YES;
 
     while (self.isActive) {
-        printf(">>> ");
-
-        NSData *data = [[NSFileHandle fileHandleWithStandardInput] availableData];
-        NSString *input = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-        [self handleREPLInput: [input stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceAndNewlineCharacterSet]];
+        [self outputStringToCommandLine: @">>> "];
+        [self handleREPLInput: [self stringFromCommandLineInput]];
     }
 }
 
@@ -43,14 +40,40 @@
     self.isActive = NO;
 }
 
+- (NSString *) stringFromCommandLineInput {
+    NSData *data = [[NSFileHandle fileHandleWithStandardInput] availableData];
+    return [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
+}
+
+- (void) outputStringToCommandLine: (NSString *) output {
+    NSData *data = [output dataUsingEncoding: NSUTF8StringEncoding];
+    NSFileHandle *handle = [NSFileHandle fileHandleWithStandardOutput];
+    [handle writeData: data];
+}
+
 - (void) handleREPLInput: (NSString *) input {
+    input = [input stringByTrimmingCharactersInSet: PSREPL.whitespaceAndNewLineAndControlCharacterSet];
+
     if (input.length == 0) return;
 
     NSError *error;
     NSString *result = [self.interpreter executePseudoCode: input error: &error];
 
-    if (error) printf("%s\n", [error.localizedDescription UTF8String]);
-    if (result.length > 0) printf("%s\n", [result UTF8String]);
+    if (error) [self outputStringToCommandLine: [[NSString alloc] initWithFormat: @"%@\n", error.localizedDescription]];
+
+    if (result.length > 0) [self outputStringToCommandLine: [[NSString alloc] initWithFormat: @"%@\n", result]];
+}
+
+#pragma mark - Constants
+
++ (nonnull NSCharacterSet *) whitespaceAndNewLineAndControlCharacterSet {
+    static NSMutableCharacterSet *_delimiters;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _delimiters = NSMutableCharacterSet.whitespaceAndNewlineCharacterSet;
+        [_delimiters formUnionWithCharacterSet: NSMutableCharacterSet.controlCharacterSet];
+    });
+    return _delimiters;
 }
 
 @end
