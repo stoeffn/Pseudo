@@ -13,7 +13,13 @@
 #pragma mark - Transpiling
 
 - (nonnull NSString *) javaScriptCode {
-    return [[NSString alloc] initWithFormat: @"%@", self.number];
+    switch (self.type) {
+        case PSLiteralTypesNull:    return @"null";
+        case PSLiteralTypesTrue:    return @"true";
+        case PSLiteralTypesFalse:   return @"false";
+        case PSLiteralTypesNumber:  return [[NSString alloc] initWithFormat: @"%@", self.number];
+        case PSLiteralTypesString:  return [[NSString alloc] initWithFormat: @"\"%@\"", self.string];
+    }
 }
 
 @end

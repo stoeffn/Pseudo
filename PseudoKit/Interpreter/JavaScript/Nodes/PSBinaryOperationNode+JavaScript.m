@@ -14,7 +14,20 @@
 #pragma mark - Transpiling
 
 - (nonnull NSString *) javaScriptCode {
-    return [[NSString alloc] initWithFormat: @"(%@ %@ %@)", self.left.javaScriptCode, @"+", self.right.javaScriptCode];
+    switch (self.type) {
+        case PSBinaryOperationTypesAddition:
+            return [[NSString alloc] initWithFormat: @"(%@ + %@)", self.left.javaScriptCode, self.right.javaScriptCode];
+        case PSBinaryOperationTypesSubtraction:
+            return [[NSString alloc] initWithFormat: @"(%@ - %@)", self.left.javaScriptCode, self.right.javaScriptCode];
+        case PSBinaryOperationTypesMultiplication:
+            return [[NSString alloc] initWithFormat: @"(%@ * %@)", self.left.javaScriptCode, self.right.javaScriptCode];
+        case PSBinaryOperationTypesDivision:
+            return [[NSString alloc] initWithFormat: @"(%@ / %@)", self.left.javaScriptCode, self.right.javaScriptCode];
+        case PSBinaryOperationTypesIntegerDivision:
+            return [[NSString alloc] initWithFormat: @"Math.floor(%@ / %@)", self.left.javaScriptCode, self.right.javaScriptCode];
+        case PSBinaryOperationTypesModulo:
+            return [[NSString alloc] initWithFormat: @"(%@ %% %@)", self.left.javaScriptCode, self.right.javaScriptCode];
+    }
 }
 
 @end
