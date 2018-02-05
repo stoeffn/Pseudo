@@ -8,6 +8,8 @@
 
 @protocol PSJavaScriptTranspilable <NSObject>
 
-- (NSString *) javaScriptCode;
+#pragma mark - Transpiling
+
+- (nonnull NSString *) javaScriptCode;
 
 @end

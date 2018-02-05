@@ -12,25 +12,24 @@
 
 int main(int argc, const char *argv[]) {
     @autoreleasepool {
-        NSString *code = @"algorithm main():"
-                          "    return 42.";
+        NSString *code = @"1 + 1";
 
-        PSLexer *lexer = [[PSLexer alloc] initWithCode: code];
+        PSStringReader *reader = [[PSStringReader alloc] initWithString: code];
+        PSLexer *lexer = [[PSLexer alloc] initWithReader: reader];
         PSParser *parser = [[PSParser alloc] initWithLexer: lexer];
 
         NSError *error;
-        PSSyntaxNodeProgram *program = [parser programWithError: &error];
+        PSNode *node = [parser expressionWithError: &error];
 
         if (error) {
             NSLog(@"Error: %@", error.localizedDescription);
             return (int) error.code;
         }
 
-        PSJavaScriptTranspiler *javaScriptTranspiler = [[PSJavaScriptTranspiler alloc] initWithProgram: program];
+        PSJavaScriptTranspiler *javaScriptTranspiler = [[PSJavaScriptTranspiler alloc] initWithNode: node];
         JSContext *context = [[JSContext alloc] init];
-        [context evaluateScript: javaScriptTranspiler.code];
-        JSValue *value = [context evaluateScript: @"main();"];
-        NSLog(@"Return value of 'main': %@", value);
+        JSValue *value = [context evaluateScript: javaScriptTranspiler.code];
+        NSLog(@">>> %@", value);
     }
     return 0;
 }

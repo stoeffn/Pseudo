@@ -7,24 +7,29 @@
 //
 
 #import "PSJavaScriptTranspiler.h"
-#import "PSSyntaxNodeProgram+JavaScript.h"
+#import "PSNode+JavaScript.h"
 
 @implementation PSJavaScriptTranspiler
 
-- (instancetype) initWithProgram: (PSSyntaxNodeProgram *) program {
+#pragma mark - Life Cycle
+
+- (nonnull instancetype) initWithNode: (nonnull PSNode *) node {
     if (self = [super init]) {
-        _program = program;
+        _node = node;
     }
     return self;
 }
 
-- (NSString *) description {
-    return [NSString stringWithFormat: @"<%@ program: %@, code: %@>",
-            NSStringFromClass([self class]), self.program, self.code];
+#pragma mark - Description
+
+- (nonnull NSString *) description {
+    return [NSString stringWithFormat: @"<%@ node: %@, code: %@>", NSStringFromClass([self class]), self.node, self.code];
 }
 
-- (NSString *) code {
-    return self.program.javaScriptCode;
+#pragma mark - Transpiling
+
+- (nonnull NSString *) code {
+    return self.node.javaScriptCode;
 }
 
 @end

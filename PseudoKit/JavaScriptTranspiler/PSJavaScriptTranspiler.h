@@ -7,14 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PSSyntaxNodeProgram.h"
+#import "PSNode.h"
 
 @interface PSJavaScriptTranspiler : NSObject
 
-@property (nonatomic) PSSyntaxNodeProgram *program;
+@property (nonatomic, nonnull) PSNode *node;
 
-- (instancetype) initWithProgram: (PSSyntaxNodeProgram *) program;
+#pragma mark - Life Cycle
 
-- (NSString *) code;
+- (nonnull instancetype) initWithNode: (nonnull PSNode *) node;
+
+#pragma mark - Transpiling
+
+- (nonnull NSString *) code;
 
 @end
