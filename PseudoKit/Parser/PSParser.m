@@ -62,8 +62,28 @@
         [self.lexer expectMultipleOfTokenTypes: allowedTokenTypes handler: handler error: error];
     }
 
+    node = [self optionalComparisonWithLeftNode: node error: error];
+
     if (*error) return NULL;
     return node;
+}
+
+- (nullable PSNode *) optionalComparisonWithLeftNode: (PSNode *) node
+                                               error: (NSError * __nullable __autoreleasing * __null_unspecified) error {
+    NSError *comparisonError;
+    NSSet<NSNumber *> *allowedTokenTypes = $set(@(PSTokenTypesEquals), @(PSTokenTypesNotEquals),
+                                                @(PSTokenTypesGreaterThan), @(PSTokenTypesGreaterThanOrEquals),
+                                                @(PSTokenTypesLessThan), @(PSTokenTypesLessThanOrEquals));
+    PSToken *token = [self.lexer expectOneOfTokenTypes: allowedTokenTypes error: &comparisonError];
+    if (!token) return node;
+
+    NSNumber *type = [PSBinaryOperationNode typeForTokenType: token.type];
+    if (!type) return node;
+
+    return [[PSBinaryOperationNode alloc] initWithToken: token
+                                                   type: type.integerValue
+                                                   left: node
+                                                  right: [self expressionWithError: error]];
 }
 
 - (nullable PSNode *) termWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error {
