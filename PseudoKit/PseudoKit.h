@@ -28,7 +28,7 @@ FOUNDATION_EXPORT const unsigned char PseudoKitVersionString[];
 
 #import <PseudoKit/PSNode.h>
 #import <PseudoKit/PSBinaryOperationNode.h>
-#import <PseudoKit/PSNumberLiteralNode.h>
+#import <PseudoKit/PSLiteralNode.h>
 
 #import <PseudoKit/PSParser.h>
 
@@ -37,6 +37,6 @@ FOUNDATION_EXPORT const unsigned char PseudoKitVersionString[];
 #import <PseudoKit/PSJavaScriptInterpreter.h>
 #import <PseudoKit/PSNode+JavaScript.h>
 #import <PseudoKit/PSBinaryOperationNode+JavaScript.h>
-#import <PseudoKit/PSNumberLiteralNode+JavaScript.h>
+#import <PseudoKit/PSLiteralNode+JavaScript.h>
 
 #import <PseudoKit/PSREPL.h>

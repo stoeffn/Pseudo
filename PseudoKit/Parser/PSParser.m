@@ -11,7 +11,7 @@
 #import "PSParser.h"
 #import "PSToken.h"
 #import "PSBinaryOperationNode.h"
-#import "PSNumberLiteralNode.h"
+#import "PSLiteralNode.h"
 
 @implementation PSParser
 
@@ -64,7 +64,7 @@
     PSToken *numberLiteral = [self.lexer expectTokenTypes: PSTokenTypesNumber error: error];
 
     if (*error) return NULL;
-    return [[PSNumberLiteralNode alloc] initWithToken: numberLiteral value: numberLiteral.number];
+    return [[PSLiteralNode alloc] initWithToken: numberLiteral value: numberLiteral.number];
 }
 
 @end

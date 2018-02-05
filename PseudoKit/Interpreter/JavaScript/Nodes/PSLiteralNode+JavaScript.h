@@ -1,5 +1,5 @@
 //
-//  PSNumberLiteralNode+JavaScript.h
+//  PSLiteralNode+JavaScript.h
 //  PseudoKit
 //
 //  Created by Steffen Ryll on 05.02.18.
@@ -9,6 +9,6 @@
 #import <PseudoKit/PseudoKit.h>
 #import "PSJavaScriptTranspilable.h"
 
-@interface PSNumberLiteralNode (JavaScript) <PSJavaScriptTranspilable>
+@interface PSLiteralNode (JavaScript) <PSJavaScriptTranspilable>
 
 @end

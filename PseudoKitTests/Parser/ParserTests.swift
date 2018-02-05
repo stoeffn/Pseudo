@@ -17,7 +17,7 @@ final class ParserTests: XCTestCase {
         let lexer = PSLexer(reader: reader)
         let parser = PSParser(lexer: lexer)
 
-        XCTAssertEqual(try parser.expression(), PSNumberLiteralNode(value: 42))
+        XCTAssertEqual(try parser.expression(), PSLiteralNode(value: 42))
     }
 
     func testParseExpression_OnePlusOne() {
@@ -25,8 +25,8 @@ final class ParserTests: XCTestCase {
         let lexer = PSLexer(reader: reader)
         let parser = PSParser(lexer: lexer)
 
-        XCTAssertEqual(try parser.expression(), PSBinaryOperationNode(left: PSNumberLiteralNode(value: 1),
-                                                                      right: PSNumberLiteralNode(value: 1)))
+        XCTAssertEqual(try parser.expression(), PSBinaryOperationNode(left: PSLiteralNode(value: 1),
+                                                                      right: PSLiteralNode(value: 1)))
     }
 
     func testParseExpression_OnePlusTwoPlusThree() {
@@ -34,8 +34,8 @@ final class ParserTests: XCTestCase {
         let lexer = PSLexer(reader: reader)
         let parser = PSParser(lexer: lexer)
 
-        let left = PSBinaryOperationNode(left: PSNumberLiteralNode(value: 1), right: PSNumberLiteralNode(value: 2))
-        XCTAssertEqual(try parser.expression(), PSBinaryOperationNode(left: left, right: PSNumberLiteralNode(value: 3)))
+        let left = PSBinaryOperationNode(left: PSLiteralNode(value: 1), right: PSLiteralNode(value: 2))
+        XCTAssertEqual(try parser.expression(), PSBinaryOperationNode(left: left, right: PSLiteralNode(value: 3)))
     }
 
     func testParseExpression_OnePlusTwoTimesThree() {
@@ -43,8 +43,8 @@ final class ParserTests: XCTestCase {
         let lexer = PSLexer(reader: reader)
         let parser = PSParser(lexer: lexer)
 
-        let right = PSBinaryOperationNode(left: PSNumberLiteralNode(value: 2), right: PSNumberLiteralNode(value: 3))
-        XCTAssertEqual(try parser.expression(), PSBinaryOperationNode(left: PSNumberLiteralNode(value: 1), right: right))
+        let right = PSBinaryOperationNode(left: PSLiteralNode(value: 2), right: PSLiteralNode(value: 3))
+        XCTAssertEqual(try parser.expression(), PSBinaryOperationNode(left: PSLiteralNode(value: 1), right: right))
     }
 
     // MARK: Terms
@@ -54,7 +54,7 @@ final class ParserTests: XCTestCase {
         let lexer = PSLexer(reader: reader)
         let parser = PSParser(lexer: lexer)
 
-        XCTAssertEqual(try parser.term(), PSNumberLiteralNode(value: 42))
+        XCTAssertEqual(try parser.term(), PSLiteralNode(value: 42))
     }
 
     func testParseTerm_TwoTimesTwo() {
@@ -62,8 +62,7 @@ final class ParserTests: XCTestCase {
         let lexer = PSLexer(reader: reader)
         let parser = PSParser(lexer: lexer)
 
-        XCTAssertEqual(try parser.term(), PSBinaryOperationNode(left: PSNumberLiteralNode(value: 2),
-                                                                right: PSNumberLiteralNode(value: 2)))
+        XCTAssertEqual(try parser.term(), PSBinaryOperationNode(left: PSLiteralNode(value: 2), right: PSLiteralNode(value: 2)))
     }
 
     // MARK: Scalars
@@ -73,6 +72,6 @@ final class ParserTests: XCTestCase {
         let lexer = PSLexer(reader: reader)
         let parser = PSParser(lexer: lexer)
 
-        XCTAssertEqual(try parser.scalar(), PSNumberLiteralNode(value: 42))
+        XCTAssertEqual(try parser.scalar(), PSLiteralNode(value: 42))
     }
 }

@@ -1,5 +1,5 @@
 //
-//  PSNumberLiteralNode.h
+//  PSLiteralNode.h
 //  PseudoKit
 //
 //  Created by Steffen Ryll on 03.02.18.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PSNode.h"
 
-@interface PSNumberLiteralNode : PSNode
+@interface PSLiteralNode : PSNode
 
 @property (nonatomic, readonly, nonnull) NSNumber *value;
 

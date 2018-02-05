@@ -1,14 +1,14 @@
 //
-//  PSNumberLiteralNode.m
+//  PSLiteralNode.m
 //  PseudoKit
 //
 //  Created by Steffen Ryll on 03.02.18.
 //  Copyright © 2018 Steffen Ryll. All rights reserved.
 //
 
-#import "PSNumberLiteralNode.h"
+#import "PSLiteralNode.h"
 
-@implementation PSNumberLiteralNode
+@implementation PSLiteralNode
 
 #pragma mark - Life Cycle
 
@@ -36,10 +36,10 @@
 - (BOOL) isEqual: (id) object {
     return [super isEqual: object]
         && [object isKindOfClass: [self class]]
-        && [self isEqualToNumberLiteralNode: (PSNumberLiteralNode *) object];
+        && [self isEqualToNumberLiteralNode: (PSLiteralNode *) object];
 }
 
-- (BOOL) isEqualToNumberLiteralNode: (PSNumberLiteralNode *) node {
+- (BOOL) isEqualToNumberLiteralNode: (PSLiteralNode *) node {
     return node != NULL
         && ((!self.value && !node.value) || [self.value isEqual: node.value]);
 }
