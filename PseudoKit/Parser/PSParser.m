@@ -10,10 +10,11 @@
 #import "Macros.h"
 #import "PSParser.h"
 #import "PSToken.h"
-#import "PSBinaryOperationNode.h"
-#import "PSBinaryOperationNode+Types.h"
+#import "PSCompoundNode.h"
 #import "PSLiteralNode.h"
 #import "PSLiteralNode+Types.h"
+#import "PSBinaryOperationNode.h"
+#import "PSBinaryOperationNode+Types.h"
 #import "PSUnaryOperationNode.h"
 #import "PSUnaryOperationNode+Types.h"
 #import "PSControlFlowNode.h"
@@ -40,6 +41,18 @@
 #pragma mark - Parsing
 
 #pragma mark Statements
+
+- (nullable PSNode *) statementListWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error {
+    NSMutableArray<PSNode *> *nodes = [[NSMutableArray alloc] initWithObjects: [self statementWithError: error], nil];
+
+    while (self.lexer.currentToken.type == PSTokenTypesSemicolon) {
+        [self.lexer advance];
+        [nodes addObject: [self statementWithError: error]];
+    }
+
+    if (*error) return NULL;
+    return [[PSCompoundNode alloc] initWithChildren: nodes];
+}
 
 - (nullable PSNode *) statementWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error {
     NSError *controlFlowError;

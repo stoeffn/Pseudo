@@ -24,6 +24,8 @@
 
 #pragma mark Statements
 
+- (nullable PSNode *) statementListWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error;
+
 - (nullable PSNode *) statementWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error;
 
 #pragma mark Expressions
