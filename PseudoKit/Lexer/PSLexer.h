@@ -19,16 +19,4 @@
 
 - (nonnull instancetype) initWithReader: (nonnull id<PSReading>) reader;
 
-#pragma mark - Expectations
-
-- (nullable PSToken *) expectTokenTypes: (PSTokenTypes) tokenType
-                                  error: (NSError * __nullable * __null_unspecified) error;
-
-- (nullable PSToken *) expectOneOfTokenTypes: (nonnull NSSet<NSNumber *> *) tokenTypes
-                                       error: (NSError * __nullable * __null_unspecified) error;
-
-- (BOOL) expectMultipleOfTokenTypes: (nonnull NSSet<NSNumber *> *) tokenTypes
-                            handler: (nonnull TokenHandler) handler
-                              error: (NSError * __nullable * __null_unspecified) error;
-
 @end

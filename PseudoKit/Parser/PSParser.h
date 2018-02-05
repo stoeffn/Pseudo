@@ -7,16 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PSLexer.h"
+#import "PSLexing.h"
 #import "PSNode.h"
 
 @interface PSParser : NSObject
 
-@property (nonatomic, nonnull) PSLexer *lexer;
+@property (nonatomic, nonnull) id<PSLexing> lexer;
+
+#pragma mark - Life Cycle
 
 - (instancetype _Nonnull) init __unavailable;
 
-- (nonnull instancetype) initWithLexer: (nonnull PSLexer *) lexer;
+- (nonnull instancetype) initWithLexer: (nonnull id<PSLexing>) lexer;
+
+#pragma mark - Parsing
 
 - (nullable PSNode *) expressionWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error;
 
