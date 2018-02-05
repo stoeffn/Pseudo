@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2421AFBD202507260007FC7A /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 2421AFBB202507260007FC7A /* Constants.h */; };
+		2421AFBD202507260007FC7A /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 2421AFBB202507260007FC7A /* Constants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2421AFBE202507260007FC7A /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2421AFBC202507260007FC7A /* Constants.m */; };
+		2421AFDE2025F8000007FC7A /* PSNumberLiteralNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 2421AFDC2025F8000007FC7A /* PSNumberLiteralNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2421AFDF2025F8000007FC7A /* PSNumberLiteralNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2421AFDD2025F8000007FC7A /* PSNumberLiteralNode.m */; };
 		2470EFD42023A2B800AE9CD8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EFD32023A2B800AE9CD8 /* main.m */; };
 		2470F0132024BA3D00AE9CD8 /* PseudoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2470F00A2024BA3D00AE9CD8 /* PseudoKit.framework */; };
 		2470F01A2024BA3D00AE9CD8 /* PseudoKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470F00C2024BA3D00AE9CD8 /* PseudoKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -17,39 +19,25 @@
 		2470F0252024BA7600AE9CD8 /* PSLexer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EFDB2023A49500AE9CD8 /* PSLexer.m */; };
 		2470F0262024BA7800AE9CD8 /* PSToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EFDE2023A79900AE9CD8 /* PSToken.m */; };
 		2470F0272024BA7E00AE9CD8 /* PSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 244C6C2B20242EC800778B71 /* PSParser.m */; };
-		2470F0282024BA8200AE9CD8 /* PSSyntaxNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 244C6C2E202430AA00778B71 /* PSSyntaxNode.m */; };
-		2470F0292024BA8400AE9CD8 /* PSSyntaxNodeProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 244C6C37202464F600778B71 /* PSSyntaxNodeProgram.m */; };
-		2470F02A2024BA8700AE9CD8 /* PSSyntaxNodeAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 244C6C31202432EC00778B71 /* PSSyntaxNodeAlgorithm.m */; };
-		2470F02B2024BA8900AE9CD8 /* PSSyntaxNodeReturn.m in Sources */ = {isa = PBXBuildFile; fileRef = 244C6C3F20246DDF00778B71 /* PSSyntaxNodeReturn.m */; };
-		2470F02C2024BA8C00AE9CD8 /* PSSyntaxNodeExpression.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EFE520247FCA00AE9CD8 /* PSSyntaxNodeExpression.m */; };
-		2470F02D2024BA8F00AE9CD8 /* PSSyntaxNodeNumberLiteral.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EFE220247E1700AE9CD8 /* PSSyntaxNodeNumberLiteral.m */; };
-		2470F02E2024BA9400AE9CD8 /* PSJavaScriptTranspiler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EFE92024852400AE9CD8 /* PSJavaScriptTranspiler.m */; };
-		2470F02F2024BA9900AE9CD8 /* PSSyntaxNode+JavaScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EFF72024885300AE9CD8 /* PSSyntaxNode+JavaScript.m */; };
-		2470F0302024BA9C00AE9CD8 /* PSSyntaxNodeProgram+JavaScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EFF0202486EB00AE9CD8 /* PSSyntaxNodeProgram+JavaScript.m */; };
-		2470F0312024BA9E00AE9CD8 /* PSSyntaxNodeAlgorithm+JavaScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EFFA202489F800AE9CD8 /* PSSyntaxNodeAlgorithm+JavaScript.m */; };
-		2470F0322024BAA100AE9CD8 /* PSSyntaxNodeReturn+JavaScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EFFD20248B5E00AE9CD8 /* PSSyntaxNodeReturn+JavaScript.m */; };
-		2470F0332024BAA400AE9CD8 /* PSSyntaxNodeExpression+JavaScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470F00020248BE600AE9CD8 /* PSSyntaxNodeExpression+JavaScript.m */; };
-		2470F0342024BAA600AE9CD8 /* PSSyntaxNodeNumberLiteral+JavaScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470F00320248C3800AE9CD8 /* PSSyntaxNodeNumberLiteral+JavaScript.m */; };
 		2470F0362024BE0800AE9CD8 /* PSLexer.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470EFDA2023A49500AE9CD8 /* PSLexer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2470F0372024BE0C00AE9CD8 /* PSParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 244C6C2A20242EC800778B71 /* PSParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2470F0382024BE1000AE9CD8 /* PSJavaScriptTranspiler.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470EFE82024852400AE9CD8 /* PSJavaScriptTranspiler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2470F0392024BE2C00AE9CD8 /* NSMutableArray+Queue.h in Headers */ = {isa = PBXBuildFile; fileRef = 244C6C332024412900778B71 /* NSMutableArray+Queue.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		2470F03A2024BE3100AE9CD8 /* PSToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470EFDD2023A79900AE9CD8 /* PSToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2470F03B2024BE3300AE9CD8 /* PSTokenType.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470EFE02023A7D200AE9CD8 /* PSTokenType.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2470F03C2024BE3800AE9CD8 /* PSSyntaxNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 244C6C2D202430AA00778B71 /* PSSyntaxNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2470F03D2024BE3A00AE9CD8 /* PSSyntaxNodeProgram.h in Headers */ = {isa = PBXBuildFile; fileRef = 244C6C36202464F600778B71 /* PSSyntaxNodeProgram.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2470F03E2024BE3D00AE9CD8 /* PSSyntaxNodeAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = 244C6C30202432EC00778B71 /* PSSyntaxNodeAlgorithm.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		2470F03F2024BE3F00AE9CD8 /* PSSyntaxNodeReturn.h in Headers */ = {isa = PBXBuildFile; fileRef = 244C6C3E20246DDF00778B71 /* PSSyntaxNodeReturn.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		2470F0402024BE4100AE9CD8 /* PSSyntaxNodeExpression.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470EFE420247FCA00AE9CD8 /* PSSyntaxNodeExpression.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		2470F0412024BE4200AE9CD8 /* PSSyntaxNodeNumberLiteral.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470EFE120247E1700AE9CD8 /* PSSyntaxNodeNumberLiteral.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		2470F0422024BE4700AE9CD8 /* PSSyntaxNode+JavaScript.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470EFF62024885300AE9CD8 /* PSSyntaxNode+JavaScript.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		2470F0432024BE4A00AE9CD8 /* PSSyntaxNodeProgram+JavaScript.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470EFEF202486EB00AE9CD8 /* PSSyntaxNodeProgram+JavaScript.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		2470F0442024BE4C00AE9CD8 /* PSSyntaxNodeAlgorithm+JavaScript.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470EFF9202489F800AE9CD8 /* PSSyntaxNodeAlgorithm+JavaScript.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		2470F0452024BE4D00AE9CD8 /* PSSyntaxNodeReturn+JavaScript.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470EFFC20248B5E00AE9CD8 /* PSSyntaxNodeReturn+JavaScript.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		2470F0462024BE4F00AE9CD8 /* PSSyntaxNodeExpression+JavaScript.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470EFFF20248BE600AE9CD8 /* PSSyntaxNodeExpression+JavaScript.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		2470F0472024BE5200AE9CD8 /* PSSyntaxNodeNumberLiteral+JavaScript.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470F00220248C3800AE9CD8 /* PSSyntaxNodeNumberLiteral+JavaScript.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		2470F0482024BE5500AE9CD8 /* PSJavaScriptTranspilable.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470EFF22024874F00AE9CD8 /* PSJavaScriptTranspilable.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		2470F03B2024BE3300AE9CD8 /* PSTokenTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470EFE02023A7D200AE9CD8 /* PSTokenTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2470F04B2024BF2800AE9CD8 /* PSLexerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470F04A2024BF2800AE9CD8 /* PSLexerTests.swift */; };
+		2471110820273BA300A79633 /* PSToken+Types.h in Headers */ = {isa = PBXBuildFile; fileRef = 2471110620273BA300A79633 /* PSToken+Types.h */; };
+		2471110920273BA300A79633 /* PSToken+Types.m in Sources */ = {isa = PBXBuildFile; fileRef = 2471110720273BA300A79633 /* PSToken+Types.m */; };
+		2471110B2027450D00A79633 /* PSReading.h in Headers */ = {isa = PBXBuildFile; fileRef = 2471110A2027450C00A79633 /* PSReading.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2471110E2027458900A79633 /* PSStringReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 2471110C2027458900A79633 /* PSStringReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2471110F2027458900A79633 /* PSStringReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2471110D2027458900A79633 /* PSStringReader.m */; };
+		2471111320274A0800A79633 /* PSStringReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2471111220274A0800A79633 /* PSStringReaderTests.swift */; };
+		2471111520274EBB00A79633 /* PSLexing.h in Headers */ = {isa = PBXBuildFile; fileRef = 2471111420274EBB00A79633 /* PSLexing.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2471111B2027B57F00A79633 /* PSBinaryOperationNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 247111192027B57F00A79633 /* PSBinaryOperationNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2471111C2027B57F00A79633 /* PSBinaryOperationNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2471111A2027B57F00A79633 /* PSBinaryOperationNode.m */; };
+		247111212027B60E00A79633 /* PSNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 2471111F2027B60E00A79633 /* PSNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		247111222027B60E00A79633 /* PSNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 247111202027B60E00A79633 /* PSNode.m */; };
+		247111242028827600A79633 /* Macros.h in Headers */ = {isa = PBXBuildFile; fileRef = 2471112320287E0D00A79633 /* Macros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		247111272028887300A79633 /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247111262028887300A79633 /* ParserTests.swift */; };
 		24DA62FB2024CA880087839C /* PSTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DA62FA2024CA880087839C /* PSTokenTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -78,29 +66,19 @@
 /* Begin PBXFileReference section */
 		2421AFBB202507260007FC7A /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		2421AFBC202507260007FC7A /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		2421AFDC2025F8000007FC7A /* PSNumberLiteralNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSNumberLiteralNode.h; sourceTree = "<group>"; };
+		2421AFDD2025F8000007FC7A /* PSNumberLiteralNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSNumberLiteralNode.m; sourceTree = "<group>"; };
 		244C6C2A20242EC800778B71 /* PSParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSParser.h; sourceTree = "<group>"; };
 		244C6C2B20242EC800778B71 /* PSParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSParser.m; sourceTree = "<group>"; };
-		244C6C2D202430AA00778B71 /* PSSyntaxNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSSyntaxNode.h; sourceTree = "<group>"; };
-		244C6C2E202430AA00778B71 /* PSSyntaxNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSSyntaxNode.m; sourceTree = "<group>"; };
-		244C6C30202432EC00778B71 /* PSSyntaxNodeAlgorithm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSSyntaxNodeAlgorithm.h; sourceTree = "<group>"; };
-		244C6C31202432EC00778B71 /* PSSyntaxNodeAlgorithm.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSSyntaxNodeAlgorithm.m; sourceTree = "<group>"; };
 		244C6C332024412900778B71 /* NSMutableArray+Queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Queue.h"; sourceTree = "<group>"; };
 		244C6C342024412900778B71 /* NSMutableArray+Queue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Queue.m"; sourceTree = "<group>"; };
-		244C6C36202464F600778B71 /* PSSyntaxNodeProgram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSSyntaxNodeProgram.h; sourceTree = "<group>"; };
-		244C6C37202464F600778B71 /* PSSyntaxNodeProgram.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSSyntaxNodeProgram.m; sourceTree = "<group>"; };
-		244C6C3E20246DDF00778B71 /* PSSyntaxNodeReturn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSSyntaxNodeReturn.h; sourceTree = "<group>"; };
-		244C6C3F20246DDF00778B71 /* PSSyntaxNodeReturn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSSyntaxNodeReturn.m; sourceTree = "<group>"; };
 		2470EFD02023A2B800AE9CD8 /* Pseudo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Pseudo; sourceTree = BUILT_PRODUCTS_DIR; };
 		2470EFD32023A2B800AE9CD8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2470EFDA2023A49500AE9CD8 /* PSLexer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSLexer.h; sourceTree = "<group>"; };
 		2470EFDB2023A49500AE9CD8 /* PSLexer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSLexer.m; sourceTree = "<group>"; };
 		2470EFDD2023A79900AE9CD8 /* PSToken.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSToken.h; sourceTree = "<group>"; };
 		2470EFDE2023A79900AE9CD8 /* PSToken.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSToken.m; sourceTree = "<group>"; };
-		2470EFE02023A7D200AE9CD8 /* PSTokenType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSTokenType.h; sourceTree = "<group>"; };
-		2470EFE120247E1700AE9CD8 /* PSSyntaxNodeNumberLiteral.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSSyntaxNodeNumberLiteral.h; sourceTree = "<group>"; };
-		2470EFE220247E1700AE9CD8 /* PSSyntaxNodeNumberLiteral.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSSyntaxNodeNumberLiteral.m; sourceTree = "<group>"; };
-		2470EFE420247FCA00AE9CD8 /* PSSyntaxNodeExpression.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSSyntaxNodeExpression.h; sourceTree = "<group>"; };
-		2470EFE520247FCA00AE9CD8 /* PSSyntaxNodeExpression.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSSyntaxNodeExpression.m; sourceTree = "<group>"; };
+		2470EFE02023A7D200AE9CD8 /* PSTokenTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSTokenTypes.h; sourceTree = "<group>"; };
 		2470EFE82024852400AE9CD8 /* PSJavaScriptTranspiler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSJavaScriptTranspiler.h; sourceTree = "<group>"; };
 		2470EFE92024852400AE9CD8 /* PSJavaScriptTranspiler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSJavaScriptTranspiler.m; sourceTree = "<group>"; };
 		2470EFEF202486EB00AE9CD8 /* PSSyntaxNodeProgram+JavaScript.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PSSyntaxNodeProgram+JavaScript.h"; sourceTree = "<group>"; };
@@ -123,6 +101,19 @@
 		2470F0192024BA3D00AE9CD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2470F0492024BF2700AE9CD8 /* PseudoKitTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PseudoKitTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		2470F04A2024BF2800AE9CD8 /* PSLexerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSLexerTests.swift; sourceTree = "<group>"; };
+		2471110620273BA300A79633 /* PSToken+Types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PSToken+Types.h"; sourceTree = "<group>"; };
+		2471110720273BA300A79633 /* PSToken+Types.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PSToken+Types.m"; sourceTree = "<group>"; };
+		2471110A2027450C00A79633 /* PSReading.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSReading.h; sourceTree = "<group>"; };
+		2471110C2027458900A79633 /* PSStringReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSStringReader.h; sourceTree = "<group>"; };
+		2471110D2027458900A79633 /* PSStringReader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSStringReader.m; sourceTree = "<group>"; };
+		2471111220274A0800A79633 /* PSStringReaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSStringReaderTests.swift; sourceTree = "<group>"; };
+		2471111420274EBB00A79633 /* PSLexing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSLexing.h; sourceTree = "<group>"; };
+		247111192027B57F00A79633 /* PSBinaryOperationNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSBinaryOperationNode.h; sourceTree = "<group>"; };
+		2471111A2027B57F00A79633 /* PSBinaryOperationNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSBinaryOperationNode.m; sourceTree = "<group>"; };
+		2471111F2027B60E00A79633 /* PSNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSNode.h; sourceTree = "<group>"; };
+		247111202027B60E00A79633 /* PSNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSNode.m; sourceTree = "<group>"; };
+		2471112320287E0D00A79633 /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
+		247111262028887300A79633 /* ParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
 		24DA62FA2024CA880087839C /* PSTokenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSTokenTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,11 +147,14 @@
 		244C6C392024650F00778B71 /* Lexer */ = {
 			isa = PBXGroup;
 			children = (
+				2471111420274EBB00A79633 /* PSLexing.h */,
 				2470EFDA2023A49500AE9CD8 /* PSLexer.h */,
 				2470EFDB2023A49500AE9CD8 /* PSLexer.m */,
 				2470EFDD2023A79900AE9CD8 /* PSToken.h */,
 				2470EFDE2023A79900AE9CD8 /* PSToken.m */,
-				2470EFE02023A7D200AE9CD8 /* PSTokenType.h */,
+				2471110620273BA300A79633 /* PSToken+Types.h */,
+				2471110720273BA300A79633 /* PSToken+Types.m */,
+				2470EFE02023A7D200AE9CD8 /* PSTokenTypes.h */,
 			);
 			path = Lexer;
 			sourceTree = "<group>";
@@ -195,18 +189,15 @@
 		244C6C3D2024654800778B71 /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
-				244C6C2D202430AA00778B71 /* PSSyntaxNode.h */,
-				244C6C2E202430AA00778B71 /* PSSyntaxNode.m */,
-				244C6C36202464F600778B71 /* PSSyntaxNodeProgram.h */,
-				244C6C37202464F600778B71 /* PSSyntaxNodeProgram.m */,
-				244C6C30202432EC00778B71 /* PSSyntaxNodeAlgorithm.h */,
-				244C6C31202432EC00778B71 /* PSSyntaxNodeAlgorithm.m */,
-				244C6C3E20246DDF00778B71 /* PSSyntaxNodeReturn.h */,
-				244C6C3F20246DDF00778B71 /* PSSyntaxNodeReturn.m */,
-				2470EFE420247FCA00AE9CD8 /* PSSyntaxNodeExpression.h */,
-				2470EFE520247FCA00AE9CD8 /* PSSyntaxNodeExpression.m */,
-				2470EFE120247E1700AE9CD8 /* PSSyntaxNodeNumberLiteral.h */,
-				2470EFE220247E1700AE9CD8 /* PSSyntaxNodeNumberLiteral.m */,
+				247110F4202710A100A79633 /* Blocks */,
+				247110F5202710A900A79633 /* Statements */,
+				247110F6202710B600A79633 /* Conditions */,
+				247110F7202710D600A79633 /* Loops */,
+				247110F8202710DA00A79633 /* Algorithms */,
+				247110F9202710E800A79633 /* Expressions */,
+				247110FA202710F100A79633 /* Calls */,
+				2471111F2027B60E00A79633 /* PSNode.h */,
+				247111202027B60E00A79633 /* PSNode.m */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -274,11 +265,13 @@
 			isa = PBXGroup;
 			children = (
 				244C6C3B2024652C00778B71 /* Extensions */,
+				247111102027459100A79633 /* Reader */,
 				244C6C392024650F00778B71 /* Lexer */,
 				244C6C3A2024651600778B71 /* Parser */,
 				2470EFE72024850500AE9CD8 /* JavaScriptTranspiler */,
 				2421AFBB202507260007FC7A /* Constants.h */,
 				2421AFBC202507260007FC7A /* Constants.m */,
+				2471112320287E0D00A79633 /* Macros.h */,
 				2470F00C2024BA3D00AE9CD8 /* PseudoKit.h */,
 				2470F00D2024BA3D00AE9CD8 /* Info.plist */,
 			);
@@ -288,7 +281,9 @@
 		2470F0162024BA3D00AE9CD8 /* PseudoKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				24711111202749F000A79633 /* Reader */,
 				2470F04C2024BF2C00AE9CD8 /* Lexer */,
+				247111252028886200A79633 /* Parser */,
 				2470F0192024BA3D00AE9CD8 /* Info.plist */,
 				2470F0492024BF2700AE9CD8 /* PseudoKitTests-Bridging-Header.h */,
 			);
@@ -311,6 +306,85 @@
 			path = Lexer;
 			sourceTree = "<group>";
 		};
+		247110F4202710A100A79633 /* Blocks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Blocks;
+			sourceTree = "<group>";
+		};
+		247110F5202710A900A79633 /* Statements */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Statements;
+			sourceTree = "<group>";
+		};
+		247110F6202710B600A79633 /* Conditions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Conditions;
+			sourceTree = "<group>";
+		};
+		247110F7202710D600A79633 /* Loops */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Loops;
+			sourceTree = "<group>";
+		};
+		247110F8202710DA00A79633 /* Algorithms */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Algorithms;
+			sourceTree = "<group>";
+		};
+		247110F9202710E800A79633 /* Expressions */ = {
+			isa = PBXGroup;
+			children = (
+				247111192027B57F00A79633 /* PSBinaryOperationNode.h */,
+				2471111A2027B57F00A79633 /* PSBinaryOperationNode.m */,
+				2421AFDC2025F8000007FC7A /* PSNumberLiteralNode.h */,
+				2421AFDD2025F8000007FC7A /* PSNumberLiteralNode.m */,
+			);
+			path = Expressions;
+			sourceTree = "<group>";
+		};
+		247110FA202710F100A79633 /* Calls */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Calls;
+			sourceTree = "<group>";
+		};
+		247111102027459100A79633 /* Reader */ = {
+			isa = PBXGroup;
+			children = (
+				2471110A2027450C00A79633 /* PSReading.h */,
+				2471110C2027458900A79633 /* PSStringReader.h */,
+				2471110D2027458900A79633 /* PSStringReader.m */,
+			);
+			path = Reader;
+			sourceTree = "<group>";
+		};
+		24711111202749F000A79633 /* Reader */ = {
+			isa = PBXGroup;
+			children = (
+				2471111220274A0800A79633 /* PSStringReaderTests.swift */,
+			);
+			path = Reader;
+			sourceTree = "<group>";
+		};
+		247111252028886200A79633 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				247111262028887300A79633 /* ParserTests.swift */,
+			);
+			path = Parser;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -318,27 +392,21 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2471111B2027B57F00A79633 /* PSBinaryOperationNode.h in Headers */,
+				2471110B2027450D00A79633 /* PSReading.h in Headers */,
 				2470F01A2024BA3D00AE9CD8 /* PseudoKit.h in Headers */,
 				2470F0362024BE0800AE9CD8 /* PSLexer.h in Headers */,
 				2470F0372024BE0C00AE9CD8 /* PSParser.h in Headers */,
-				2470F0382024BE1000AE9CD8 /* PSJavaScriptTranspiler.h in Headers */,
+				247111212027B60E00A79633 /* PSNode.h in Headers */,
 				2470F03A2024BE3100AE9CD8 /* PSToken.h in Headers */,
-				2470F03B2024BE3300AE9CD8 /* PSTokenType.h in Headers */,
-				2470F03C2024BE3800AE9CD8 /* PSSyntaxNode.h in Headers */,
-				2470F03D2024BE3A00AE9CD8 /* PSSyntaxNodeProgram.h in Headers */,
+				2470F03B2024BE3300AE9CD8 /* PSTokenTypes.h in Headers */,
+				2471110820273BA300A79633 /* PSToken+Types.h in Headers */,
+				2471111520274EBB00A79633 /* PSLexing.h in Headers */,
 				2421AFBD202507260007FC7A /* Constants.h in Headers */,
+				2421AFDE2025F8000007FC7A /* PSNumberLiteralNode.h in Headers */,
+				247111242028827600A79633 /* Macros.h in Headers */,
 				2470F0392024BE2C00AE9CD8 /* NSMutableArray+Queue.h in Headers */,
-				2470F03E2024BE3D00AE9CD8 /* PSSyntaxNodeAlgorithm.h in Headers */,
-				2470F03F2024BE3F00AE9CD8 /* PSSyntaxNodeReturn.h in Headers */,
-				2470F0412024BE4200AE9CD8 /* PSSyntaxNodeNumberLiteral.h in Headers */,
-				2470F0402024BE4100AE9CD8 /* PSSyntaxNodeExpression.h in Headers */,
-				2470F0432024BE4A00AE9CD8 /* PSSyntaxNodeProgram+JavaScript.h in Headers */,
-				2470F0422024BE4700AE9CD8 /* PSSyntaxNode+JavaScript.h in Headers */,
-				2470F0462024BE4F00AE9CD8 /* PSSyntaxNodeExpression+JavaScript.h in Headers */,
-				2470F0452024BE4D00AE9CD8 /* PSSyntaxNodeReturn+JavaScript.h in Headers */,
-				2470F0442024BE4C00AE9CD8 /* PSSyntaxNodeAlgorithm+JavaScript.h in Headers */,
-				2470F0482024BE5500AE9CD8 /* PSJavaScriptTranspilable.h in Headers */,
-				2470F0472024BE5200AE9CD8 /* PSSyntaxNodeNumberLiteral+JavaScript.h in Headers */,
+				2471110E2027458900A79633 /* PSStringReader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,23 +539,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2470F0332024BAA400AE9CD8 /* PSSyntaxNodeExpression+JavaScript.m in Sources */,
+				2421AFDF2025F8000007FC7A /* PSNumberLiteralNode.m in Sources */,
 				2470F0242024BA6A00AE9CD8 /* NSMutableArray+Queue.m in Sources */,
-				2470F02A2024BA8700AE9CD8 /* PSSyntaxNodeAlgorithm.m in Sources */,
-				2470F02F2024BA9900AE9CD8 /* PSSyntaxNode+JavaScript.m in Sources */,
-				2470F0282024BA8200AE9CD8 /* PSSyntaxNode.m in Sources */,
-				2470F0292024BA8400AE9CD8 /* PSSyntaxNodeProgram.m in Sources */,
-				2470F0322024BAA100AE9CD8 /* PSSyntaxNodeReturn+JavaScript.m in Sources */,
-				2470F02C2024BA8C00AE9CD8 /* PSSyntaxNodeExpression.m in Sources */,
+				247111222027B60E00A79633 /* PSNode.m in Sources */,
 				2470F0272024BA7E00AE9CD8 /* PSParser.m in Sources */,
 				2470F0262024BA7800AE9CD8 /* PSToken.m in Sources */,
 				2470F0252024BA7600AE9CD8 /* PSLexer.m in Sources */,
-				2470F02D2024BA8F00AE9CD8 /* PSSyntaxNodeNumberLiteral.m in Sources */,
-				2470F0312024BA9E00AE9CD8 /* PSSyntaxNodeAlgorithm+JavaScript.m in Sources */,
-				2470F02B2024BA8900AE9CD8 /* PSSyntaxNodeReturn.m in Sources */,
-				2470F0302024BA9C00AE9CD8 /* PSSyntaxNodeProgram+JavaScript.m in Sources */,
-				2470F0342024BAA600AE9CD8 /* PSSyntaxNodeNumberLiteral+JavaScript.m in Sources */,
-				2470F02E2024BA9400AE9CD8 /* PSJavaScriptTranspiler.m in Sources */,
+				2471110920273BA300A79633 /* PSToken+Types.m in Sources */,
+				2471110F2027458900A79633 /* PSStringReader.m in Sources */,
+				2471111C2027B57F00A79633 /* PSBinaryOperationNode.m in Sources */,
 				2421AFBE202507260007FC7A /* Constants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -496,8 +556,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				247111272028887300A79633 /* ParserTests.swift in Sources */,
 				24DA62FB2024CA880087839C /* PSTokenTests.swift in Sources */,
 				2470F04B2024BF2800AE9CD8 /* PSLexerTests.swift in Sources */,
+				2471111320274A0800A79633 /* PSStringReaderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
