@@ -15,13 +15,11 @@
 		2470F0132024BA3D00AE9CD8 /* PseudoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2470F00A2024BA3D00AE9CD8 /* PseudoKit.framework */; };
 		2470F01A2024BA3D00AE9CD8 /* PseudoKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470F00C2024BA3D00AE9CD8 /* PseudoKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2470F0222024BA5500AE9CD8 /* PseudoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2470F00A2024BA3D00AE9CD8 /* PseudoKit.framework */; };
-		2470F0242024BA6A00AE9CD8 /* NSMutableArray+Queue.m in Sources */ = {isa = PBXBuildFile; fileRef = 244C6C342024412900778B71 /* NSMutableArray+Queue.m */; };
 		2470F0252024BA7600AE9CD8 /* PSLexer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EFDB2023A49500AE9CD8 /* PSLexer.m */; };
 		2470F0262024BA7800AE9CD8 /* PSToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EFDE2023A79900AE9CD8 /* PSToken.m */; };
 		2470F0272024BA7E00AE9CD8 /* PSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 244C6C2B20242EC800778B71 /* PSParser.m */; };
 		2470F0362024BE0800AE9CD8 /* PSLexer.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470EFDA2023A49500AE9CD8 /* PSLexer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2470F0372024BE0C00AE9CD8 /* PSParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 244C6C2A20242EC800778B71 /* PSParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2470F0392024BE2C00AE9CD8 /* NSMutableArray+Queue.h in Headers */ = {isa = PBXBuildFile; fileRef = 244C6C332024412900778B71 /* NSMutableArray+Queue.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		2470F03A2024BE3100AE9CD8 /* PSToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470EFDD2023A79900AE9CD8 /* PSToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2470F03B2024BE3300AE9CD8 /* PSTokenTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470EFE02023A7D200AE9CD8 /* PSTokenTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2470F04B2024BF2800AE9CD8 /* PSLexerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470F04A2024BF2800AE9CD8 /* PSLexerTests.swift */; };
@@ -85,8 +83,6 @@
 		2421AFDD2025F8000007FC7A /* PSLiteralNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSLiteralNode.m; sourceTree = "<group>"; };
 		244C6C2A20242EC800778B71 /* PSParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSParser.h; sourceTree = "<group>"; };
 		244C6C2B20242EC800778B71 /* PSParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSParser.m; sourceTree = "<group>"; };
-		244C6C332024412900778B71 /* NSMutableArray+Queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Queue.h"; sourceTree = "<group>"; };
-		244C6C342024412900778B71 /* NSMutableArray+Queue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Queue.m"; sourceTree = "<group>"; };
 		2470EFD02023A2B800AE9CD8 /* Pseudo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Pseudo; sourceTree = BUILT_PRODUCTS_DIR; };
 		2470EFD32023A2B800AE9CD8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2470EFDA2023A49500AE9CD8 /* PSLexer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSLexer.h; sourceTree = "<group>"; };
@@ -183,23 +179,6 @@
 			path = Parser;
 			sourceTree = "<group>";
 		};
-		244C6C3B2024652C00778B71 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				244C6C3C2024653300778B71 /* Foundation */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		244C6C3C2024653300778B71 /* Foundation */ = {
-			isa = PBXGroup;
-			children = (
-				244C6C332024412900778B71 /* NSMutableArray+Queue.h */,
-				244C6C342024412900778B71 /* NSMutableArray+Queue.m */,
-			);
-			path = Foundation;
-			sourceTree = "<group>";
-		};
 		244C6C3D2024654800778B71 /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,7 +240,6 @@
 		2470F00B2024BA3D00AE9CD8 /* PseudoKit */ = {
 			isa = PBXGroup;
 			children = (
-				244C6C3B2024652C00778B71 /* Extensions */,
 				247111102027459100A79633 /* Reader */,
 				244C6C392024650F00778B71 /* Lexer */,
 				244C6C3D2024654800778B71 /* Nodes */,
@@ -444,7 +422,6 @@
 				247111492028B6E300A79633 /* PSBinaryOperationNode+Types.h in Headers */,
 				2471113F2028AAF000A79633 /* PSREPL.h in Headers */,
 				2471113A20289A6700A79633 /* PSJavaScriptInterpreter.h in Headers */,
-				2470F0392024BE2C00AE9CD8 /* NSMutableArray+Queue.h in Headers */,
 				2471110E2027458900A79633 /* PSStringReader.h in Headers */,
 				247111462028B40400A79633 /* PSBinaryOperationTypes.h in Headers */,
 			);
@@ -580,7 +557,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2421AFDF2025F8000007FC7A /* PSLiteralNode.m in Sources */,
-				2470F0242024BA6A00AE9CD8 /* NSMutableArray+Queue.m in Sources */,
 				247111222027B60E00A79633 /* PSNode.m in Sources */,
 				2470F0272024BA7E00AE9CD8 /* PSParser.m in Sources */,
 				2470F0262024BA7800AE9CD8 /* PSToken.m in Sources */,
