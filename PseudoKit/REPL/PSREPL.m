@@ -59,9 +59,14 @@
     NSError *error;
     NSString *result = [self.interpreter executePseudoCode: input error: &error];
 
-    if (error) [self outputStringToCommandLine: [[NSString alloc] initWithFormat: @"%@\n", error.localizedDescription]];
+    if (error) {
+        [self outputStringToCommandLine: [[NSString alloc] initWithFormat: @"%@\n", error.localizedDescription]];
+        return;
+    }
 
-    if (result.length > 0) [self outputStringToCommandLine: [[NSString alloc] initWithFormat: @"%@\n", result]];
+    if (result && result.length > 0) {
+        [self outputStringToCommandLine: [[NSString alloc] initWithFormat: @"%@\n", result]];
+    }
 }
 
 #pragma mark - Constants
@@ -72,6 +77,7 @@
     dispatch_once(&onceToken, ^{
         _delimiters = NSMutableCharacterSet.whitespaceAndNewlineCharacterSet;
         [_delimiters formUnionWithCharacterSet: NSMutableCharacterSet.controlCharacterSet];
+        [_delimiters formUnionWithCharacterSet: NSMutableCharacterSet.illegalCharacterSet];
     });
     return _delimiters;
 }
