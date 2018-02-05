@@ -6,7 +6,7 @@
 //  Copyright © 2018 Steffen Ryll. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for PseudoKit.
 FOUNDATION_EXPORT double PseudoKitVersionNumber;
@@ -36,6 +36,9 @@ FOUNDATION_EXPORT const unsigned char PseudoKitVersionString[];
 #import <PseudoKit/PSUnaryOperationTypes.h>
 #import <PseudoKit/PSUnaryOperationNode.h>
 #import <PseudoKit/PSUnaryOperationNode+Types.h>
+#import <PseudoKit/PSControlFlowTypes.h>
+#import <PseudoKit/PSControlFlowNode.h>
+#import <PseudoKit/PSControlFlowNode+Types.h>
 
 #import <PseudoKit/PSParser.h>
 
@@ -45,5 +48,6 @@ FOUNDATION_EXPORT const unsigned char PseudoKitVersionString[];
 #import <PseudoKit/PSNode+JavaScript.h>
 #import <PseudoKit/PSBinaryOperationNode+JavaScript.h>
 #import <PseudoKit/PSLiteralNode+JavaScript.h>
+#import <PseudoKit/PSControlFlowNode+JavaScript.h>
 
 #import <PseudoKit/PSREPL.h>
