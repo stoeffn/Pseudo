@@ -65,6 +65,13 @@
 			remoteGlobalIDString = 2470F0092024BA3D00AE9CD8;
 			remoteInfo = PseudoKit;
 		};
+		247111552028D8AC00A79633 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2470EFC82023A2B800AE9CD8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2470F0092024BA3D00AE9CD8;
+			remoteInfo = PseudoKit;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -131,6 +138,7 @@
 		2471114C2028BB0800A79633 /* PSLiteralNode+Types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PSLiteralNode+Types.h"; sourceTree = "<group>"; };
 		2471114D2028BB0800A79633 /* PSLiteralNode+Types.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PSLiteralNode+Types.m"; sourceTree = "<group>"; };
 		247111502028BB2B00A79633 /* PSLiteralTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSLiteralTypes.h; sourceTree = "<group>"; };
+		247111542028D87100A79633 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24DA62FA2024CA880087839C /* PSTokenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSTokenTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -221,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				2470EFD32023A2B800AE9CD8 /* main.m */,
+				247111542028D87100A79633 /* Info.plist */,
 			);
 			path = Pseudo;
 			sourceTree = "<group>";
@@ -412,6 +421,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				247111562028D8AC00A79633 /* PBXTargetDependency */,
 			);
 			name = Pseudo;
 			productName = Pseudo;
@@ -565,6 +575,11 @@
 			target = 2470F0092024BA3D00AE9CD8 /* PseudoKit */;
 			targetProxy = 2470F0142024BA3D00AE9CD8 /* PBXContainerItemProxy */;
 		};
+		247111562028D8AC00A79633 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2470F0092024BA3D00AE9CD8 /* PseudoKit */;
+			targetProxy = 247111552028D8AC00A79633 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -676,6 +691,8 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X63VKA93X8;
+				INFOPLIST_FILE = "$(SRCROOT)/PseudoKit/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = SteffenRyll.Pseudo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -685,6 +702,8 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X63VKA93X8;
+				INFOPLIST_FILE = "$(SRCROOT)/PseudoKit/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = SteffenRyll.Pseudo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
