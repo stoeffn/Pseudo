@@ -11,6 +11,7 @@
 #import "PSParser.h"
 #import "PSToken.h"
 #import "PSCompoundNode.h"
+#import "PSConditionNode.h"
 #import "PSLiteralNode.h"
 #import "PSLiteralNode+Types.h"
 #import "PSBinaryOperationNode.h"
@@ -117,18 +118,22 @@
 #pragma mark Conditions
 
 - (nullable PSNode *) conditionWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error {
-    [self.lexer expectTokenTypes: PSTokenTypesIf error: error];
+    PSToken *ifToken = [self.lexer expectTokenTypes: PSTokenTypesIf error: error];
     PSNode *expressionNode = [self expressionWithError: error];
     [self.lexer expectTokenTypes: PSTokenTypesThen error: error];
-    PSNode *thenBlockList = [self blockListWithStopTokenType: @(PSTokenTypesPoint) error: error];
+    PSNode *thenNode = [self blockListWithStopTokenType: @(PSTokenTypesPoint) error: error];
+    PSNode *elseNode;
 
     if (self.lexer.currentToken.type == PSTokenTypesElse) {
         [self.lexer advance];
-        PSNode *elseBlockList = [self blockListWithStopTokenType: @(PSTokenTypesPoint) error: error];
+        elseNode = [self blockListWithStopTokenType: @(PSTokenTypesPoint) error: error];
     }
 
     if (*error) return NULL;
-    return thenBlockList;
+    return [[PSConditionNode alloc] initWithToken: ifToken
+                                   expressionNode: expressionNode
+                                         thenNode: thenNode
+                                         elseNode: elseNode];
 }
 
 #pragma mark Algorithms
