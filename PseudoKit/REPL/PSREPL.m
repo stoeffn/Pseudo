@@ -38,10 +38,7 @@
 
     while (self.isActive) {
         [self promptForInput];
-        NSString *input = [PSConsole awaitSanitizedString];
-        if (!input) return [self leave];
-
-        [self handleREPLInput: input];
+        [self handleREPLInput: [PSConsole awaitSanitizedString]];
     }
 }
 
@@ -51,7 +48,22 @@
     self.isActive = NO;
 }
 
-- (void) handleREPLInput: (nonnull NSString *) input {
+- (void) promptForInput {
+    if (self.buffer.count == 0) {
+        [PSConsole writeString: @">>> "];
+    } else {
+        [PSConsole writeString: @"... "];
+    }
+}
+
+- (void) handleREPLInput: (NSString *) input {
+    if (!input && self.buffer.count > 0) {
+        [self.buffer removeAllObjects];
+        return [PSConsole writeString: @"\n"];
+    }
+
+    if (!input) return [self leave];
+
     if (input.length == 0) return;
 
     [self.buffer addObject: input];
@@ -68,20 +80,11 @@
     [self.buffer removeAllObjects];
 
     if (error) {
-        [PSConsole writeString: [[NSString alloc] initWithFormat: @"%@\n", error.localizedDescription]];
-        return;
+        return [PSConsole writeString: [[NSString alloc] initWithFormat: @"%@\n", error.localizedDescription]];
     }
 
     if (result && result.length > 0) {
         [PSConsole writeString: [[NSString alloc] initWithFormat: @"%@\n", result]];
-    }
-}
-
-- (void) promptForInput {
-    if (self.buffer.count == 0) {
-        [PSConsole writeString: @">>> "];
-    } else {
-        [PSConsole writeString: @"... "];
     }
 }
 
