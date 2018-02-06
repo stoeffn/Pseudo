@@ -12,6 +12,8 @@
 int main(int argc, const char *argv[]) {
     @autoreleasepool {
         Application *application = [[Application alloc] init];
-        return [application executeWithArguments: NSProcessInfo.processInfo.arguments];
+        BOOL isSuccess = [application executeWithArguments: NSProcessInfo.processInfo.arguments];
+
+        return isSuccess ? EXIT_SUCCESS : EXIT_FAILURE;
     }
 }

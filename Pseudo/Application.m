@@ -27,10 +27,49 @@
 }
 
 - (BOOL) executeWithArguments: (nonnull NSArray<NSString *> *) arguments {
+    if (arguments.count <= 1) {
+        return [self enterREPL];
+    }
+
+    if ([arguments[1] isEqualToString: @"-h"]) {
+        return [self printHelp];
+    }
+
+    if ([arguments[1] isEqualToString: @"-i"]) {
+        [self executeWithArguments: [arguments subarrayWithRange: NSMakeRange(2, arguments.count - 2)]];
+        return [self enterREPL];
+    }
+
+    if ([arguments[1] hasPrefix: @"-"]) {
+        return [self printInvalidArgumentsError];
+    }
+
+    return [self executeWithArguments: [arguments subarrayWithRange: NSMakeRange(1, arguments.count - 1)]];
+}
+
+#pragma mark - Commands
+
+- (BOOL) executeFilesAtFilePaths: (NSArray<NSString *> *) filePaths {
+    return YES;
+}
+
+- (BOOL) enterREPL {
     PSREPL *repl = [[PSREPL alloc] initWithInterpreter: self.interpreter];
     [repl enter];
-
     return YES;
+}
+
+- (BOOL) printHelp {
+    [PSConsole writeString: @"Usage: pseudo [-i | -h] file...\n"
+                             "-i      : Starts interactive REPL after executing files\n"
+                             "-h      : Prints this help message and exits\n"
+                             "file... : Executes zero or more files; implicitly starts interactive REPL if no files are given\n"];
+    return YES;
+}
+
+- (BOOL) printInvalidArgumentsError {
+    [PSConsole writeString: @"Invalid arguments. Type \"pseudo -h\" for help.\n"];
+    return NO;
 }
 
 @end
