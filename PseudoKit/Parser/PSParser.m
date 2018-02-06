@@ -49,6 +49,11 @@
 
 - (nullable PSNode *) blockListWithStopTokenType: (nullable NSNumber *) stopTokenType
                                            error: (NSError * __nullable __autoreleasing * __null_unspecified) error {
+    if (stopTokenType && self.lexer.currentToken.type == stopTokenType.integerValue) {
+        [self.lexer expectTokenTypes: stopTokenType.integerValue error: error];
+        return [[PSCompoundNode alloc] initWithNodes: @[]];
+    }
+
     NSMutableArray<PSNode *> *nodes = [[NSMutableArray alloc] initWithObjects: [self blockWithError: error], nil];
 
     while (self.lexer.currentToken && (!stopTokenType || self.lexer.currentToken.type != stopTokenType.integerValue)) {
@@ -58,7 +63,7 @@
         [nodes addObject: node];
     }
 
-    if (stopTokenType) [self.lexer advance];
+    if (stopTokenType) [self.lexer expectTokenTypes: stopTokenType.integerValue error: error];
 
     return [[PSCompoundNode alloc] initWithNodes: nodes];
 }
