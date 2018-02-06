@@ -103,6 +103,10 @@
     return @".";
 }
 
++ (nonnull NSString *) commentStartCharacter {
+    return @"/";
+}
+
 + (nonnull NSNumberFormatter *) numberFormatter {
     static NSNumberFormatter *_formatter;
     static dispatch_once_t onceToken;

@@ -22,6 +22,8 @@
 
 + (nonnull NSString *) floatingPointCharacter;
 
++ (nonnull NSString *) commentStartCharacter;
+
 + (nonnull NSNumberFormatter *) numberFormatter;
 
 #pragma mark - Description

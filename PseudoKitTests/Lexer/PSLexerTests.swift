@@ -21,6 +21,34 @@ final class PSLexerTests: XCTestCase {
         XCTAssertNil(lexer.advance())
     }
 
+    func testNextToken_EmptyWithComment() {
+        let reader = PSStringReader(string: "// Comment")
+        let lexer = PSLexer(reader: reader)
+
+        XCTAssertNil(lexer.currentToken)
+        XCTAssertNil(lexer.nextToken)
+        XCTAssertNil(lexer.advance())
+    }
+
+    func testNextToken_DelimitersWithComment() {
+        let reader = PSStringReader(string: "←* // =")
+        let lexer = PSLexer(reader: reader)
+
+        XCTAssertEqual(lexer.currentToken, PSToken(type: .assign))
+        XCTAssertEqual(lexer.nextToken, PSToken(type: .times))
+        XCTAssertNil(lexer.advance())
+    }
+
+    func testNextToken_DelimitersWithCommentAndNewline() {
+        let reader = PSStringReader(string: "←* // Comment\n =")
+        let lexer = PSLexer(reader: reader)
+
+        XCTAssertEqual(lexer.currentToken, PSToken(type: .assign))
+        XCTAssertEqual(lexer.nextToken, PSToken(type: .times))
+        XCTAssertEqual(lexer.advance(), PSToken(type: .equals))
+        XCTAssertNil(lexer.advance())
+    }
+
     func testNextToken_Delimiters() {
         let reader = PSStringReader(string: "←*  =")
         let lexer = PSLexer(reader: reader)
@@ -31,7 +59,7 @@ final class PSLexerTests: XCTestCase {
         XCTAssertNil(lexer.advance())
     }
 
-    func testNextToken_AmbigouosDelimiters() {
+    func testNextToken_AmbiguousDelimiters() {
         let reader = PSStringReader(string: "*<-")
         let lexer = PSLexer(reader: reader)
 

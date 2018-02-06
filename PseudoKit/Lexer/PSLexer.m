@@ -58,6 +58,7 @@
 
 - (nullable PSToken *) nextTokenFromReader: (id<PSReading>) reader {
     [self skipWhitespaceAndNewlinesInReader: reader];
+    [self skipCommentsInReader: reader];
 
     PSToken *delimiterToken = [self nextDelimiterTokenFromReader: reader];
     if (delimiterToken) return delimiterToken;
@@ -75,7 +76,18 @@
 }
 
 - (void) skipWhitespaceAndNewlinesInReader: (id<PSReading>) reader {
-    while (self.reader.nextCharacter && [self isCharacterWhitespaceOrNewline: reader.currentCharacter]) {
+    while (reader.nextCharacter && [self isCharacterWhitespaceOrNewline: reader.currentCharacter]) {
+        [reader advance];
+    }
+}
+
+- (void) skipCommentsInReader: (id<PSReading>) reader {
+    BOOL isCommentStartCharacter = [reader.currentCharacter isEqualToString: PSToken.commentStartCharacter];
+    BOOL isFollowedByCommentStartCharacter = [reader.nextCharacter isEqualToString: PSToken.commentStartCharacter];
+
+    if (!isCommentStartCharacter || !isFollowedByCommentStartCharacter) return;
+
+    while (reader.currentCharacter && ![self isCharacterNewline: reader.currentCharacter]) {
         [reader advance];
     }
 }
@@ -173,6 +185,10 @@
 }
 
 #pragma mark - Helpers
+
+- (BOOL) isCharacterNewline: (NSString *) character {
+    return [character rangeOfCharacterFromSet: NSCharacterSet.newlineCharacterSet].location != NSNotFound;
+}
 
 - (BOOL) isCharacterWhitespaceOrNewline: (NSString *) character {
     return [character rangeOfCharacterFromSet: NSCharacterSet.whitespaceAndNewlineCharacterSet].location != NSNotFound;
