@@ -92,7 +92,7 @@
     NSMutableArray<PSNode *> *nodes = [[NSMutableArray alloc] initWithObjects: [self statementWithError: error], nil];
 
     while (self.lexer.currentToken.type == PSTokenTypesSemicolon) {
-        [self.lexer advance];
+        [self.lexer expectTokenTypes: PSTokenTypesSemicolon error: error];
 
         PSNode *node = [self statementWithError: error];
         if (*error) return NULL;
@@ -218,7 +218,7 @@
     PSToken *token = self.lexer.currentToken;
 
     if (token.type == PSTokenTypesNot) {
-        [self.lexer advance];
+        [self.lexer expectTokenTypes: PSTokenTypesNot error: error];
         node = [[PSUnaryOperationNode alloc] initWithToken: token
                                                       type: PSUnaryOperationTypesNot
                                                       node: [self expressionWithError: error]];
@@ -281,11 +281,11 @@
     PSToken *token = self.lexer.currentToken;
 
     if (token.type == PSTokenTypesOpeningParenthesis) {
-        [self.lexer advance];
+        [self.lexer expectTokenTypes: PSTokenTypesOpeningParenthesis error: error];
         node = [self expressionWithError: error];
         [self.lexer expectTokenTypes: PSTokenTypesClosingParanthesis error: error];
     } else if (token.type == PSTokenTypesMinus) {
-        [self.lexer advance];
+        [self.lexer expectTokenTypes: PSTokenTypesMinus error: error];
         node = [[PSUnaryOperationNode alloc] initWithToken: token
                                                       type: PSUnaryOperationTypesNegation
                                                       node: [self scalarWithError: error]];
