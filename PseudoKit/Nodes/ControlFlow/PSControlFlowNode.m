@@ -15,24 +15,24 @@
 
 - (nonnull instancetype) initWithToken: (nullable PSToken *) token
                                   type: (PSControlFlowTypes) type
-                                  node: (nullable PSNode *) node {
+                        expressionNode: (nullable PSNode *) expressionNode {
     if (self = [super initWithToken: token]) {
         _type = type;
-        _node = node;
+        _expressionNode = expressionNode;
     }
     return self;
 }
 
 - (nonnull instancetype) initWithType: (PSControlFlowTypes) type
-                                 node: (nullable PSNode *) node {
-    return [self initWithToken: NULL type: type node: node];
+                       expressionNode: (nullable PSNode *) expressionNode {
+    return [self initWithToken: NULL type: type expressionNode: expressionNode];
 }
 
 #pragma mark - Description
 
 - (nonnull NSString *) description {
     return [[NSString alloc] initWithFormat: @"<%@ token: %@, type: %@, node: %@>",
-            NSStringFromClass([self class]), self.token, [PSControlFlowNode descriptionForType: self.type], self.node];
+            NSStringFromClass([self class]), self.token, [PSControlFlowNode descriptionForType: self.type], self.expressionNode];
 }
 
 #pragma mark - Equality
@@ -45,7 +45,7 @@
 
 - (BOOL) isEqualToControlFlowNode: (PSControlFlowNode *) node {
     return node != NULL
-        && ((!self.node && !node.node) || [self.node isEqual: node.node]);
+        && ((!self.expressionNode && !node.expressionNode) || [self.expressionNode isEqual: node.expressionNode]);
 }
 
 @end

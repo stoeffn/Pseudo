@@ -108,7 +108,7 @@
 
         return [[PSControlFlowNode alloc] initWithToken: self.lexer.currentToken
                                                    type: [PSControlFlowNode typeForTokenType: token.type].integerValue
-                                                   node: returnExpressionNode];
+                                         expressionNode: returnExpressionNode];
     }
 
     return [self expressionWithError: error];
@@ -176,8 +176,8 @@
 
             node = [[PSBinaryOperationNode alloc] initWithToken: token
                                                            type: type.integerValue
-                                                           left: node
-                                                          right: [self termWithError: error]];
+                                                       leftNode: node
+                                                      rightNode: [self termWithError: error]];
         };
         [self.lexer expectMultipleOfTokenTypes: allowedTokenTypes handler: handler error: error];
     }
@@ -199,8 +199,8 @@
 
     return [[PSBinaryOperationNode alloc] initWithToken: token
                                                    type: [PSBinaryOperationNode typeForTokenType: token.type].integerValue
-                                                   left: node
-                                                  right: [self expressionWithError: error]];
+                                               leftNode: node
+                                              rightNode: [self expressionWithError: error]];
 }
 
 - (nullable PSNode *) termWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error {
@@ -211,8 +211,8 @@
     TokenHandler handler = ^(PSToken *token) {
         node = [[PSBinaryOperationNode alloc] initWithToken: token
                                                        type: [PSBinaryOperationNode typeForTokenType: token.type].integerValue
-                                                       left: node
-                                                      right: [self scalarWithError: error]];
+                                                   leftNode: node
+                                                  rightNode: [self scalarWithError: error]];
     };
     [self.lexer expectMultipleOfTokenTypes: allowedTokenTypes handler: handler error: error];
 

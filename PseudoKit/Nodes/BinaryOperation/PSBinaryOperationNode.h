@@ -14,9 +14,9 @@
 
 @property (nonatomic, readonly) PSBinaryOperationTypes type;
 
-@property (nonatomic, readonly, nonnull) PSNode *left;
+@property (nonatomic, readonly, nonnull) PSNode *leftNode;
 
-@property (nonatomic, readonly, nonnull) PSNode *right;
+@property (nonatomic, readonly, nonnull) PSNode *rightNode;
 
 #pragma mark - Life Cycle
 
@@ -24,11 +24,11 @@
 
 - (nonnull instancetype) initWithToken: (nullable PSToken *) token
                                   type: (PSBinaryOperationTypes) type
-                                  left: (nonnull PSNode *) left
-                                 right: (nonnull PSNode *) right;
+                              leftNode: (nonnull PSNode *) leftNode
+                             rightNode: (nonnull PSNode *) rightNode;
 
 - (nonnull instancetype) initWithType: (PSBinaryOperationTypes) type
-                                 left: (nonnull PSNode *) left
-                                right: (nonnull PSNode *) right;
+                             leftNode: (nonnull PSNode *) leftNode
+                            rightNode: (nonnull PSNode *) rightNode;
 
 @end

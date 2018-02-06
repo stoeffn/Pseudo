@@ -20,8 +20,8 @@
         case PSControlFlowTypesContinue:
             return @"continue";
         case PSControlFlowTypesReturn:
-            if (!self.node) return @"return";
-            return [[NSString alloc] initWithFormat: @"return %@", self.node.javaScriptCode];
+            if (!self.expressionNode) return @"return";
+            return [[NSString alloc] initWithFormat: @"return %@", self.expressionNode.javaScriptCode];
     }
 }
 

@@ -14,7 +14,7 @@
 
 @property (nonatomic, readonly) PSControlFlowTypes type;
 
-@property (nonatomic, readonly, nullable) PSNode *node;
+@property (nonatomic, readonly, nullable) PSNode *expressionNode;
 
 #pragma mark - Life Cycle
 
@@ -22,9 +22,9 @@
 
 - (nonnull instancetype) initWithToken: (nullable PSToken *) token
                                   type: (PSControlFlowTypes) type
-                                  node: (nullable PSNode *) node;
+                        expressionNode: (nullable PSNode *) expressionNode;
 
 - (nonnull instancetype) initWithType: (PSControlFlowTypes) type
-                                 node: (nullable PSNode *) node;
+                       expressionNode: (nullable PSNode *) expressionNode;
 
 @end

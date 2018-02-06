@@ -15,28 +15,28 @@
 
 - (nonnull instancetype) initWithToken: (nullable PSToken *) token
                                   type: (PSBinaryOperationTypes) type
-                                  left: (nonnull PSNode *) left
-                                 right: (nonnull PSNode *) right {
+                                  leftNode: (nonnull PSNode *) leftNode
+                                 rightNode: (nonnull PSNode *) rightNode {
     if (self = [super initWithToken: token]) {
         _type = type;
-        _left = left;
-        _right = right;
+        _leftNode = leftNode;
+        _rightNode = rightNode;
     }
     return self;
 }
 
 - (nonnull instancetype) initWithType: (PSBinaryOperationTypes) type
-                                 left: (nonnull PSNode *) left
-                                right: (nonnull PSNode *) right {
-    return [self initWithToken: NULL type: type left: left right: right];
+                                 leftNode: (nonnull PSNode *) leftNode
+                                rightNode: (nonnull PSNode *) rightNode {
+    return [self initWithToken: NULL type: type leftNode: leftNode rightNode: rightNode];
 }
 
 #pragma mark - Description
 
 - (nonnull NSString *) description {
     return [[NSString alloc] initWithFormat: @"<%@ token: %@, type: %@, left: %@, right: %@>",
-            NSStringFromClass([self class]), self.token, [PSBinaryOperationNode descriptionForType: self.type], self.left,
-            self.right];
+            NSStringFromClass([self class]), self.token, [PSBinaryOperationNode descriptionForType: self.type], self.leftNode,
+            self.rightNode];
 }
 
 #pragma mark - Equality
@@ -49,8 +49,8 @@
 
 - (BOOL) isEqualToBinaryOperationNode: (PSBinaryOperationNode *) node {
     return node != NULL
-        && ((!self.left && !node.left) || [self.left isEqual: node.left])
-        && ((!self.right && !node.right) || [self.right isEqual: node.right]);
+        && [self.leftNode isEqual: node.leftNode]
+        && [self.rightNode isEqual: node.rightNode];
 }
 
 @end
