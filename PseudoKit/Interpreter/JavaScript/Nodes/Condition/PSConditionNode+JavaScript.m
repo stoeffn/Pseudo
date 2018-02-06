@@ -15,11 +15,11 @@
 
 - (nonnull NSString *) javaScriptCode {
     if (!self.elseNode) {
-        return [[NSString alloc] initWithFormat: @"if %@ { %@ }",
+        return [[NSString alloc] initWithFormat: @"if (%@) { %@ }",
                 self.expressionNode.javaScriptCode, self.thenNode.javaScriptCode];
     }
 
-    return [[NSString alloc] initWithFormat: @"if %@ { %@ } else { %@ }",
+    return [[NSString alloc] initWithFormat: @"if (%@) { %@ } else { %@ }",
             self.expressionNode.javaScriptCode, self.thenNode.javaScriptCode, self.elseNode.javaScriptCode];
 }
 
