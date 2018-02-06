@@ -19,6 +19,7 @@
 #import "PSControlFlowNode+Types.h"
 #import "PSLiteralNode.h"
 #import "PSLiteralNode+Types.h"
+#import "PSParameterNode.h"
 #import "PSUnaryOperationNode.h"
 #import "PSUnaryOperationNode+Types.h"
 
@@ -180,8 +181,11 @@
     [self.lexer expectTokenTypes: PSTokenTypesOpeningParenthesis error: error];
 
     while (self.lexer.currentToken.type == PSTokenTypesIdentifier) {
-        PSToken *typeIdentifier = [self.lexer expectTokenTypes: PSTokenTypesIdentifier error: error];
-        PSToken *identifier = [self.lexer expectTokenTypes: PSTokenTypesIdentifier error: error];
+        PSToken *typeIdentifierToken = [self.lexer expectTokenTypes: PSTokenTypesIdentifier error: error];
+        PSToken *identifierToken = [self.lexer expectTokenTypes: PSTokenTypesIdentifier error: error];
+        [parameters addObject: [[PSParameterNode alloc] initWithToken: typeIdentifierToken
+                                                       typeIdentifier: typeIdentifierToken.string
+                                                           identifier: identifierToken.string]];
     }
 
     [self.lexer expectTokenTypes: PSTokenTypesClosingParanthesis error: error];
