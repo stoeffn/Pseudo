@@ -13,22 +13,22 @@
 # pragma mark - Life Cycle
 
 - (nonnull instancetype) initWithToken: (nullable PSToken *) token
-                              children: (nonnull NSArray<PSNode *> *) children {
+                                 nodes: (nonnull NSArray<PSNode *> *) nodes {
     if (self = [super initWithToken: token]) {
-        _children = children;
+        _nodes = nodes;
     }
     return self;
 }
 
-- (nonnull instancetype) initWithChildren: (nonnull NSArray<PSNode *> *) children {
-    return [self initWithToken: NULL children: children];
+- (nonnull instancetype) initWithNodes: (nonnull NSArray<PSNode *> *) nodes {
+    return [self initWithToken: NULL nodes: nodes];
 }
 
 #pragma mark - Description
 
 - (nonnull NSString *) description {
-    return [[NSString alloc] initWithFormat: @"<%@ token: %@, children: %@>",
-            NSStringFromClass([self class]), self.token, self.children];
+    return [[NSString alloc] initWithFormat: @"<%@ token: %@, nodes: %@>",
+            NSStringFromClass([self class]), self.token, self.nodes];
 }
 
 #pragma mark - Equality
@@ -41,7 +41,7 @@
 
 - (BOOL) isEqualToCompoundNode: (PSCompoundNode *) node {
     return node != NULL
-        && [self.children isEqual: node.children];
+        && [self.nodes isEqual: node.nodes];
 }
 
 @end

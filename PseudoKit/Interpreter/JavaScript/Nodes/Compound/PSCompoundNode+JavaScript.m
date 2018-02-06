@@ -14,8 +14,8 @@
 #pragma mark - Transpiling
 
 - (nonnull NSString *) javaScriptCode {
-    NSMutableArray<NSString *> *code = [NSMutableArray arrayWithCapacity: self.children.count];
-    [self.children enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {
+    NSMutableArray<NSString *> *code = [NSMutableArray arrayWithCapacity: self.nodes.count];
+    [self.nodes enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {
         [code addObject: ((PSNode *) obj).javaScriptCode];
     }];
     return [code componentsJoinedByString: @";"];

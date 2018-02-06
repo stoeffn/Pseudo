@@ -58,7 +58,7 @@
 
     if (stopTokenType) [self.lexer advance];
 
-    return [[PSCompoundNode alloc] initWithChildren: nodes];
+    return [[PSCompoundNode alloc] initWithNodes: nodes];
 }
 
 - (nullable PSNode *) blockWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error {
@@ -92,7 +92,7 @@
         [nodes addObject: node];
     }
 
-    return [[PSCompoundNode alloc] initWithChildren: nodes];
+    return [[PSCompoundNode alloc] initWithNodes: nodes];
 }
 
 - (nullable PSNode *) statementWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error {

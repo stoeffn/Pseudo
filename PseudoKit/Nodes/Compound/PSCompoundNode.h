@@ -11,15 +11,15 @@
 
 @interface PSCompoundNode : PSNode
 
-@property (nonatomic, readonly, nonnull) NSArray<PSNode *> *children;
+@property (nonatomic, readonly, nonnull) NSArray<PSNode *> *nodes;
 
 #pragma mark - Life Cycle
 
 - (nonnull instancetype) initWithToken: (nullable PSToken *) token __unavailable;
 
 - (nonnull instancetype) initWithToken: (nullable PSToken *) token
-                              children: (nonnull NSArray<PSNode *> *) children;
+                                 nodes: (nonnull NSArray<PSNode *> *) nodes;
 
-- (nonnull instancetype) initWithChildren: (nonnull NSArray<PSNode *> *) children;
+- (nonnull instancetype) initWithNodes: (nonnull NSArray<PSNode *> *) nodes;
 
 @end
