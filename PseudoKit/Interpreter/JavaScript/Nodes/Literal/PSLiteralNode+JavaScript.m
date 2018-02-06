@@ -17,9 +17,21 @@
         case PSLiteralTypesNull:    return @"null";
         case PSLiteralTypesTrue:    return @"true";
         case PSLiteralTypesFalse:   return @"false";
-        case PSLiteralTypesNumber:  return [[NSString alloc] initWithFormat: @"%@", self.number];
-        case PSLiteralTypesString:  return [[NSString alloc] initWithFormat: @"\"%@\"", self.string];
+        case PSLiteralTypesNumber:  return self.number.stringValue;
+        case PSLiteralTypesString:  return self.escapedJavaScriptString;
     }
+}
+
+- (nullable NSString *) escapedJavaScriptString {
+    if (!self.string) return NULL;
+
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject: @[self.string] options: 0 error: &error];
+
+    if (error) return @"";
+
+    NSString *string = [[NSString alloc] initWithData: jsonData encoding: NSUTF8StringEncoding];
+    return [string substringWithRange: NSMakeRange(1, string.length - 2)];
 }
 
 @end
