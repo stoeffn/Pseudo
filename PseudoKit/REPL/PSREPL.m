@@ -105,7 +105,7 @@
     [self.buffer removeAllObjects];
 
     if (error) {
-        return [PSConsole writeString: [[NSString alloc] initWithFormat: @"%@\n", error.localizedDescription]];
+        return [PSConsole writeErrorString: [[NSString alloc] initWithFormat: @"%@\n", error.localizedDescription]];
     }
 
     if (result && result.length > 0) {

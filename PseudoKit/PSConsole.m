@@ -31,6 +31,11 @@
     [NSFileHandle.fileHandleWithStandardOutput writeData: data];
 }
 
++ (void) writeErrorString: (nonnull NSString *) string {
+    NSData *data = [string dataUsingEncoding: NSUTF8StringEncoding];
+    [NSFileHandle.fileHandleWithStandardError writeData: data];
+}
+
 #pragma mark - Constants
 
 + (nonnull NSCharacterSet *) illegalAndControlCharacterSet {

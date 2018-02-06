@@ -68,7 +68,7 @@
     }];
 
     if (error) {
-        [PSConsole writeString: [[NSString alloc] initWithFormat: @"%@\n", error.localizedDescription]];
+        [PSConsole writeErrorString: [[NSString alloc] initWithFormat: @"%@\n", error.localizedDescription]];
         return NO;
     }
 

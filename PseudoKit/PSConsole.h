@@ -22,4 +22,6 @@
 
 + (void) writeString: (nonnull NSString *) string;
 
++ (void) writeErrorString: (nonnull NSString *) string;
+
 @end
