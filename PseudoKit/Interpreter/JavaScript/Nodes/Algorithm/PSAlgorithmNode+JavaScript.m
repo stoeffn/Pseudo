@@ -16,11 +16,11 @@
 - (nonnull NSString *) javaScriptCode {
     if (self.typeIdentifier) {
         return [[NSString alloc] initWithFormat: @"%@.prototype.%@ = function(%@) { %@ };",
-                self.typeIdentifier, self.identifier, self.parametersJavaScriptCode, self.bodyNode];
+                self.typeIdentifier, self.identifier, self.parametersJavaScriptCode, self.bodyNode.javaScriptCode];
     }
 
     return [[NSString alloc] initWithFormat: @"var %@ = function(%@) { %@ };",
-            self.identifier, self.parametersJavaScriptCode, self.bodyNode];
+            self.identifier, self.parametersJavaScriptCode, self.bodyNode.javaScriptCode];
 }
 
 - (nonnull NSString *) parametersJavaScriptCode {

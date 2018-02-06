@@ -10,16 +10,17 @@
 #import "Macros.h"
 #import "PSParser.h"
 #import "PSToken.h"
-#import "PSCompoundNode.h"
-#import "PSConditionNode.h"
-#import "PSLiteralNode.h"
-#import "PSLiteralNode+Types.h"
+#import "PSAlgorithmNode.h"
 #import "PSBinaryOperationNode.h"
 #import "PSBinaryOperationNode+Types.h"
-#import "PSUnaryOperationNode.h"
-#import "PSUnaryOperationNode+Types.h"
+#import "PSCompoundNode.h"
+#import "PSConditionNode.h"
 #import "PSControlFlowNode.h"
 #import "PSControlFlowNode+Types.h"
+#import "PSLiteralNode.h"
+#import "PSLiteralNode+Types.h"
+#import "PSUnaryOperationNode.h"
+#import "PSUnaryOperationNode+Types.h"
 
 @implementation PSParser
 
@@ -125,7 +126,7 @@
     PSNode *elseNode;
 
     if (self.lexer.currentToken.type == PSTokenTypesElse) {
-        [self.lexer advance];
+        [self.lexer expectTokenTypes: PSTokenTypesElse error: error];
         elseNode = [self blockListWithStopTokenType: @(PSTokenTypesPoint) error: error];
     }
 
@@ -139,8 +140,49 @@
 #pragma mark Algorithms
 
 - (nullable PSNode *) algorithmWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error {
-    NSLog(@"Algorithms are not supported yet.");
-    return NULL;
+    PSToken *typeIdentifierToken;
+    PSToken *returnTypeIdentifierToken;
+    PSToken *algorithmToken = [self.lexer expectTokenTypes: PSTokenTypesAlgorithm error: error];
+    PSToken *identifierToken = [self.lexer expectTokenTypes: PSTokenTypesIdentifier error: error];
+
+    if (self.lexer.currentToken.type == PSTokenTypesPoint) {
+        [self.lexer expectTokenTypes: PSTokenTypesPoint error: error];
+        typeIdentifierToken = identifierToken;
+        identifierToken = [self.lexer expectTokenTypes: PSTokenTypesIdentifier error: error];
+    }
+
+    NSArray<PSNode *> *parameterNodes = [self parameterListWithError: error];
+    [self.lexer expectTokenTypes: PSTokenTypesColon error: error];
+
+    if (self.lexer.currentToken.type == PSTokenTypesIdentifier && self.lexer.nextToken.type == PSTokenTypesColon) {
+        returnTypeIdentifierToken = [self.lexer expectTokenTypes: PSTokenTypesIdentifier error: error];
+        [self.lexer expectTokenTypes: PSTokenTypesColon error: error];
+    }
+
+    PSNode *bodyNode = [self blockListWithStopTokenType: @(PSTokenTypesPoint) error: error];
+
+    if (*error) return NULL;
+    return [[PSAlgorithmNode alloc] initWithToken: algorithmToken
+                                   typeIdentifier: typeIdentifierToken.string
+                                       identifier: identifierToken.string
+                                   parameterNodes: parameterNodes
+                             returnTypeIdentifier: returnTypeIdentifierToken.string
+                                         bodyNode: bodyNode];
+}
+
+- (nullable NSArray<PSNode *> *) parameterListWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error {
+    NSMutableArray<PSNode *> *parameters = [[NSMutableArray alloc] init];
+    [self.lexer expectTokenTypes: PSTokenTypesOpeningParenthesis error: error];
+
+    while (self.lexer.currentToken.type == PSTokenTypesIdentifier) {
+        PSToken *typeIdentifier = [self.lexer expectTokenTypes: PSTokenTypesIdentifier error: error];
+        PSToken *identifier = [self.lexer expectTokenTypes: PSTokenTypesIdentifier error: error];
+    }
+
+    [self.lexer expectTokenTypes: PSTokenTypesClosingParanthesis error: error];
+
+    if (*error) return NULL;
+    return parameters;
 }
 
 #pragma mark Loops
