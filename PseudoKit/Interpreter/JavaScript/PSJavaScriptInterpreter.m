@@ -26,8 +26,6 @@
 - (nonnull instancetype) init {
     if (self = [super init]) {
         _context = [[JSContext alloc] init];
-
-        [self setUpNativeFunctionsInContext: _context];
     }
     return self;
 }
@@ -52,15 +50,10 @@
     return [self executeNode: node];
 }
 
-#pragma mark - Native Functions
+#pragma mark - Providing Native Functions
 
-- (void) setUpNativeFunctionsInContext: (JSContext *) context {
-    context[@"print"] = ^(NSString *string) {
-        [PSConsole writeString: [[NSString alloc] initWithFormat: @"%@\n", string]];
-    };
-    context[@"input"] = ^NSString *() {
-        return [PSConsole awaitSanitizedString];
-    };
+- (void) setObject: (nonnull id) object forKeyedSubscript: (nullable NSObject<NSCopying> *) key {
+    self.context[key] = object;
 }
 
 @end

@@ -13,6 +13,8 @@
 
 @property (nonatomic, readonly, nonnull) id<PSInterpreting> interpreter;
 
+@property (nonatomic, readonly, nonnull) PSREPL *repl;
+
 @end
 
 @implementation Application
@@ -22,6 +24,7 @@
 - (nonnull instancetype) init {
     if (self = [super init]) {
         _interpreter = [[PSJavaScriptInterpreter alloc] init];
+        _repl = [[PSREPL alloc] initWithInterpreter: _interpreter];
     }
     return self;
 }
@@ -73,8 +76,7 @@
 }
 
 - (BOOL) enterREPL {
-    PSREPL *repl = [[PSREPL alloc] initWithInterpreter: self.interpreter];
-    [repl enter];
+    [self.repl enter];
     return YES;
 }
 

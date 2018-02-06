@@ -18,4 +18,8 @@
 - (nullable NSString *) executePseudoCode: (nonnull NSString *) code
                                     error: (NSError * __nullable __autoreleasing * __null_unspecified) error;
 
+#pragma mark - Providing Native Functions
+
+- (void) setObject: (nonnull id) object forKeyedSubscript: (nullable NSObject<NSCopying> *) key;
+
 @end

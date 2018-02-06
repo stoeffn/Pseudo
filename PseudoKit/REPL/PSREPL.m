@@ -27,6 +27,8 @@
         _interpreter = interpreter;
         _isActive = NO;
         _buffer = [[NSMutableArray alloc] init];
+
+        [self setUpNativeFunctions];
     }
     return self;
 }
@@ -86,6 +88,17 @@
     if (result && result.length > 0) {
         [PSConsole writeString: [[NSString alloc] initWithFormat: @"%@\n", result]];
     }
+}
+
+#pragma mark - Providing Native Functions
+
+- (void) setUpNativeFunctions {
+    self.interpreter[@"print"] = ^(NSString *string) {
+        [PSConsole writeString: [[NSString alloc] initWithFormat: @"%@\n", string]];
+    };
+    self.interpreter[@"input"] = ^NSString *() {
+        return [PSConsole awaitSanitizedString];
+    };
 }
 
 @end
