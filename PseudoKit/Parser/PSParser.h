@@ -26,7 +26,8 @@
 
 #pragma mark Blocks
 
-- (nullable PSNode *) blockListError: (NSError * __nullable __autoreleasing * __null_unspecified) error;
+- (nullable PSNode *) blockListWithStopTokenType: (nullable NSNumber *) stopTokenType
+                                           error: (NSError * __nullable __autoreleasing * __null_unspecified) error;
 
 - (nullable PSNode *) blockWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error;
 

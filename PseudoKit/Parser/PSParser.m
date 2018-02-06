@@ -40,20 +40,24 @@
 #pragma mark - Parsing
 
 - (nullable PSNode *) programWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error {
-    return [self blockListError: error];
+    return [self blockListWithStopTokenType: NULL error: error];
 }
 
 #pragma mark Blocks
 
-- (nullable PSNode *) blockListError: (NSError * __nullable __autoreleasing * __null_unspecified) error {
+- (nullable PSNode *) blockListWithStopTokenType: (nullable NSNumber *) stopTokenType
+                                           error: (NSError * __nullable __autoreleasing * __null_unspecified) error {
     NSMutableArray<PSNode *> *nodes = [[NSMutableArray alloc] initWithObjects: [self blockWithError: error], nil];
 
-    while (self.lexer.currentToken.type == PSTokenTypesPoint) {
-        [self.lexer advance];
-        [nodes addObject: [self blockWithError: error]];
+    while (self.lexer.currentToken && (!stopTokenType || self.lexer.currentToken.type != stopTokenType.integerValue)) {
+        PSNode *node = [self blockWithError: error];
+        if (*error) return NULL;
+
+        [nodes addObject: node];
     }
 
-    if (*error) return NULL;
+    if (stopTokenType) [self.lexer advance];
+
     return [[PSCompoundNode alloc] initWithChildren: nodes];
 }
 
@@ -81,10 +85,13 @@
 
     while (self.lexer.currentToken.type == PSTokenTypesSemicolon) {
         [self.lexer advance];
-        [nodes addObject: [self statementWithError: error]];
+
+        PSNode *node = [self statementWithError: error];
+        if (*error) return NULL;
+
+        [nodes addObject: node];
     }
 
-    if (*error) return NULL;
     return [[PSCompoundNode alloc] initWithChildren: nodes];
 }
 
@@ -110,8 +117,18 @@
 #pragma mark Conditions
 
 - (nullable PSNode *) conditionWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error {
-    NSLog(@"Conditions are not supported yet.");
-    return NULL;
+    [self.lexer expectTokenTypes: PSTokenTypesIf error: error];
+    PSNode *expressionNode = [self expressionWithError: error];
+    [self.lexer expectTokenTypes: PSTokenTypesThen error: error];
+    PSNode *thenBlockList = [self blockListWithStopTokenType: @(PSTokenTypesPoint) error: error];
+
+    if (self.lexer.currentToken.type == PSTokenTypesElse) {
+        [self.lexer advance];
+        PSNode *elseBlockList = [self blockListWithStopTokenType: @(PSTokenTypesPoint) error: error];
+    }
+
+    if (*error) return NULL;
+    return thenBlockList;
 }
 
 #pragma mark Algorithms
