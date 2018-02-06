@@ -64,7 +64,7 @@ loop
 // Algorithms
 
 algorithm
-    : ALGORITHM (IDENTIFIER POINT)? IDENTIFIER parameterList COLON returnType? blockList POINT
+    : ALGORITHM (IDENTIFIER POINT)? IDENTIFIER parameterList COLON (IDENTIFIER COLON)? blockList POINT
     ;
 
 parameterList
@@ -75,10 +75,6 @@ parameterList
 parameter
     : IDENTIFIER IDENTIFIER
     | IDENTIFIER subscriptCall IDENTIFIER
-    ;
-
-returnType
-    : IDENTIFIER COLON
     ;
 
 // Expressions

@@ -27,20 +27,21 @@ FOUNDATION_EXPORT const unsigned char PseudoKitVersionString[];
 #import <PseudoKit/PSTokenTypes.h>
 
 #import <PseudoKit/PSNode.h>
-#import <PseudoKit/PSCompoundNode.h>
-#import <PseudoKit/PSConditionNode.h>
-#import <PseudoKit/PSLiteralTypes.h>
-#import <PseudoKit/PSLiteralNode.h>
-#import <PseudoKit/PSLiteralNode+Types.h>
+#import <PseudoKit/PSAlgorithmNode.h>
 #import <PseudoKit/PSBinaryOperationTypes.h>
 #import <PseudoKit/PSBinaryOperationNode.h>
 #import <PseudoKit/PSBinaryOperationNode+Types.h>
-#import <PseudoKit/PSUnaryOperationTypes.h>
-#import <PseudoKit/PSUnaryOperationNode.h>
-#import <PseudoKit/PSUnaryOperationNode+Types.h>
+#import <PseudoKit/PSCompoundNode.h>
+#import <PseudoKit/PSConditionNode.h>
 #import <PseudoKit/PSControlFlowTypes.h>
 #import <PseudoKit/PSControlFlowNode.h>
 #import <PseudoKit/PSControlFlowNode+Types.h>
+#import <PseudoKit/PSLiteralTypes.h>
+#import <PseudoKit/PSLiteralNode.h>
+#import <PseudoKit/PSLiteralNode+Types.h>
+#import <PseudoKit/PSUnaryOperationTypes.h>
+#import <PseudoKit/PSUnaryOperationNode.h>
+#import <PseudoKit/PSUnaryOperationNode+Types.h>
 
 #import <PseudoKit/PSParser.h>
 

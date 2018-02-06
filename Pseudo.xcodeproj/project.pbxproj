@@ -31,6 +31,10 @@
 		240ABDFF2029A69500543C40 /* PSConditionNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 240ABDFD2029A69500543C40 /* PSConditionNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		240ABE022029AA3800543C40 /* PSConditionNode+JavaScript.h in Headers */ = {isa = PBXBuildFile; fileRef = 240ABE002029AA3700543C40 /* PSConditionNode+JavaScript.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		240ABE032029AA3800543C40 /* PSConditionNode+JavaScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 240ABE012029AA3700543C40 /* PSConditionNode+JavaScript.m */; };
+		240ABE082029AD4700543C40 /* PSAlgorithmNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 240ABE062029AD4700543C40 /* PSAlgorithmNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		240ABE092029AD4700543C40 /* PSAlgorithmNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 240ABE072029AD4700543C40 /* PSAlgorithmNode.m */; };
+		240ABE0C2029AD4E00543C40 /* PSAlgorithmNode+JavaScript.h in Headers */ = {isa = PBXBuildFile; fileRef = 240ABE0A2029AD4D00543C40 /* PSAlgorithmNode+JavaScript.h */; };
+		240ABE0D2029AD4E00543C40 /* PSAlgorithmNode+JavaScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 240ABE0B2029AD4D00543C40 /* PSAlgorithmNode+JavaScript.m */; };
 		2421AFBD202507260007FC7A /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 2421AFBB202507260007FC7A /* Constants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2421AFBE202507260007FC7A /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2421AFBC202507260007FC7A /* Constants.m */; };
 		2421AFDE2025F8000007FC7A /* PSLiteralNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 2421AFDC2025F8000007FC7A /* PSLiteralNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -134,6 +138,10 @@
 		240ABDFD2029A69500543C40 /* PSConditionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSConditionNode.h; sourceTree = "<group>"; };
 		240ABE002029AA3700543C40 /* PSConditionNode+JavaScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PSConditionNode+JavaScript.h"; sourceTree = "<group>"; };
 		240ABE012029AA3700543C40 /* PSConditionNode+JavaScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PSConditionNode+JavaScript.m"; sourceTree = "<group>"; };
+		240ABE062029AD4700543C40 /* PSAlgorithmNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSAlgorithmNode.h; sourceTree = "<group>"; };
+		240ABE072029AD4700543C40 /* PSAlgorithmNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSAlgorithmNode.m; sourceTree = "<group>"; };
+		240ABE0A2029AD4D00543C40 /* PSAlgorithmNode+JavaScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PSAlgorithmNode+JavaScript.h"; sourceTree = "<group>"; };
+		240ABE0B2029AD4D00543C40 /* PSAlgorithmNode+JavaScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PSAlgorithmNode+JavaScript.m"; sourceTree = "<group>"; };
 		2421AFBB202507260007FC7A /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		2421AFBC202507260007FC7A /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		2421AFDC2025F8000007FC7A /* PSLiteralNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSLiteralNode.h; sourceTree = "<group>"; };
@@ -313,6 +321,24 @@
 			path = Condition;
 			sourceTree = "<group>";
 		};
+		240ABE042029ACF500543C40 /* Algorithm */ = {
+			isa = PBXGroup;
+			children = (
+				240ABE062029AD4700543C40 /* PSAlgorithmNode.h */,
+				240ABE072029AD4700543C40 /* PSAlgorithmNode.m */,
+			);
+			path = Algorithm;
+			sourceTree = "<group>";
+		};
+		240ABE052029AD0300543C40 /* Algorithm */ = {
+			isa = PBXGroup;
+			children = (
+				240ABE0A2029AD4D00543C40 /* PSAlgorithmNode+JavaScript.h */,
+				240ABE0B2029AD4D00543C40 /* PSAlgorithmNode+JavaScript.m */,
+			);
+			path = Algorithm;
+			sourceTree = "<group>";
+		};
 		244C6C392024650F00778B71 /* Lexer */ = {
 			isa = PBXGroup;
 			children = (
@@ -340,12 +366,13 @@
 		244C6C3D2024654800778B71 /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
+				240ABE042029ACF500543C40 /* Algorithm */,
+				247110F9202710E800A79633 /* BinaryOperation */,
 				240ABDF02028F9A800543C40 /* Compound */,
 				240ABDFB2029A63200543C40 /* Condition */,
-				2471114B2028BAE500A79633 /* Literal */,
-				247110F9202710E800A79633 /* BinaryOperation */,
-				240ABDCE2028E1DA00543C40 /* UnaryOperation */,
 				240ABDE12028F00600543C40 /* ControlFlow */,
+				2471114B2028BAE500A79633 /* Literal */,
+				240ABDCE2028E1DA00543C40 /* UnaryOperation */,
 				2471111F2027B60E00A79633 /* PSNode.h */,
 				247111202027B60E00A79633 /* PSNode.m */,
 			);
@@ -376,12 +403,13 @@
 		2470EFEB202486AE00AE9CD8 /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
+				240ABE052029AD0300543C40 /* Algorithm */,
+				240ABDD92028E38200543C40 /* BinaryOperation */,
 				240ABDF52028FB2800543C40 /* Compound */,
 				240ABDFA2029A61A00543C40 /* Condition */,
-				240ABDDB2028E39100543C40 /* Literal */,
-				240ABDD92028E38200543C40 /* BinaryOperation */,
-				240ABDDA2028E38A00543C40 /* UnaryOperation */,
 				240ABDE02028EFB700543C40 /* ControlFlow */,
+				240ABDDB2028E39100543C40 /* Literal */,
+				240ABDDA2028E38A00543C40 /* UnaryOperation */,
 				2471112B2028968500A79633 /* PSNode+JavaScript.h */,
 				2471112C2028968500A79633 /* PSNode+JavaScript.m */,
 			);
@@ -533,6 +561,7 @@
 				2471111B2027B57F00A79633 /* PSBinaryOperationNode.h in Headers */,
 				240ABDD62028E21F00543C40 /* PSUnaryOperationNode.h in Headers */,
 				247111512028BE2E00A79633 /* PSLiteralTypes.h in Headers */,
+				240ABE0C2029AD4E00543C40 /* PSAlgorithmNode+JavaScript.h in Headers */,
 				2471110B2027450D00A79633 /* PSReading.h in Headers */,
 				2470F01A2024BA3D00AE9CD8 /* PseudoKit.h in Headers */,
 				2470F0362024BE0800AE9CD8 /* PSLexer.h in Headers */,
@@ -567,6 +596,7 @@
 				2471110E2027458900A79633 /* PSStringReader.h in Headers */,
 				247111462028B40400A79633 /* PSBinaryOperationTypes.h in Headers */,
 				240ABE022029AA3800543C40 /* PSConditionNode+JavaScript.h in Headers */,
+				240ABE082029AD4700543C40 /* PSAlgorithmNode.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -711,6 +741,7 @@
 				240ABDEB2028F06D00543C40 /* PSControlFlowNode+Types.m in Sources */,
 				240ABDDF2028E3C200543C40 /* PSUnaryOperationNode+JavaScript.m in Sources */,
 				240ABDD82028E21F00543C40 /* PSUnaryOperationNode+Types.m in Sources */,
+				240ABE0D2029AD4E00543C40 /* PSAlgorithmNode+JavaScript.m in Sources */,
 				240ABDF42028F9F200543C40 /* PSCompoundNode.m in Sources */,
 				240ABDF92028FB5400543C40 /* PSCompoundNode+JavaScript.m in Sources */,
 				2470F0272024BA7E00AE9CD8 /* PSParser.m in Sources */,
@@ -720,6 +751,7 @@
 				240ABE032029AA3800543C40 /* PSConditionNode+JavaScript.m in Sources */,
 				2470F0252024BA7600AE9CD8 /* PSLexer.m in Sources */,
 				2471114F2028BB0800A79633 /* PSLiteralNode+Types.m in Sources */,
+				240ABE092029AD4700543C40 /* PSAlgorithmNode.m in Sources */,
 				2471114A2028B6E300A79633 /* PSBinaryOperationNode+Types.m in Sources */,
 				247111322028977100A79633 /* PSBinaryOperationNode+JavaScript.m in Sources */,
 				2471110920273BA300A79633 /* PSToken+Types.m in Sources */,
