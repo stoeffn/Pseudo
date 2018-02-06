@@ -25,8 +25,8 @@
 
 - (nonnull NSString *) parametersJavaScriptCode {
     NSMutableArray<NSString *> *code = [NSMutableArray arrayWithCapacity: self.parameterNodes.count];
-    [self.parameterNodes enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {
-        [code addObject: ((PSNode *) obj).javaScriptCode];
+    [self.parameterNodes enumerateObjectsUsingBlock: ^(PSNode *node, NSUInteger idx, BOOL *stop) {
+        [code addObject: node.javaScriptCode];
     }];
     return [code componentsJoinedByString: @", "];
 }

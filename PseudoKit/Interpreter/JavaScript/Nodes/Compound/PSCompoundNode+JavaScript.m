@@ -15,8 +15,8 @@
 
 - (nonnull NSString *) javaScriptCode {
     NSMutableArray<NSString *> *code = [NSMutableArray arrayWithCapacity: self.nodes.count];
-    [self.nodes enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {
-        [code addObject: ((PSNode *) obj).javaScriptCode];
+    [self.nodes enumerateObjectsUsingBlock: ^(PSNode *node, NSUInteger idx, BOOL *stop) {
+        [code addObject: node.javaScriptCode];
     }];
     return [code componentsJoinedByString: @"; "];
 }

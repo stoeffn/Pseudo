@@ -30,8 +30,8 @@
     if (!self.argumentNodes) return NULL;
 
     NSMutableArray<NSString *> *code = [NSMutableArray arrayWithCapacity: self.argumentNodes.count];
-    [self.argumentNodes enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {
-        [code addObject: ((PSNode *) obj).javaScriptCode];
+    [self.argumentNodes enumerateObjectsUsingBlock: ^(PSNode *node, NSUInteger idx, BOOL *stop) {
+        [code addObject: node.javaScriptCode];
     }];
     return [code componentsJoinedByString: @", "];
 }
