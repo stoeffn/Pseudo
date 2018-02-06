@@ -46,6 +46,8 @@
 		240ABE252029C7B300543C40 /* PSCallNode+Types.m in Sources */ = {isa = PBXBuildFile; fileRef = 240ABE202029C7B300543C40 /* PSCallNode+Types.m */; };
 		240ABE262029C7B300543C40 /* PSCallTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 240ABE212029C7B300543C40 /* PSCallTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		240ABE272029C7B300543C40 /* PSCallNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 240ABE222029C7B300543C40 /* PSCallNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		240ABE2A2029E51E00543C40 /* PSConsole.h in Headers */ = {isa = PBXBuildFile; fileRef = 240ABE282029E51E00543C40 /* PSConsole.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		240ABE2B2029E51E00543C40 /* PSConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = 240ABE292029E51E00543C40 /* PSConsole.m */; };
 		2421AFBD202507260007FC7A /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 2421AFBB202507260007FC7A /* Constants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2421AFBE202507260007FC7A /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2421AFBC202507260007FC7A /* Constants.m */; };
 		2421AFDE2025F8000007FC7A /* PSLiteralNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 2421AFDC2025F8000007FC7A /* PSLiteralNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -164,6 +166,8 @@
 		240ABE202029C7B300543C40 /* PSCallNode+Types.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PSCallNode+Types.m"; sourceTree = "<group>"; };
 		240ABE212029C7B300543C40 /* PSCallTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSCallTypes.h; sourceTree = "<group>"; };
 		240ABE222029C7B300543C40 /* PSCallNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSCallNode.h; sourceTree = "<group>"; };
+		240ABE282029E51E00543C40 /* PSConsole.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSConsole.h; sourceTree = "<group>"; };
+		240ABE292029E51E00543C40 /* PSConsole.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSConsole.m; sourceTree = "<group>"; };
 		2421AFBB202507260007FC7A /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		2421AFBC202507260007FC7A /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		2421AFDC2025F8000007FC7A /* PSLiteralNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSLiteralNode.h; sourceTree = "<group>"; };
@@ -490,6 +494,8 @@
 				244C6C3A2024651600778B71 /* Parser */,
 				2471113720289A4700A79633 /* Interpreter */,
 				247111442028AD1000A79633 /* REPL */,
+				240ABE282029E51E00543C40 /* PSConsole.h */,
+				240ABE292029E51E00543C40 /* PSConsole.m */,
 				2421AFBB202507260007FC7A /* Constants.h */,
 				2421AFBC202507260007FC7A /* Constants.m */,
 				2471112320287E0D00A79633 /* Macros.h */,
@@ -632,6 +638,7 @@
 				2470F0362024BE0800AE9CD8 /* PSLexer.h in Headers */,
 				2470F0372024BE0C00AE9CD8 /* PSParser.h in Headers */,
 				240ABDDE2028E3C200543C40 /* PSUnaryOperationNode+JavaScript.h in Headers */,
+				240ABE2A2029E51E00543C40 /* PSConsole.h in Headers */,
 				247111212027B60E00A79633 /* PSNode.h in Headers */,
 				240ABDEF2028F07600543C40 /* PSControlFlowNode+JavaScript.h in Headers */,
 				240ABDF32028F9F200543C40 /* PSCompoundNode.h in Headers */,
@@ -809,6 +816,7 @@
 			files = (
 				2421AFDF2025F8000007FC7A /* PSLiteralNode.m in Sources */,
 				247111222027B60E00A79633 /* PSNode.m in Sources */,
+				240ABE2B2029E51E00543C40 /* PSConsole.m in Sources */,
 				240ABDEB2028F06D00543C40 /* PSControlFlowNode+Types.m in Sources */,
 				240ABDDF2028E3C200543C40 /* PSUnaryOperationNode+JavaScript.m in Sources */,
 				240ABDD82028E21F00543C40 /* PSUnaryOperationNode+Types.m in Sources */,

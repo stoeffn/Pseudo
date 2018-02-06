@@ -7,6 +7,7 @@
 //
 
 #import "PSREPL.h"
+#import "PSConsole.h"
 
 @interface PSREPL ()
 
@@ -31,9 +32,9 @@
     self.isActive = YES;
 
     while (self.isActive) {
-        [self outputStringToCommandLine: @">>> "];
+        [PSConsole writeString: @">>> "];
 
-        NSString *input = [self stringFromCommandLineInput];
+        NSString *input = [PSConsole awaitSanitizedString];
         if (!input) return [self leave];
 
         [self handleREPLInput: input];
@@ -41,53 +42,25 @@
 }
 
 - (void) leave {
-    [self outputStringToCommandLine: @"\n"];
+    [PSConsole writeString: @"\n"];
 
     self.isActive = NO;
 }
 
-- (nullable NSString *) stringFromCommandLineInput {
-    NSData *data = [NSFileHandle.fileHandleWithStandardInput availableData];
-    if (!data.length) return NULL;
-
-    return [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-}
-
-- (void) outputStringToCommandLine: (NSString *) output {
-    NSData *data = [output dataUsingEncoding: NSUTF8StringEncoding];
-    [NSFileHandle.fileHandleWithStandardOutput writeData: data];
-}
-
 - (void) handleREPLInput: (NSString *) input {
-    input = [input stringByTrimmingCharactersInSet: PSREPL.whitespaceAndNewLineAndControlCharacterSet];
-
     if (input.length == 0) return;
 
     NSError *error;
     NSString *result = [self.interpreter executePseudoCode: input error: &error];
 
     if (error) {
-        [self outputStringToCommandLine: [[NSString alloc] initWithFormat: @"%@\n", error.localizedDescription]];
+        [PSConsole writeString: [[NSString alloc] initWithFormat: @"%@\n", error.localizedDescription]];
         return;
     }
 
     if (result && result.length > 0) {
-        [self outputStringToCommandLine: [[NSString alloc] initWithFormat: @"%@\n", result]];
+        [PSConsole writeString: [[NSString alloc] initWithFormat: @"%@\n", result]];
     }
-}
-
-#pragma mark - Constants
-
-+ (nonnull NSCharacterSet *) whitespaceAndNewLineAndControlCharacterSet {
-    static NSMutableCharacterSet *_delimiters;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _delimiters = NSMutableCharacterSet.whitespaceAndNewlineCharacterSet;
-        [_delimiters formUnionWithCharacterSet: NSMutableCharacterSet.controlCharacterSet];
-        [_delimiters formUnionWithCharacterSet: NSMutableCharacterSet.illegalCharacterSet];
-        [_delimiters addCharactersInString: @""]; // Characters produced by arrow keys.
-    });
-    return _delimiters;
 }
 
 @end
