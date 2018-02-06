@@ -77,6 +77,15 @@ final class PSLexerTests: XCTestCase {
         XCTAssertNil(lexer.advance())
     }
 
+    func testNextToken_EscapedString() {
+        let reader = PSStringReader(string: "\"Say \\\"Hello\\\"\"")
+        let lexer = PSLexer(reader: reader)
+
+        XCTAssertEqual(lexer.currentToken, PSToken(type: .string, string: "Say \"Hello\""))
+        XCTAssertNil(lexer.nextToken)
+        XCTAssertNil(lexer.advance())
+    }
+
     func testNextToken_Number() {
         let reader = PSStringReader(string: "42")
         let lexer = PSLexer(reader: reader)

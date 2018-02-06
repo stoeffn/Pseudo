@@ -119,11 +119,15 @@
 
     NSMutableArray<NSString *> *buffer = [[NSMutableArray alloc] init];
 
-    while (reader.nextCharacter) {
+    while (reader.currentCharacter) {
         [reader advance];
-        [buffer addObject: reader.currentCharacter];
 
-        if ([reader.nextCharacter isEqualToString: PSToken.stringStartCharacter]) break;
+        BOOL isStringEscapeCharacter = [reader.currentCharacter isEqualToString: PSToken.stringEscapeCharacter];
+        BOOL isFollowedByStringStartCharacter = [reader.nextCharacter isEqualToString: PSToken.stringStartCharacter];
+
+        if (!isStringEscapeCharacter) [buffer addObject: reader.currentCharacter];
+
+        if (!isStringEscapeCharacter && isFollowedByStringStartCharacter) break;
     };
 
     [reader advance];

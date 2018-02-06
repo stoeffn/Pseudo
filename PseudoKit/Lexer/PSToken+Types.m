@@ -99,6 +99,10 @@
     return @"\"";
 }
 
++ (nonnull NSString *) stringEscapeCharacter {
+    return @"\\";
+}
+
 + (nonnull NSString *) floatingPointCharacter {
     return @".";
 }

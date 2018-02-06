@@ -20,6 +20,8 @@
 
 + (nonnull NSString *) stringStartCharacter;
 
++ (nonnull NSString *) stringEscapeCharacter;
+
 + (nonnull NSString *) floatingPointCharacter;
 
 + (nonnull NSString *) commentStartCharacter;
