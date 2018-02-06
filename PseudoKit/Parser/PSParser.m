@@ -194,6 +194,10 @@
         [parameters addObject: [[PSParameterNode alloc] initWithToken: typeIdentifierToken
                                                        typeIdentifier: typeIdentifierToken.string
                                                            identifier: identifierToken.string]];
+
+        if (self.lexer.currentToken.type != PSTokenTypesClosingParenthesis) {
+            [self.lexer expectTokenTypes: PSTokenTypesComma error: error];
+        }
     }
 
     [self.lexer expectTokenTypes: PSTokenTypesClosingParenthesis error: error];
