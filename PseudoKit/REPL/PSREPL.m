@@ -32,23 +32,30 @@
 
     while (self.isActive) {
         [self outputStringToCommandLine: @">>> "];
-        [self handleREPLInput: [self stringFromCommandLineInput]];
+
+        NSString *input = [self stringFromCommandLineInput];
+        if (!input) return [self leave];
+
+        [self handleREPLInput: input];
     }
 }
 
 - (void) leave {
+    [self outputStringToCommandLine: @"\n"];
+
     self.isActive = NO;
 }
 
-- (NSString *) stringFromCommandLineInput {
-    NSData *data = [[NSFileHandle fileHandleWithStandardInput] availableData];
+- (nullable NSString *) stringFromCommandLineInput {
+    NSData *data = [NSFileHandle.fileHandleWithStandardInput availableData];
+    if (!data.length) return NULL;
+
     return [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
 }
 
 - (void) outputStringToCommandLine: (NSString *) output {
     NSData *data = [output dataUsingEncoding: NSUTF8StringEncoding];
-    NSFileHandle *handle = [NSFileHandle fileHandleWithStandardOutput];
-    [handle writeData: data];
+    [NSFileHandle.fileHandleWithStandardOutput writeData: data];
 }
 
 - (void) handleREPLInput: (NSString *) input {
