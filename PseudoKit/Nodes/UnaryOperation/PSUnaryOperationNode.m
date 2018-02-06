@@ -45,6 +45,7 @@
 
 - (BOOL) isEqualToUnaryOperationNode: (PSUnaryOperationNode *) node {
     return node != NULL
+        && self.type == node.type
         && [self.node isEqual: node.node];
 }
 

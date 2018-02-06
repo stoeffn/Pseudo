@@ -45,6 +45,7 @@
 
 - (BOOL) isEqualToControlFlowNode: (PSControlFlowNode *) node {
     return node != NULL
+        && self.type == node.type
         && ((!self.expressionNode && !node.expressionNode) || [self.expressionNode isEqual: node.expressionNode]);
 }
 

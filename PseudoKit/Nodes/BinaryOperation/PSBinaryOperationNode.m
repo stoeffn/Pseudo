@@ -49,6 +49,7 @@
 
 - (BOOL) isEqualToBinaryOperationNode: (PSBinaryOperationNode *) node {
     return node != NULL
+        && self.type == node.type
         && [self.leftNode isEqual: node.leftNode]
         && [self.rightNode isEqual: node.rightNode];
 }
