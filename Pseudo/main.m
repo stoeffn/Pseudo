@@ -7,12 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PseudoKit.h"
+#import "Application.h"
 
 int main(int argc, const char *argv[]) {
     @autoreleasepool {
-        PSREPL *repl = [[PSREPL alloc] initWithInterpreter: [[PSJavaScriptInterpreter alloc] init]];
-        [repl enter];
+        Application *application = [[Application alloc] init];
+        return [application executeWithArguments: NSProcessInfo.processInfo.arguments];
     }
-    return 0;
 }

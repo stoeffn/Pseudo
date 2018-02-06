@@ -52,6 +52,7 @@
 		2421AFBE202507260007FC7A /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2421AFBC202507260007FC7A /* Constants.m */; };
 		2421AFDE2025F8000007FC7A /* PSLiteralNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 2421AFDC2025F8000007FC7A /* PSLiteralNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2421AFDF2025F8000007FC7A /* PSLiteralNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2421AFDD2025F8000007FC7A /* PSLiteralNode.m */; };
+		2439E1A32029EE3300E82389 /* Application.m in Sources */ = {isa = PBXBuildFile; fileRef = 2439E1A22029EE3300E82389 /* Application.m */; };
 		2470F0132024BA3D00AE9CD8 /* PseudoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2470F00A2024BA3D00AE9CD8 /* PseudoKit.framework */; };
 		2470F01A2024BA3D00AE9CD8 /* PseudoKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470F00C2024BA3D00AE9CD8 /* PseudoKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2470F0252024BA7600AE9CD8 /* PSLexer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EFDB2023A49500AE9CD8 /* PSLexer.m */; };
@@ -172,6 +173,8 @@
 		2421AFBC202507260007FC7A /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		2421AFDC2025F8000007FC7A /* PSLiteralNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSLiteralNode.h; sourceTree = "<group>"; };
 		2421AFDD2025F8000007FC7A /* PSLiteralNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSLiteralNode.m; sourceTree = "<group>"; };
+		2439E1A12029EE3300E82389 /* Application.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
+		2439E1A22029EE3300E82389 /* Application.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Application.m; sourceTree = "<group>"; };
 		244C6C2A20242EC800778B71 /* PSParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSParser.h; sourceTree = "<group>"; };
 		244C6C2B20242EC800778B71 /* PSParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSParser.m; sourceTree = "<group>"; };
 		2470EFDA2023A49500AE9CD8 /* PSLexer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSLexer.h; sourceTree = "<group>"; };
@@ -615,6 +618,8 @@
 		247111672028DC9D00A79633 /* Pseudo */ = {
 			isa = PBXGroup;
 			children = (
+				2439E1A12029EE3300E82389 /* Application.h */,
+				2439E1A22029EE3300E82389 /* Application.m */,
 				247111712028DC9D00A79633 /* main.m */,
 				247111702028DC9D00A79633 /* Info.plist */,
 				247111732028DC9D00A79633 /* Pseudo.entitlements */,
@@ -866,6 +871,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2439E1A32029EE3300E82389 /* Application.m in Sources */,
 				247111722028DC9D00A79633 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
