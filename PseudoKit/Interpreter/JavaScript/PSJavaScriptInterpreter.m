@@ -35,7 +35,10 @@
 #pragma mark - Executing Code
 
 - (nullable NSString *) executeNode: (nonnull PSNode *) node {
-    return [self.context evaluateScript: node.javaScriptCode].description;
+    JSValue *resultValue = [self.context evaluateScript: node.javaScriptCode];
+    if (!resultValue || resultValue.isUndefined) return NULL;
+
+    return resultValue.description;
 }
 
 - (nullable NSString *) executePseudoCode: (nonnull NSString *) code
