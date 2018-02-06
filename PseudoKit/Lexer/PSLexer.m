@@ -235,7 +235,7 @@
     }
 
     if (![tokenTypes containsObject: @(token.type)]) {
-        *error = PSParser.failedExpectationError;
+        *error = [PSParser expectedOneOfTokenTypes: tokenTypes butFoundTokenTypeError: token.type];
         return NULL;
     }
 

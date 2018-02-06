@@ -12,7 +12,8 @@ FOUNDATION_EXPORT NSString * _Nonnull const PSParserErrorDomain;
 
 @interface PSParser (Errors)
 
-+ (nonnull NSError *) failedExpectationError;
++ (nonnull NSError *) expectedOneOfTokenTypes: (nonnull NSSet<NSNumber *> *) expectedTokenTypes
+                       butFoundTokenTypeError: (PSTokenTypes) actualTokenType;
 
 + (nonnull NSError *) endOfFileError;
 
