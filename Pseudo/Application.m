@@ -36,7 +36,7 @@
     }
 
     if ([arguments[1] isEqualToString: @"-i"]) {
-        [self executeWithArguments: [arguments subarrayWithRange: NSMakeRange(2, arguments.count - 2)]];
+        [self executeFilesAtFilePaths: [arguments subarrayWithRange: NSMakeRange(2, arguments.count - 2)]];
         return [self enterREPL];
     }
 
@@ -44,12 +44,31 @@
         return [self printInvalidArgumentsError];
     }
 
-    return [self executeWithArguments: [arguments subarrayWithRange: NSMakeRange(1, arguments.count - 1)]];
+    return [self executeFilesAtFilePaths: [arguments subarrayWithRange: NSMakeRange(1, arguments.count - 1)]];
 }
 
 #pragma mark - Commands
 
 - (BOOL) executeFilesAtFilePaths: (NSArray<NSString *> *) filePaths {
+    __block NSError *error;
+
+    [filePaths enumerateObjectsUsingBlock: ^(NSString * _Nonnull filePath, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (![filePath hasSuffix: PSDefaultFileExtension]) {
+            filePath = [filePath stringByAppendingString: PSDefaultFileExtension];
+        }
+
+        NSString *code = [NSString stringWithContentsOfFile: filePath encoding: NSUTF8StringEncoding error: &error];
+        if (error) *stop = YES;
+
+        [self.interpreter executePseudoCode: code error: &error];
+        if (error) *stop = YES;
+    }];
+
+    if (error) {
+        [PSConsole writeString: [[NSString alloc] initWithFormat: @"%@\n", error.localizedDescription]];
+        return NO;
+    }
+
     return YES;
 }
 

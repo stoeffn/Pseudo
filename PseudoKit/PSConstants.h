@@ -9,3 +9,5 @@
 #import <Foundation/Foundation.h>
 
 FOUNDATION_EXPORT NSString *const PSParserErrorDomain;
+
+FOUNDATION_EXPORT NSString *const PSDefaultFileExtension;
