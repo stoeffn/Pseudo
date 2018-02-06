@@ -1,11 +1,11 @@
 //
-//  Constants.m
+//  PSConstants.h
 //  PseudoKit
 //
 //  Created by Steffen Ryll on 02.02.18.
 //  Copyright © 2018 Steffen Ryll. All rights reserved.
 //
 
-#import "Constants.h"
+#import <Foundation/Foundation.h>
 
-NSString *const PSParserErrorDomain = @"SteffenRyll.Pseudo.Parser";
+FOUNDATION_EXPORT NSString *const PSParserErrorDomain;

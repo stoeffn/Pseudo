@@ -6,8 +6,8 @@
 //  Copyright © 2018 Steffen Ryll. All rights reserved.
 //
 
-#import "Constants.h"
-#import "Macros.h"
+#import "PSConstants.h"
+#import "PSMacros.h"
 #import "PSLexer.h"
 #import "PSToken.h"
 #import "PSToken+Types.h"

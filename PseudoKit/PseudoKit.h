@@ -14,8 +14,8 @@ FOUNDATION_EXPORT double PseudoKitVersionNumber;
 //! Project version string for PseudoKit.
 FOUNDATION_EXPORT const unsigned char PseudoKitVersionString[];
 
-#import <PseudoKit/Constants.h>
-#import <PseudoKit/Macros.h>
+#import <PseudoKit/PSConstants.h>
+#import <PseudoKit/PSMacros.h>
 
 #import <PseudoKit/PSReading.h>
 #import <PseudoKit/PSStringReader.h>
