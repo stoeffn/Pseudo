@@ -50,7 +50,7 @@
     return [self executeNode: node];
 }
 
-#pragma mark - Providing Native Functions
+#pragma mark - Providing Native Algorithms
 
 - (void) setObject: (nonnull id) object forKeyedSubscript: (nullable NSObject<NSCopying> *) key {
     self.context[key] = object;

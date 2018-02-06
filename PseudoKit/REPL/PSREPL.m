@@ -28,7 +28,7 @@
         _isActive = NO;
         _buffer = [[NSMutableArray alloc] init];
 
-        [self setUpNativeFunctions];
+        [self setUpNativeAlgorithms];
     }
     return self;
 }
@@ -38,6 +38,8 @@
 - (void) enter {
     self.isActive = YES;
 
+    [self printWelcomeMessage];
+
     while (self.isActive) {
         [self promptForInput];
         [self handleREPLInput: [PSConsole awaitSanitizedString]];
@@ -46,6 +48,26 @@
 
 - (void) leave {
     self.isActive = NO;
+}
+
+- (void) printWelcomeMessage {
+    NSString *version = NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"];
+    NSString *build = NSBundle.mainBundle.infoDictionary[@"CFBundleVersion"];
+    NSString *welcomeMessage = [[NSString alloc] initWithFormat: @"Pseudo %@ (Build %@)\n"
+                                                                  "Type \"help()\" for more information.\n", version, build];
+    [PSConsole writeString: welcomeMessage];
+}
+
+- (void) printHelpMessage {
+    NSString *helpMessage =
+    @"Pseudo is a pseudo-language you can actually execute!\n"
+    "This REPL supports multi-line input. Use [CTRL] + [D] to exit multi-line-input or the REPL.\n"
+    "\n"
+    "NATIVE ALGORITHMS:\n"
+    "print(Obj): Prints the object given to standard output\n"
+    "input():    String: Reads one line of text from standard input\n"
+    "exit():     Exits this REPL\n";
+    [PSConsole writeString: helpMessage];
 }
 
 - (void) promptForInput {
@@ -91,9 +113,9 @@
     }
 }
 
-#pragma mark - Providing Native Functions
+#pragma mark - Providing Native Algorithms
 
-- (void) setUpNativeFunctions {
+- (void) setUpNativeAlgorithms {
     __weak PSREPL *weakSelf = self;
 
     self.interpreter[@"print"] = ^(NSString *string) {
@@ -101,6 +123,9 @@
     };
     self.interpreter[@"input"] = ^NSString *() {
         return [PSConsole awaitSanitizedString];
+    };
+    self.interpreter[@"help"] = ^void() {
+        [weakSelf printHelpMessage];
     };
     self.interpreter[@"exit"] = ^void() {
         [weakSelf leave];
