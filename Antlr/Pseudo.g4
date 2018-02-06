@@ -48,7 +48,7 @@ assignment
 // Conditions
 
 condition
-    : IF expression THEN blockList (ELSE blockList)? POINT
+    : IF expression THEN blockList POINT (ELSE blockList POINT)?
     ;
 
 // Loops

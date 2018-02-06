@@ -1,6 +1,9 @@
 true;
 S.first()[1].test();
 
+algorithm empty():
+    .
+
 if not true then
     return S.
 
