@@ -85,6 +85,7 @@
         _delimiters = NSMutableCharacterSet.whitespaceAndNewlineCharacterSet;
         [_delimiters formUnionWithCharacterSet: NSMutableCharacterSet.controlCharacterSet];
         [_delimiters formUnionWithCharacterSet: NSMutableCharacterSet.illegalCharacterSet];
+        [_delimiters addCharactersInString: @""]; // Characters produced by arrow keys.
     });
     return _delimiters;
 }
