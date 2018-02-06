@@ -18,7 +18,7 @@
     [self.nodes enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {
         [code addObject: ((PSNode *) obj).javaScriptCode];
     }];
-    return [code componentsJoinedByString: @";"];
+    return [code componentsJoinedByString: @"; "];
 }
 
 @end

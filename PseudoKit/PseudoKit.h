@@ -49,10 +49,12 @@ FOUNDATION_EXPORT const unsigned char PseudoKitVersionString[];
 #import <PseudoKit/PSJavaScriptTranspilable.h>
 #import <PseudoKit/PSJavaScriptInterpreter.h>
 #import <PseudoKit/PSNode+JavaScript.h>
+#import <PseudoKit/PSAlgorithmNode+JavaScript.h>
+#import <PseudoKit/PSBinaryOperationNode+JavaScript.h>
 #import <PseudoKit/PSCompoundNode+JavaScript.h>
 #import <PseudoKit/PSConditionNode+JavaScript.h>
-#import <PseudoKit/PSBinaryOperationNode+JavaScript.h>
-#import <PseudoKit/PSLiteralNode+JavaScript.h>
 #import <PseudoKit/PSControlFlowNode+JavaScript.h>
+#import <PseudoKit/PSLiteralNode+JavaScript.h>
+#import <PseudoKit/PSUnaryOperationNode+JavaScript.h>
 
 #import <PseudoKit/PSREPL.h>

@@ -14,7 +14,7 @@
 		240ABDD62028E21F00543C40 /* PSUnaryOperationNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 240ABDD12028E21F00543C40 /* PSUnaryOperationNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		240ABDD72028E21F00543C40 /* PSUnaryOperationNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 240ABDD22028E21F00543C40 /* PSUnaryOperationNode.m */; };
 		240ABDD82028E21F00543C40 /* PSUnaryOperationNode+Types.m in Sources */ = {isa = PBXBuildFile; fileRef = 240ABDD32028E21F00543C40 /* PSUnaryOperationNode+Types.m */; };
-		240ABDDE2028E3C200543C40 /* PSUnaryOperationNode+JavaScript.h in Headers */ = {isa = PBXBuildFile; fileRef = 240ABDDC2028E3C200543C40 /* PSUnaryOperationNode+JavaScript.h */; };
+		240ABDDE2028E3C200543C40 /* PSUnaryOperationNode+JavaScript.h in Headers */ = {isa = PBXBuildFile; fileRef = 240ABDDC2028E3C200543C40 /* PSUnaryOperationNode+JavaScript.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		240ABDDF2028E3C200543C40 /* PSUnaryOperationNode+JavaScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 240ABDDD2028E3C200543C40 /* PSUnaryOperationNode+JavaScript.m */; };
 		240ABDE72028F06D00543C40 /* PSControlFlowTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 240ABDE22028F06D00543C40 /* PSControlFlowTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		240ABDE82028F06D00543C40 /* PSControlFlowNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 240ABDE32028F06D00543C40 /* PSControlFlowNode.m */; };
@@ -33,7 +33,7 @@
 		240ABE032029AA3800543C40 /* PSConditionNode+JavaScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 240ABE012029AA3700543C40 /* PSConditionNode+JavaScript.m */; };
 		240ABE082029AD4700543C40 /* PSAlgorithmNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 240ABE062029AD4700543C40 /* PSAlgorithmNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		240ABE092029AD4700543C40 /* PSAlgorithmNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 240ABE072029AD4700543C40 /* PSAlgorithmNode.m */; };
-		240ABE0C2029AD4E00543C40 /* PSAlgorithmNode+JavaScript.h in Headers */ = {isa = PBXBuildFile; fileRef = 240ABE0A2029AD4D00543C40 /* PSAlgorithmNode+JavaScript.h */; };
+		240ABE0C2029AD4E00543C40 /* PSAlgorithmNode+JavaScript.h in Headers */ = {isa = PBXBuildFile; fileRef = 240ABE0A2029AD4D00543C40 /* PSAlgorithmNode+JavaScript.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		240ABE0D2029AD4E00543C40 /* PSAlgorithmNode+JavaScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 240ABE0B2029AD4D00543C40 /* PSAlgorithmNode+JavaScript.m */; };
 		2421AFBD202507260007FC7A /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 2421AFBB202507260007FC7A /* Constants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2421AFBE202507260007FC7A /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2421AFBC202507260007FC7A /* Constants.m */; };
