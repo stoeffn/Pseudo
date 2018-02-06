@@ -28,19 +28,19 @@
 - (nonnull instancetype) initWithType: (PSLiteralTypes) type
                                string: (nullable NSString *) string
                                number: (nullable NSNumber *) number {
-    return [self initWithType: type string: string number: number];
+    return [self initWithToken: NULL type: type string: string number: number];
 }
 
 - (nonnull instancetype) initWithType: (PSLiteralTypes) type {
-    return [self initWithType: type string: NULL number: NULL];
+    return [self initWithToken: NULL type: type string: NULL number: NULL];
 }
 
 - (nonnull instancetype) initWithString: (nullable NSString *) string {
-    return [self initWithType: PSLiteralTypesString string: string number: NULL];
+    return [self initWithToken: NULL type: PSLiteralTypesString string: string number: NULL];
 }
 
 - (nonnull instancetype) initWithNumber: (nullable NSNumber *) number {
-    return [self initWithType: PSLiteralTypesNumber string: NULL number: number];
+    return [self initWithToken: NULL type: PSLiteralTypesNumber string: NULL number: number];
 }
 
 #pragma mark - Description
