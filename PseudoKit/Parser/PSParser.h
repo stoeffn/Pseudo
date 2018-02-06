@@ -63,4 +63,8 @@
 
 - (nullable PSNode *) literalWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error;
 
+#pragma mark Calls
+
+- (nullable PSNode *) anyCallWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error;
+
 @end

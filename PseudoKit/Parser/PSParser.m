@@ -289,6 +289,8 @@
         node = [[PSUnaryOperationNode alloc] initWithToken: token
                                                       type: PSUnaryOperationTypesNegation
                                                       node: [self scalarWithError: error]];
+    } else if (token.type == PSTokenTypesIdentifier) {
+        node = [self anyCallWithError: error];
     } else {
         node = [self literalWithError: error];
     }
@@ -306,6 +308,16 @@
                                            type: [PSLiteralNode typeForTokenType: token.type].integerValue
                                          string: token.string
                                          number: token.number];
+}
+
+#pragma mark Calls
+
+- (nullable PSNode *) anyCallWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error {
+    PSToken *identifierToken = [self.lexer expectTokenTypes: PSTokenTypesIdentifier error: error];
+
+    if (self.lexer.currentToken.type == PSTokenTypesOpeningParenthesis) {
+
+    }
 }
 
 @end
