@@ -20,7 +20,7 @@ NSString * _Nonnull const PSParserErrorDomain = @"SteffenRyll.Pseudo.Parser";
         [expectedTokenTypeDescriptions addObject: [PSToken descriptionForTokenType: tokenType.integerValue]];
     }];
 
-    NSString *errorMessage = [[NSString alloc] initWithFormat: @"Expected %@ but found %@",
+    NSString *errorMessage = [[NSString alloc] initWithFormat: @"Expected %@ but found %@.",
                               [expectedTokenTypeDescriptions componentsJoinedByString: @", "],
                               [PSToken descriptionForTokenType: actualTokenType]];
 

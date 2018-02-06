@@ -118,6 +118,12 @@
 - (nullable PSToken *) nextStringTokenFromReader: (id<PSReading>) reader {
     if (![reader.currentCharacter isEqualToString: PSToken.stringStartCharacter]) return NULL;
 
+    if ([reader.nextCharacter isEqualToString: PSToken.stringStartCharacter]) {
+        [reader advance];
+        [reader advance];
+        return [[PSToken alloc] initWithType: PSTokenTypesString string: @""];
+    }
+
     NSMutableArray<NSString *> *buffer = [[NSMutableArray alloc] init];
 
     while (reader.currentCharacter) {
@@ -126,7 +132,7 @@
         BOOL isStringEscapeCharacter = [reader.currentCharacter isEqualToString: PSToken.stringEscapeCharacter];
         BOOL isFollowedByStringStartCharacter = [reader.nextCharacter isEqualToString: PSToken.stringStartCharacter];
 
-        if (!isStringEscapeCharacter) [buffer addObject: reader.currentCharacter];
+        if (!isStringEscapeCharacter && reader.currentCharacter) [buffer addObject: reader.currentCharacter];
 
         if (!isStringEscapeCharacter && isFollowedByStringStartCharacter) break;
     };
@@ -163,8 +169,7 @@
     NSString *rawToken = [self rawTokenFromBuffer: buffer];
     NSNumber *number = [PSToken.numberFormatter numberFromString: rawToken];
 
-    if (number != NULL) return [[PSToken alloc] initWithType: PSTokenTypesNumber number: number];
-    return NULL;
+    return [[PSToken alloc] initWithType: PSTokenTypesNumber number: number];
 }
 
 - (nullable PSToken *) nextKeywordOrIdentifierTokenFromReader: (id<PSReading>) reader {
