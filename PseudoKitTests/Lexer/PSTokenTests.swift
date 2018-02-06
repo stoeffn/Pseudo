@@ -13,7 +13,7 @@ final class PSTokenTests: XCTestCase {
     // MARK: - Equality
 
     func testEquality_ClosingBrace_true() {
-        XCTAssertEqual(PSToken(type: .closingParanthesis), PSToken(type: .closingParanthesis))
+        XCTAssertEqual(PSToken(type: .closingParenthesis), PSToken(type: .closingParenthesis))
     }
 
     func testEquality_SameIdentifiers_true() {
@@ -33,6 +33,6 @@ final class PSTokenTests: XCTestCase {
     }
 
     func testEquality_ClosingBraceAndColon_true() {
-        XCTAssertNotEqual(PSToken(type: .closingParanthesis), PSToken(type: .colon))
+        XCTAssertNotEqual(PSToken(type: .closingParenthesis), PSToken(type: .colon))
     }
 }

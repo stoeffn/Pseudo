@@ -197,7 +197,7 @@
                                                            identifier: identifierToken.string]];
     }
 
-    [self.lexer expectTokenTypes: PSTokenTypesClosingParanthesis error: error];
+    [self.lexer expectTokenTypes: PSTokenTypesClosingParenthesis error: error];
 
     if (*error) return NULL;
     return parameters;
@@ -292,7 +292,7 @@
     if (token.type == PSTokenTypesOpeningParenthesis) {
         [self.lexer expectTokenTypes: PSTokenTypesOpeningParenthesis error: error];
         node = [self expressionWithError: error];
-        [self.lexer expectTokenTypes: PSTokenTypesClosingParanthesis error: error];
+        [self.lexer expectTokenTypes: PSTokenTypesClosingParenthesis error: error];
     } else if (token.type == PSTokenTypesMinus) {
         [self.lexer expectTokenTypes: PSTokenTypesMinus error: error];
         node = [[PSUnaryOperationNode alloc] initWithToken: token
@@ -349,18 +349,18 @@
 
     [self.lexer expectTokenTypes: PSTokenTypesOpeningParenthesis error: error];
 
-    while (self.lexer.currentToken.type != PSTokenTypesClosingParanthesis) {
+    while (self.lexer.currentToken.type != PSTokenTypesClosingParenthesis) {
         PSNode *expressionNode = [self expressionWithError: error];
 
         if (*error) return NULL;
         [argumentNodes addObject: expressionNode];
 
-        if (self.lexer.currentToken.type != PSTokenTypesClosingParanthesis) {
+        if (self.lexer.currentToken.type != PSTokenTypesClosingParenthesis) {
             [self.lexer expectTokenTypes: PSTokenTypesComma error: error];
         }
     }
 
-    [self.lexer expectTokenTypes: PSTokenTypesClosingParanthesis error: error];
+    [self.lexer expectTokenTypes: PSTokenTypesClosingParenthesis error: error];
 
     if (*error) return NULL;
     return argumentNodes;

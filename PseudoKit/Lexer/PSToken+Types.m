@@ -23,7 +23,7 @@
 
                     @".":           @(PSTokenTypesPoint),
                     @"(":           @(PSTokenTypesOpeningParenthesis),
-                    @")":           @(PSTokenTypesClosingParanthesis),
+                    @")":           @(PSTokenTypesClosingParenthesis),
                     @"[":           @(PSTokenTypesOpeningBracket),
                     @"]":           @(PSTokenTypesClosingBracket),
 
@@ -123,7 +123,7 @@
         case PSTokenTypesSemicolon:             return @"SEMICOLON";
         case PSTokenTypesPoint:                 return @"POINT";
         case PSTokenTypesOpeningParenthesis:    return @"OPENING_PARENTHESIS";
-        case PSTokenTypesClosingParanthesis:    return @"CLOSING_PARENTHESIS";
+        case PSTokenTypesClosingParenthesis:    return @"CLOSING_PARENTHESIS";
         case PSTokenTypesOpeningBracket:        return @"OPENING_BRACKET";
         case PSTokenTypesClosingBracket:        return @"CLOSING_BRACKET";
         case PSTokenTypesPlus:                  return @"PLUS";

@@ -13,7 +13,7 @@ typedef NS_ENUM(NSInteger, PSTokenTypes) {
 
     PSTokenTypesPoint,
     PSTokenTypesOpeningParenthesis,
-    PSTokenTypesClosingParanthesis,
+    PSTokenTypesClosingParenthesis,
     PSTokenTypesOpeningBracket,
     PSTokenTypesClosingBracket,
 

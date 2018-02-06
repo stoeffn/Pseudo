@@ -25,7 +25,7 @@ final class ParserTests: XCTestCase {
         let lexer = PSLexer(reader: reader)
         let parser = PSParser(lexer: lexer)
 
-        let node = PSBinaryOperationNode(type: .addition, left: PSLiteralNode(number: 1), right: PSLiteralNode(number: 1))
+        let node = PSBinaryOperationNode(type: .addition, leftNode: PSLiteralNode(number: 1), rightNode: PSLiteralNode(number: 1))
         XCTAssertEqual(try parser.expression(), node)
     }
 
@@ -34,8 +34,8 @@ final class ParserTests: XCTestCase {
         let lexer = PSLexer(reader: reader)
         let parser = PSParser(lexer: lexer)
 
-        let left = PSBinaryOperationNode(type: .addition, left: PSLiteralNode(number: 1), right: PSLiteralNode(number: 2))
-        let node = PSBinaryOperationNode(type: .addition, left: left, right: PSLiteralNode(number: 3))
+        let left = PSBinaryOperationNode(type: .addition, leftNode: PSLiteralNode(number: 1), rightNode: PSLiteralNode(number: 2))
+        let node = PSBinaryOperationNode(type: .addition, leftNode: left, rightNode: PSLiteralNode(number: 3))
         XCTAssertEqual(try parser.expression(), node)
     }
 
@@ -44,8 +44,8 @@ final class ParserTests: XCTestCase {
         let lexer = PSLexer(reader: reader)
         let parser = PSParser(lexer: lexer)
 
-        let right = PSBinaryOperationNode(type: .multiplication, left: PSLiteralNode(number: 2), right: PSLiteralNode(number: 3))
-        let node = PSBinaryOperationNode(type: .addition, left: PSLiteralNode(number: 1), right: right)
+        let right = PSBinaryOperationNode(type: .multiplication, leftNode: PSLiteralNode(number: 2), rightNode: PSLiteralNode(number: 3))
+        let node = PSBinaryOperationNode(type: .addition, leftNode: PSLiteralNode(number: 1), rightNode: right)
         XCTAssertEqual(try parser.expression(), node)
     }
 
@@ -64,7 +64,7 @@ final class ParserTests: XCTestCase {
         let lexer = PSLexer(reader: reader)
         let parser = PSParser(lexer: lexer)
 
-        let node = PSBinaryOperationNode(type: .multiplication, left: PSLiteralNode(number: 2), right: PSLiteralNode(number: 2))
+        let node = PSBinaryOperationNode(type: .multiplication, leftNode: PSLiteralNode(number: 2), rightNode: PSLiteralNode(number: 2))
         XCTAssertEqual(try parser.term(), node)
     }
 
