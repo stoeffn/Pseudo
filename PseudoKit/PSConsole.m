@@ -13,7 +13,7 @@
 #pragma mark - Reading and Writing
 
 + (nullable NSString *) awaitString {
-    NSData *data = NSFileHandle.fileHandleWithStandardInput.availableData;
+    NSData *data = [NSFileHandle.fileHandleWithStandardInput availableData];
     if (!data.length) return NULL;
 
     return [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];

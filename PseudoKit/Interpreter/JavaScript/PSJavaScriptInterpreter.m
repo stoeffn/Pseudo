@@ -26,6 +26,8 @@
 - (nonnull instancetype) init {
     if (self = [super init]) {
         _context = [[JSContext alloc] init];
+
+        [self setUpNativeFunctionsInContext: _context];
     }
     return self;
 }
@@ -45,6 +47,17 @@
 
     if (*error) return NULL;
     return [self executeNode: node];
+}
+
+#pragma mark - Native Functions
+
+- (void) setUpNativeFunctionsInContext: (JSContext *) context {
+    context[@"print"] = ^(NSString *string) {
+        [PSConsole writeString: [[NSString alloc] initWithFormat: @"%@\n", string]];
+    };
+    context[@"input"] = ^NSString *() {
+        return [PSConsole awaitSanitizedString];
+    };
 }
 
 @end
