@@ -8,10 +8,13 @@
 
 #import "PSREPL.h"
 #import "PSConsole.h"
+#import "PSParser+Errors.h"
 
 @interface PSREPL ()
 
 @property (nonatomic) BOOL isActive;
+
+@property (nonatomic, nonnull) NSMutableArray<NSString *> *buffer;
 
 @end
 
@@ -22,6 +25,8 @@
 - (nonnull instancetype) initWithInterpreter: (nonnull id<PSInterpreting>) interpreter {
     if (self = [super init]) {
         _interpreter = interpreter;
+        _isActive = NO;
+        _buffer = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -32,8 +37,7 @@
     self.isActive = YES;
 
     while (self.isActive) {
-        [PSConsole writeString: @">>> "];
-
+        [self promptForInput];
         NSString *input = [PSConsole awaitSanitizedString];
         if (!input) return [self leave];
 
@@ -47,11 +51,21 @@
     self.isActive = NO;
 }
 
-- (void) handleREPLInput: (NSString *) input {
+- (void) handleREPLInput: (nonnull NSString *) input {
     if (input.length == 0) return;
 
+    [self.buffer addObject: input];
+
+    NSString *code = [self.buffer componentsJoinedByString: @"\n"];
+
     NSError *error;
-    NSString *result = [self.interpreter executePseudoCode: input error: &error];
+    NSString *result = [self.interpreter executePseudoCode: code error: &error];
+
+    if (error && [error.domain isEqualToString: PSParserErrorDomain] && error.code == PSParserErrorTypesEndOfFile) {
+        return;
+    }
+
+    [self.buffer removeAllObjects];
 
     if (error) {
         [PSConsole writeString: [[NSString alloc] initWithFormat: @"%@\n", error.localizedDescription]];
@@ -60,6 +74,14 @@
 
     if (result && result.length > 0) {
         [PSConsole writeString: [[NSString alloc] initWithFormat: @"%@\n", result]];
+    }
+}
+
+- (void) promptForInput {
+    if (self.buffer.count == 0) {
+        [PSConsole writeString: @">>> "];
+    } else {
+        [PSConsole writeString: @"... "];
     }
 }
 
