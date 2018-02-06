@@ -116,28 +116,30 @@
 }
 
 - (nullable PSToken *) nextStringTokenFromReader: (id<PSReading>) reader {
-    if (![reader.currentCharacter isEqualToString: PSToken.stringStartCharacter]) return NULL;
-
-    if ([reader.nextCharacter isEqualToString: PSToken.stringStartCharacter]) {
-        [reader advance];
-        [reader advance];
-        return [[PSToken alloc] initWithType: PSTokenTypesString string: @""];
-    }
-
-    NSMutableArray<NSString *> *buffer = [[NSMutableArray alloc] init];
-
-    while (reader.currentCharacter) {
-        [reader advance];
-
-        BOOL isStringEscapeCharacter = [reader.currentCharacter isEqualToString: PSToken.stringEscapeCharacter];
-        BOOL isFollowedByStringStartCharacter = [reader.nextCharacter isEqualToString: PSToken.stringStartCharacter];
-
-        if (!isStringEscapeCharacter && reader.currentCharacter) [buffer addObject: reader.currentCharacter];
-
-        if (!isStringEscapeCharacter && isFollowedByStringStartCharacter) break;
-    };
+    if (![reader.currentCharacter isEqualToString: PSToken.stringDelimiterCharacter]) return NULL;
 
     [reader advance];
+
+    NSMutableArray<NSString *> *buffer = [[NSMutableArray alloc] init];
+    BOOL wasLastCharacterEscaping = NO;
+
+    while (reader.currentCharacter) {
+        BOOL isEscapeCharacter = [reader.currentCharacter isEqualToString: PSToken.stringEscapeCharacter];
+        BOOL isStringDelimiterCharacter = [reader.currentCharacter isEqualToString: PSToken.stringDelimiterCharacter];
+
+        if (wasLastCharacterEscaping) {
+            NSString *escapedCharacter = PSToken.escapableCharacters[reader.currentCharacter];
+            [buffer addObject: escapedCharacter ? escapedCharacter : reader.currentCharacter];
+        } else if (isStringDelimiterCharacter) {
+            break;
+        } else if (!isEscapeCharacter) {
+            [buffer addObject: reader.currentCharacter];
+        }
+
+        wasLastCharacterEscaping = isEscapeCharacter;
+        [reader advance];
+    }
+
     [reader advance];
 
     NSString *string = [self rawTokenFromBuffer: buffer];

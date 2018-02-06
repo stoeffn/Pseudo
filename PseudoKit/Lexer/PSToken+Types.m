@@ -95,12 +95,24 @@
     return _delimiters;
 }
 
-+ (nonnull NSString *) stringStartCharacter {
++ (nonnull NSString *) stringDelimiterCharacter {
     return @"\"";
 }
 
 + (nonnull NSString *) stringEscapeCharacter {
     return @"\\";
+}
+
++ (nonnull NSDictionary<NSString *, NSString *> *) escapableCharacters {
+    static NSDictionary *_characters;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _characters = @{@"\\":  @"\\",
+                        @"\"":  @"\"",
+                        @"n":   @"\n",
+                        @"t":   @"\t"};
+    });
+    return _characters;
 }
 
 + (nonnull NSString *) floatingPointCharacter {

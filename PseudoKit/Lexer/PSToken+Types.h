@@ -18,9 +18,11 @@
 
 + (nonnull NSCharacterSet *) delimiterCharacterSet;
 
-+ (nonnull NSString *) stringStartCharacter;
++ (nonnull NSString *) stringDelimiterCharacter;
 
 + (nonnull NSString *) stringEscapeCharacter;
+
++ (nonnull NSDictionary<NSString *, NSString *> *) escapableCharacters;
 
 + (nonnull NSString *) floatingPointCharacter;
 
