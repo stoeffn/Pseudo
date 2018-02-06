@@ -45,8 +45,6 @@
 }
 
 - (void) leave {
-    [PSConsole writeString: @"\n"];
-
     self.isActive = NO;
 }
 
@@ -64,7 +62,10 @@
         return [PSConsole writeString: @"\n"];
     }
 
-    if (!input) return [self leave];
+    if (!input) {
+        [self leave];
+        return [PSConsole writeString: @"\n"];
+    }
 
     if (input.length == 0) return;
 
@@ -93,11 +94,16 @@
 #pragma mark - Providing Native Functions
 
 - (void) setUpNativeFunctions {
+    __weak PSREPL *weakSelf = self;
+
     self.interpreter[@"print"] = ^(NSString *string) {
         [PSConsole writeString: [[NSString alloc] initWithFormat: @"%@\n", string]];
     };
     self.interpreter[@"input"] = ^NSString *() {
         return [PSConsole awaitSanitizedString];
+    };
+    self.interpreter[@"exit"] = ^void() {
+        [weakSelf leave];
     };
 }
 
