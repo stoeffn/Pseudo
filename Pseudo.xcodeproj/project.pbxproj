@@ -741,6 +741,7 @@
 				247111632028DC9D00A79633 /* Frameworks */,
 				247111642028DC9D00A79633 /* Resources */,
 				240ABDCD2028DD6400543C40 /* Embed Frameworks */,
+				24B80EA5202A0C8C002BFBB0 /* Remove default.profraw File */,
 			);
 			buildRules = (
 			);
@@ -824,6 +825,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		24B80EA5202A0C8C002BFBB0 /* Remove default.profraw File */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Remove default.profraw File";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rm \"$BUILD_ROOT/Debug/Pseudo.app/Contents/MacOS/default.profraw\" 2> /dev/null\ntrue\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2470F0052024BA3D00AE9CD8 /* Sources */ = {
