@@ -53,6 +53,9 @@
 		2421AFDE2025F8000007FC7A /* PSLiteralNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 2421AFDC2025F8000007FC7A /* PSLiteralNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2421AFDF2025F8000007FC7A /* PSLiteralNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2421AFDD2025F8000007FC7A /* PSLiteralNode.m */; };
 		2439E1A32029EE3300E82389 /* Application.m in Sources */ = {isa = PBXBuildFile; fileRef = 2439E1A22029EE3300E82389 /* Application.m */; };
+		2439E1AA202A043A00E82389 /* PSParser+Errors.h in Headers */ = {isa = PBXBuildFile; fileRef = 2439E1A8202A043A00E82389 /* PSParser+Errors.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2439E1AB202A043A00E82389 /* PSParser+Errors.m in Sources */ = {isa = PBXBuildFile; fileRef = 2439E1A9202A043A00E82389 /* PSParser+Errors.m */; };
+		2439E1AD202A047900E82389 /* PSParserErrorTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 2439E1AC202A044500E82389 /* PSParserErrorTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2470F0132024BA3D00AE9CD8 /* PseudoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2470F00A2024BA3D00AE9CD8 /* PseudoKit.framework */; };
 		2470F01A2024BA3D00AE9CD8 /* PseudoKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 2470F00C2024BA3D00AE9CD8 /* PseudoKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2470F0252024BA7600AE9CD8 /* PSLexer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EFDB2023A49500AE9CD8 /* PSLexer.m */; };
@@ -175,6 +178,9 @@
 		2421AFDD2025F8000007FC7A /* PSLiteralNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSLiteralNode.m; sourceTree = "<group>"; };
 		2439E1A12029EE3300E82389 /* Application.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
 		2439E1A22029EE3300E82389 /* Application.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Application.m; sourceTree = "<group>"; };
+		2439E1A8202A043A00E82389 /* PSParser+Errors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PSParser+Errors.h"; sourceTree = "<group>"; };
+		2439E1A9202A043A00E82389 /* PSParser+Errors.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PSParser+Errors.m"; sourceTree = "<group>"; };
+		2439E1AC202A044500E82389 /* PSParserErrorTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSParserErrorTypes.h; sourceTree = "<group>"; };
 		244C6C2A20242EC800778B71 /* PSParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSParser.h; sourceTree = "<group>"; };
 		244C6C2B20242EC800778B71 /* PSParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSParser.m; sourceTree = "<group>"; };
 		2470EFDA2023A49500AE9CD8 /* PSLexer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSLexer.h; sourceTree = "<group>"; };
@@ -427,6 +433,9 @@
 			children = (
 				244C6C2A20242EC800778B71 /* PSParser.h */,
 				244C6C2B20242EC800778B71 /* PSParser.m */,
+				2439E1A8202A043A00E82389 /* PSParser+Errors.h */,
+				2439E1A9202A043A00E82389 /* PSParser+Errors.m */,
+				2439E1AC202A044500E82389 /* PSParserErrorTypes.h */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -659,7 +668,9 @@
 				240ABDFF2029A69500543C40 /* PSConditionNode.h in Headers */,
 				240ABE1D2029C79200543C40 /* PSCallNode+JavaScript.h in Headers */,
 				240ABE242029C7B300543C40 /* PSCallNode+Types.h in Headers */,
+				2439E1AD202A047900E82389 /* PSParserErrorTypes.h in Headers */,
 				2421AFBD202507260007FC7A /* PSConstants.h in Headers */,
+				2439E1AA202A043A00E82389 /* PSParser+Errors.h in Headers */,
 				240ABDD42028E21F00543C40 /* PSUnaryOperationNode+Types.h in Headers */,
 				2421AFDE2025F8000007FC7A /* PSLiteralNode.h in Headers */,
 				247111242028827600A79633 /* PSMacros.h in Headers */,
@@ -825,6 +836,7 @@
 				240ABDEB2028F06D00543C40 /* PSControlFlowNode+Types.m in Sources */,
 				240ABDDF2028E3C200543C40 /* PSUnaryOperationNode+JavaScript.m in Sources */,
 				240ABDD82028E21F00543C40 /* PSUnaryOperationNode+Types.m in Sources */,
+				2439E1AB202A043A00E82389 /* PSParser+Errors.m in Sources */,
 				240ABE0D2029AD4E00543C40 /* PSAlgorithmNode+JavaScript.m in Sources */,
 				240ABDF42028F9F200543C40 /* PSCompoundNode.m in Sources */,
 				240ABDF92028FB5400543C40 /* PSCompoundNode+JavaScript.m in Sources */,

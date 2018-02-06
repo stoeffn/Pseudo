@@ -11,6 +11,7 @@
 #import "PSLexer.h"
 #import "PSToken.h"
 #import "PSToken+Types.h"
+#import "PSParser+Errors.h"
 
 @interface PSLexer ()
 
@@ -228,8 +229,13 @@
 
     PSToken *token = self.currentToken;
 
-    if (!token || ![tokenTypes containsObject: @(token.type)]) {
-        *error = [NSError errorWithDomain: PSParserErrorDomain code: 1 userInfo: NULL];
+    if (!token) {
+        *error = PSParser.endOfFileError;
+        return NULL;
+    }
+
+    if (![tokenTypes containsObject: @(token.type)]) {
+        *error = PSParser.failedExpectationError;
         return NULL;
     }
 

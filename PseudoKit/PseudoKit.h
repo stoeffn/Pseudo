@@ -48,6 +48,8 @@ FOUNDATION_EXPORT const unsigned char PseudoKitVersionString[];
 #import <PseudoKit/PSUnaryOperationNode+Types.h>
 
 #import <PseudoKit/PSParser.h>
+#import <PseudoKit/PSParser+Errors.h>
+#import <PseudoKit/PSParserErrorTypes.h>
 
 #import <PseudoKit/PSInterpreting.h>
 #import <PseudoKit/PSJavaScriptTranspilable.h>

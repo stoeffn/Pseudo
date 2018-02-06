@@ -8,6 +8,4 @@
 
 #import "PSConstants.h"
 
-NSString *const PSParserErrorDomain = @"SteffenRyll.Pseudo.Parser";
-
-NSString *const PSDefaultFileExtension = @".pseudo";
+NSString * _Nonnull const PSDefaultFileExtension = @".pseudo";

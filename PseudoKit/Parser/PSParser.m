@@ -6,7 +6,6 @@
 //  Copyright © 2018 Steffen Ryll. All rights reserved.
 //
 
-#import "PSConstants.h"
 #import "PSMacros.h"
 #import "PSParser.h"
 #import "PSToken.h"
