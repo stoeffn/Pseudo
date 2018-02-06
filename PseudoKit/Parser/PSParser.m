@@ -13,6 +13,7 @@
 #import "PSAlgorithmNode.h"
 #import "PSBinaryOperationNode.h"
 #import "PSBinaryOperationNode+Types.h"
+#import "PSCallNode.h"
 #import "PSCompoundNode.h"
 #import "PSConditionNode.h"
 #import "PSControlFlowNode.h"
@@ -52,6 +53,8 @@
                                            error: (NSError * __nullable __autoreleasing * __null_unspecified) error {
     if (stopTokenType && self.lexer.currentToken.type == stopTokenType.integerValue) {
         [self.lexer expectTokenTypes: stopTokenType.integerValue error: error];
+
+        if (*error) return NULL;
         return [[PSCompoundNode alloc] initWithNodes: @[]];
     }
 
@@ -66,6 +69,7 @@
 
     if (stopTokenType) [self.lexer expectTokenTypes: stopTokenType.integerValue error: error];
 
+    if (*error) return NULL;
     return [[PSCompoundNode alloc] initWithNodes: nodes];
 }
 
@@ -100,6 +104,7 @@
         [nodes addObject: node];
     }
 
+    if (*error) return NULL;
     return [[PSCompoundNode alloc] initWithNodes: nodes];
 }
 
@@ -114,11 +119,13 @@
             ? [self expressionWithError: &returnExpressionError]
             : NULL;
 
+        if (*error) return NULL;
         return [[PSControlFlowNode alloc] initWithToken: self.lexer.currentToken
                                                    type: [PSControlFlowNode typeForTokenType: token.type].integerValue
                                          expressionNode: returnExpressionNode];
     }
 
+    if (*error) return NULL;
     return [self expressionWithError: error];
 }
 
@@ -183,6 +190,8 @@
     while (self.lexer.currentToken.type == PSTokenTypesIdentifier) {
         PSToken *typeIdentifierToken = [self.lexer expectTokenTypes: PSTokenTypesIdentifier error: error];
         PSToken *identifierToken = [self.lexer expectTokenTypes: PSTokenTypesIdentifier error: error];
+
+        if (*error) return NULL;
         [parameters addObject: [[PSParameterNode alloc] initWithToken: typeIdentifierToken
                                                        typeIdentifier: typeIdentifierToken.string
                                                            identifier: identifierToken.string]];
@@ -304,6 +313,7 @@
                                                 @(PSTokenTypesNumber), @(PSTokenTypesString));
     PSToken *token = [self.lexer expectOneOfTokenTypes: allowedTokenTypes error: error];
 
+    if (*error) return NULL;
     return [[PSLiteralNode alloc] initWithToken: token
                                            type: [PSLiteralNode typeForTokenType: token.type].integerValue
                                          string: token.string
@@ -316,8 +326,44 @@
     PSToken *identifierToken = [self.lexer expectTokenTypes: PSTokenTypesIdentifier error: error];
 
     if (self.lexer.currentToken.type == PSTokenTypesOpeningParenthesis) {
+        NSArray<PSNode *> *callArgumentNodes = [self callArgumentsWithError: error];
 
+        if (*error) return NULL;
+        return [[PSCallNode alloc] initWithToken: identifierToken
+                                            type: PSCallTypesFunction
+                                     chainedNode: NULL
+                                      identifier: identifierToken.string
+                                   argumentNodes: callArgumentNodes];
     }
+
+    if (*error) return NULL;
+    return [[PSCallNode alloc] initWithToken: identifierToken
+                                        type: PSCallTypesVariable
+                                 chainedNode: NULL
+                                  identifier: identifierToken.string
+                               argumentNodes: NULL];
+}
+
+- (nullable NSArray<PSNode *> *) callArgumentsWithError: (NSError * __nullable __autoreleasing * __null_unspecified) error {
+    NSMutableArray<PSNode *> *argumentNodes = [[NSMutableArray alloc] init];
+
+    [self.lexer expectTokenTypes: PSTokenTypesOpeningParenthesis error: error];
+
+    while (self.lexer.currentToken.type != PSTokenTypesClosingParanthesis) {
+        PSNode *expressionNode = [self expressionWithError: error];
+
+        if (*error) return NULL;
+        [argumentNodes addObject: expressionNode];
+
+        if (self.lexer.currentToken.type != PSTokenTypesClosingParanthesis) {
+            [self.lexer expectTokenTypes: PSTokenTypesComma error: error];
+        }
+    }
+
+    [self.lexer expectTokenTypes: PSTokenTypesClosingParanthesis error: error];
+
+    if (*error) return NULL;
+    return argumentNodes;
 }
 
 @end
