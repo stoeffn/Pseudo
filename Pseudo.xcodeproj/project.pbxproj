@@ -25,10 +25,12 @@
 		240ABDEF2028F07600543C40 /* PSControlFlowNode+JavaScript.h in Headers */ = {isa = PBXBuildFile; fileRef = 240ABDED2028F07600543C40 /* PSControlFlowNode+JavaScript.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		240ABDF32028F9F200543C40 /* PSCompoundNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 240ABDF12028F9F200543C40 /* PSCompoundNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		240ABDF42028F9F200543C40 /* PSCompoundNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 240ABDF22028F9F200543C40 /* PSCompoundNode.m */; };
-		240ABDF82028FB5400543C40 /* PSCompoundNode+JavaScript.h in Headers */ = {isa = PBXBuildFile; fileRef = 240ABDF62028FB5400543C40 /* PSCompoundNode+JavaScript.h */; };
+		240ABDF82028FB5400543C40 /* PSCompoundNode+JavaScript.h in Headers */ = {isa = PBXBuildFile; fileRef = 240ABDF62028FB5400543C40 /* PSCompoundNode+JavaScript.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		240ABDF92028FB5400543C40 /* PSCompoundNode+JavaScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 240ABDF72028FB5400543C40 /* PSCompoundNode+JavaScript.m */; };
 		240ABDFE2029A69500543C40 /* PSConditionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 240ABDFC2029A69500543C40 /* PSConditionNode.m */; };
 		240ABDFF2029A69500543C40 /* PSConditionNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 240ABDFD2029A69500543C40 /* PSConditionNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		240ABE022029AA3800543C40 /* PSConditionNode+JavaScript.h in Headers */ = {isa = PBXBuildFile; fileRef = 240ABE002029AA3700543C40 /* PSConditionNode+JavaScript.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		240ABE032029AA3800543C40 /* PSConditionNode+JavaScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 240ABE012029AA3700543C40 /* PSConditionNode+JavaScript.m */; };
 		2421AFBD202507260007FC7A /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 2421AFBB202507260007FC7A /* Constants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2421AFBE202507260007FC7A /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2421AFBC202507260007FC7A /* Constants.m */; };
 		2421AFDE2025F8000007FC7A /* PSLiteralNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 2421AFDC2025F8000007FC7A /* PSLiteralNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -130,6 +132,8 @@
 		240ABDF72028FB5400543C40 /* PSCompoundNode+JavaScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PSCompoundNode+JavaScript.m"; sourceTree = "<group>"; };
 		240ABDFC2029A69500543C40 /* PSConditionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSConditionNode.m; sourceTree = "<group>"; };
 		240ABDFD2029A69500543C40 /* PSConditionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSConditionNode.h; sourceTree = "<group>"; };
+		240ABE002029AA3700543C40 /* PSConditionNode+JavaScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PSConditionNode+JavaScript.h"; sourceTree = "<group>"; };
+		240ABE012029AA3700543C40 /* PSConditionNode+JavaScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PSConditionNode+JavaScript.m"; sourceTree = "<group>"; };
 		2421AFBB202507260007FC7A /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		2421AFBC202507260007FC7A /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		2421AFDC2025F8000007FC7A /* PSLiteralNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSLiteralNode.h; sourceTree = "<group>"; };
@@ -294,6 +298,8 @@
 		240ABDFA2029A61A00543C40 /* Condition */ = {
 			isa = PBXGroup;
 			children = (
+				240ABE002029AA3700543C40 /* PSConditionNode+JavaScript.h */,
+				240ABE012029AA3700543C40 /* PSConditionNode+JavaScript.m */,
 			);
 			path = Condition;
 			sourceTree = "<group>";
@@ -560,6 +566,7 @@
 				2471113A20289A6700A79633 /* PSJavaScriptInterpreter.h in Headers */,
 				2471110E2027458900A79633 /* PSStringReader.h in Headers */,
 				247111462028B40400A79633 /* PSBinaryOperationTypes.h in Headers */,
+				240ABE022029AA3800543C40 /* PSConditionNode+JavaScript.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -710,6 +717,7 @@
 				2470F0262024BA7800AE9CD8 /* PSToken.m in Sources */,
 				240ABDFE2029A69500543C40 /* PSConditionNode.m in Sources */,
 				2471112E2028968500A79633 /* PSNode+JavaScript.m in Sources */,
+				240ABE032029AA3800543C40 /* PSConditionNode+JavaScript.m in Sources */,
 				2470F0252024BA7600AE9CD8 /* PSLexer.m in Sources */,
 				2471114F2028BB0800A79633 /* PSLiteralNode+Types.m in Sources */,
 				2471114A2028B6E300A79633 /* PSBinaryOperationNode+Types.m in Sources */,
